@@ -5,14 +5,14 @@
  */
 var partitionArray = function(nums, k) {
     nums.sort((a, b) => a - b);
-    let [cnt, prev] = [1, nums[0]];
+    let prev = nums.shift();
     
-    for (let i = 1; i < nums.length; i++) {
-        if (nums[i] - prev > k) {
+    return nums.reduce((cnt, num) => {
+        if (num - prev > k) {
             cnt++;
-            prev = nums[i];
+            prev = num;
         }
-    }
-    
-    return cnt;
+        
+        return cnt;
+    }, 1)
 };
