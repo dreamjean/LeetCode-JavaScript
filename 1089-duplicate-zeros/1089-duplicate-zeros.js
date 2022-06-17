@@ -13,8 +13,7 @@ var duplicateZeros = function(arr) {
     let j = n + countZero
     
     for (let i = n - 1; i >= 0; i--) {
-        j--;
-        if (j < n) arr[j] = arr[i]
+        if (--j < n) arr[j] = arr[i]
         if (!arr[i] && --j < n) arr[j] = 0
     }
 };
