@@ -16,7 +16,7 @@ var threeSum = function(nums) {
             if (!sum) {
                 ans.push([nums[i], nums[l], nums[r]])
                 while (l < r && nums[l] === nums[++l]);
-                //while (l < r && nums[r] === nums[--r]);
+                while (l < r && nums[r] === nums[--r]);
             }
             
             else sum < 0 ? l++ : r--;
