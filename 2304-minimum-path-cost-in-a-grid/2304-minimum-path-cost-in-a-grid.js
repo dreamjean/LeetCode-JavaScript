@@ -8,7 +8,7 @@ var minPathCost = function(grid, moveCost) {
     const visited = Array.from({ length: m }, () => new Array(n).fill(Number.MAX_VALUE));
     const pq = new MinPriorityQueue({ priority: x => x[0] });
     
-    for (let j = 0; j < n; j++) 
+    for (let j = 0; j < n; j++)
         pq.enqueue([grid[0][j], 0, j]);
     
     while (!pq.isEmpty()) {
@@ -24,6 +24,6 @@ var minPathCost = function(grid, moveCost) {
             }
         }
     }
-         
+    
     return -1;
 };
