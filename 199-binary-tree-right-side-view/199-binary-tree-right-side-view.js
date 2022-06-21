@@ -23,10 +23,9 @@ var rightSideView = function(root) {
         
         for (let i = 0; i < size; i++) {
             const { val, left, right } = queue.shift();
-            currVal = val;
-
             if (left) currQ.push(left);
             if (right) currQ.push(right);
+            currVal = val;
         }
 
         ans.push(currVal);
