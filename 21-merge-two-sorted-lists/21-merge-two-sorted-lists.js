@@ -17,7 +17,7 @@ var mergeTwoLists = function(list1, list2) {
     while (list1 && list2) {
         list1.val < list2.val
             ? [curr.next, list1] = [list1, list1.next]
-            : [curr.next, list2] = [list2, list2.next]
+            : [curr.next, list2] = [list2, list2.next];
         
         curr = curr.next;
             
