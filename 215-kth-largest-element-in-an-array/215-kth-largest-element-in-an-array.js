@@ -4,7 +4,7 @@
  * @return {number}
  */
 var findKthLargest = function(nums, k) {
-    return quickSelect(nums, 0, nums.length - 1, k)
+    return quickSelect(nums, k)
 };
 
 const swap = (arr, i, j) => [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -28,12 +28,17 @@ const partition = (arr, start, end) => {
     return i;
 }
 
-const quickSelect = (arr, start, end, k) => {
-    const pivotIndex = partition(arr, start, end);
+const quickSelect = (arr, k) => {
     const n = arr.length;
+    const finalIdx = n - k;
+    let [low, high] = [0, n - 1];
     
-    if (k < n - pivotIndex) return quickSelect(arr, pivotIndex + 1, end, k);
-    else if (k > n - pivotIndex) return quickSelect(arr, start, pivotIndex - 1, k);
-    
-    return arr[pivotIndex];
+    while (low <= high) {
+        const pivotIdx = partition(arr, low, high);
+        
+        if (pivotIdx === finalIdx) return arr[pivotIdx];
+        
+        if (pivotIdx < finalIdx) low = pivotIdx + 1;
+        else high = pivotIdx - 1;
+    }
 }
