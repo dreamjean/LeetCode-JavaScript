@@ -16,7 +16,7 @@ var findSubstring = function(s, words) {
         
         const seen = {};
         let [j, count] = [i, 0];
-        while (count <= wordsCount) {
+        while (count < wordsCount) {
             const sub = s.slice(j, j + size);
             seen[sub] ? seen[sub]++ : seen[sub] = 1;
             if (!map[sub] || seen[sub] > map[sub]) break;
