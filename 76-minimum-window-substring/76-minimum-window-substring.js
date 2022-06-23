@@ -8,7 +8,7 @@ var minWindow = function(s, t) {
     let [start, end] = [-Infinity, Infinity];
     let [left, right, count] = [0, 0, t.length];
     
-    for (let i = 0; i < t.length; i++)
+    for (let i = 0; i < t.length; i++) 
         cnt[t.charCodeAt(i)]++;
     
     while (right < s.length) {
