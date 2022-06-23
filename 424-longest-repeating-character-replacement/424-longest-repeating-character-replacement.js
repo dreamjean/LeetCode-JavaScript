@@ -5,17 +5,17 @@
  */
 var characterReplacement = function(s, k) {
     const map = {};
-    let [l, r, maxCount] = [0, 0, 0];
-
-    while (r < s.length) {
-        const char = s.charAt(r);
-        map[char] ? map[char]++  : map[char] = 1;
-        maxCount = Math.max(maxCount, map[char]);
-
-        while (maxCount + k <  r - l + 1) map[s[l++]]--;
+    let [left, right, maxCnt] = [0, 0, 0];
+    
+    while (right < s.length) {
+        const char = s.charAt(right);
+        map[char] ? map[char]++ : map[char] = 1;
+        maxCnt = Math.max(maxCnt, map[char]);
         
-        r++;
+        while (maxCnt + k < right - left + 1) map[s.charAt(left++)]--;
+        
+        right++;
     }
-
-    return r - l;
+    
+    return right - left;
 };
