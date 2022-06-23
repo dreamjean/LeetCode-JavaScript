@@ -4,20 +4,21 @@
  * @return {number[]}
  */
 var findAnagrams = function(s, p) {
-    const output = [];
-    const need = [];
-    let [l, r, cnt] = [0, 0, p.length];
+    const cnt = new Array(26).fill(0);
+    const a = 'a'.charCodeAt();
+    const ans = [];
+    let [left, right, count] = [0, 0, p.length];
     
     for (let c of p) 
-        need[c] ? need[c]++ : need[c] = 1;
+        cnt[c.charCodeAt() - a]++;
     
-    while (r < s.length) {
-        if (need[s[r++]]-- > 0) cnt--;
-        if (!cnt) output.push(l);
+    while (right < s.length) {
+        if (cnt[s.charCodeAt(right++) - a]-- > 0) count--;
+        if (!count) ans.push(left);
         
-        while (r - l === p.length) 
-            if (need[s[l++]]++ >= 0) cnt++;
+        while (right - left === p.length) 
+            if (++cnt[s.charCodeAt(left++) - a] > 0) count++;        
     }
     
-    return output;
+    return ans;
 };
