@@ -8,7 +8,7 @@ var checkInclusion = function(s1, s2) {
     const a = 'a'.charCodeAt();
     const n = s1.length;
     
-    for (let i = 0; i < s1.length; i++) {
+    for (let i = 0; i < n; i++) {
         cnt[s1.charCodeAt(i) - a]++;
         cnt[s2.charCodeAt(i) - a]--;
     }
@@ -20,7 +20,7 @@ var checkInclusion = function(s1, s2) {
         cnt[s2.charCodeAt(i - n) - a]++;
         if (check(cnt)) return true;
     }
-    
+
     return false;
 };
 
