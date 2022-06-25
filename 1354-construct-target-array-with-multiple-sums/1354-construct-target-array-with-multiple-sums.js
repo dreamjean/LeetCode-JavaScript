@@ -15,7 +15,7 @@ var isPossible = function(target) {
         let num = pq.dequeue().element;
         sum -= num;
         if (num <= sum || sum < 1) return false;
-
+        
         num %= sum;
         sum += num;
         pq.enqueue(num || sum);
