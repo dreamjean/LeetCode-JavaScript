@@ -8,7 +8,7 @@ var sortedSquares = function(nums) {
     let p = r;
     
     while (l <= r) {
-        ans[p--] = Math.abs(nums[l]) < nums[r] ? nums[r--] ** 2 : nums[l++] ** 2;
+        ans[p--] = nums[l] ** 2 < nums[r] ** 2 ? nums[r--] ** 2 : nums[l++] ** 2;
     }
     
     return ans;
