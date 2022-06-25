@@ -9,16 +9,17 @@ var isPossible = function(target) {
     target.forEach(num => {
         sum += num;
         pq.enqueue(num);
-    })
+    });
     
-    while (sum > 1 && pq.front().element > sum / 2) {
+    while (pq.front().element !== 1) {
         let num = pq.dequeue().element;
         sum -= num;
-        if (sum <= 1) return sum;
-        
-        pq.enqueue(num % sum);
-        sum += num % sum
-    }
+        if (num <= sum || sum < 1) return false;
 
-    return sum === target.length;
+        num %= sum;
+        sum += num;
+        pq.enqueue(num || sum);
+    }
+    
+    return true;
 };
