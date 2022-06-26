@@ -4,15 +4,15 @@
  * @return {number}
  */
 var maximumsSplicedArray = function(nums1, nums2) {
-    return Math.max(kacane(nums1, nums2), kacane(nums2, nums1));
+    return Math.max(kadane(nums1, nums2), kadane(nums2, nums1));
 };
 
-const kacane = (nums1, nums2) => {
-    const n = nums1.length;
+const kadane = (nums1, nums2) => {
     let [res, sum] = [0, 0];
     
-    for (let i = 0; i < n; i++) {
-        sum = Math.max(nums2[i] - nums1[i], sum + nums2[i] - nums1[i]);
+    for (let i = 0; i < nums1.length; i++) {
+        const diff = nums2[i]- nums1[i];
+        sum = Math.max(diff, sum + diff);
         res = Math.max(res, sum);
     }
     
