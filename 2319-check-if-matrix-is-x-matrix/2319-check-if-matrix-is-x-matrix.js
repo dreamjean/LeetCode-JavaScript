@@ -7,14 +7,8 @@ var checkXMatrix = function(grid) {
     
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
-            if (i === j || i + j === n - 1) {
-                if (!grid[i][j]) return false;
-            }
-                            
-            else {
-                if (grid[i][j] > 0) return false;
-            }
-                
+            if ((i === j || i + j === n - 1) && !grid[i][j]) return false;
+            if ((i !== j && i + j !== n - 1) && grid[i][j]) return false; 
         }
     }
     
