@@ -12,6 +12,4 @@ var twoSum = function(numbers, target) {
         
         sum > target ? right-- : left++;
     }
-    
-    return [];
 };
