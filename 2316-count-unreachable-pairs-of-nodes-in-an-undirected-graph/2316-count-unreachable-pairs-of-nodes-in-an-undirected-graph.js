@@ -25,11 +25,11 @@ var countPairs = function(n, edges) {
 
 const dfs = (start, visite, graph) => {
     visite[start] = true;
-    let ans = 1;
+    let res = 1;
     
     for (const v of graph[start]) {
-        if (!visite[v]) ans += dfs(v, visite, graph);
+        if (!visite[v]) res += dfs(v, visite, graph);
     }
     
-    return ans;
+    return res;
 }
