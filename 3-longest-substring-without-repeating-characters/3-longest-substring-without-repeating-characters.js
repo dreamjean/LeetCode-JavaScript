@@ -4,10 +4,10 @@
  */
 var lengthOfLongestSubstring = function(s) {
     const set = new Set();
-    let [left, right, maxLen] = [0, 0, 0];
+    let [l, r, maxLen] = [0, 0, 0];
     
-    while (right < s.length) {
-        set.has(s[right]) ? set.delete(s[left++]) : set.add(s[right++]);
+    while (r < s.length) {
+        set.has(s[r]) ? set.delete(s[l++]) : set.add(s[r++]);
         maxLen = Math.max(maxLen, set.size);
     }
     
