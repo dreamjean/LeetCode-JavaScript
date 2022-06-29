@@ -4,20 +4,19 @@
  */
 var maximumUniqueSubarray = function(nums) {
     const set = new Set();
-    let [start, end, sum, ans] = [0, 0, 0, 0];
+    let [l, r, sum, maxSum] = [0, 0, 0, 0];
     
-    while (end < nums.length) {
-        if (!set.has(nums[end])) {
-            sum += nums[end];
-            set.add(nums[end++]);
-            ans = Math.max(sum, ans);
+    while (r < nums.length) {
+        if (!set.has(nums[r])) {
+            sum += nums[r];
+            set.add(nums[r++]);
+            maxSum = Math.max(sum, maxSum);
         }
-        
         else {
-            sum -= nums[start];
-            set.delete(nums[start++]);
+            sum -= nums[l];
+            set.delete(nums[l++]);
         }
     }
     
-    return ans;
+    return maxSum;
 };
