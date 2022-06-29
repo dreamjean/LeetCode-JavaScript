@@ -6,8 +6,8 @@
 var criticalConnections = function(n, connections) {
     const graph = Array.from({ length: n }, () => []);
     const used = new Array(n).fill(false);
-    const fup = new Array(n).fill(-1);
     const tin = new Array(n).fill(-1);
+    const fup = new Array(n).fill(-1);
     const ans = [];
     let time = 0;
     
@@ -25,10 +25,9 @@ var criticalConnections = function(n, connections) {
             
             else fup[curr] = Math.min(fup[curr], tin[next]);
             
-            if (fup[next] > tin[curr]) ans.push([curr, next]);
+            if (fup[next] > tin[curr]) ans.push([next, curr]);
         }
     }
-   
     
     for (const [u, v] of connections) {
         graph[u].push(v);
@@ -41,4 +40,3 @@ var criticalConnections = function(n, connections) {
     
     return ans;
 };
-
