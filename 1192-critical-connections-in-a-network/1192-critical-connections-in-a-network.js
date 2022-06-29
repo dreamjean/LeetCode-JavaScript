@@ -25,7 +25,7 @@ var criticalConnections = function(n, connections) {
             
             else fup[curr] = Math.min(fup[curr], tin[next]);
             
-            if (fup[next] > tin[curr]) ans.push([next, curr]);
+            if (fup[next] > tin[curr]) ans.push([curr, next]);
         }
     }
     
