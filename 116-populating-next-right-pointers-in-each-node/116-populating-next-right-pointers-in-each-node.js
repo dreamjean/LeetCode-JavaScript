@@ -13,7 +13,7 @@
  * @return {Node}
  */
 var connect = function(root) {
-    if (!root) return root;
+    if (!root) return null;
     
     const queue = [root];
     
@@ -22,6 +22,7 @@ var connect = function(root) {
         while (n--) {
             const node = queue.shift();
             node.next = !n ? null : queue[0];
+            
             if (node.left) queue.push(node.left);
             if (node.right) queue.push(node.right);
         }
