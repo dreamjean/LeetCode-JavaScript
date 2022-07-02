@@ -4,14 +4,12 @@
  */
 var updateMatrix = function(mat) {
     const [m, n] = [mat.length, mat[0].length];
-    const dirt = [[0, 1], [1, 0], [0, -1], [-1, 0]];
+    const dirt = [[1, 0], [0, 1], [-1, 0], [0, -1]];
     const queue = [];
     
-   for (let i = 0; i < m; i++) {
-        for (let j = 0; j < n; j++) {
+    for (let i = 0; i < m; i++) 
+        for (let j = 0; j < n; j++) 
             !mat[i][j] ? queue.push([i, j]) : mat[i][j] = -1;
-        }
-    }      
     
     while (queue.length) {
         const [row, col] = queue.shift();
@@ -23,6 +21,6 @@ var updateMatrix = function(mat) {
             queue.push([x, y]);
         }
     }
- 
+     
     return mat;
 };
