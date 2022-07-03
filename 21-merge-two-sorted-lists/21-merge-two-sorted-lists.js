@@ -20,10 +20,9 @@ var mergeTwoLists = function(list1, list2) {
             : [curr.next, list2] = [list2, list2.next];
         
         curr = curr.next;
-            
     }
     
-    curr.next = list1 || list2;
-        
+    curr.next = list1 ?? list2;
+    
     return dummy.next;
 };
