@@ -10,11 +10,10 @@ var permute = function(nums) {
     const backtrack = (path = []) => {
         if (path.length === n) return ans.push([...path]);
         
-        for (let i = 0; i < n; i++) {
-            if (path.includes(nums[i])) continue;
-            
-            backtrack([...path, nums[i]]);
-        }
+        nums.forEach(num => {
+            if (!path.includes(num)) 
+                backtrack([...path, num])
+        })
     }
     
     backtrack();
