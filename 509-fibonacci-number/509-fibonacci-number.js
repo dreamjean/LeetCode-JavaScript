@@ -3,10 +3,14 @@
  * @return {number}
  */
 var fib = function(n) {
-    const preSum = [0, 1];
+    if (n <= 1) return n;
     
-    for (let i = 2; i <= n; i++)
-        preSum[i] = preSum[i - 2] + preSum[i - 1];
+    let [a, b] = [0, 1];
+    for (let i = 2; i <= n; i++) {
+        let sum = a + b;
+        a = b;
+        b = sum;
+    }
     
-    return preSum[n];
+    return b;
 };
