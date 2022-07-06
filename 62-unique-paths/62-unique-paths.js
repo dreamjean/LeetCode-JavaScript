@@ -1,0 +1,16 @@
+/**
+ * @param {number} m
+ * @param {number} n
+ * @return {number}
+ */
+var uniquePaths = function(m, n) {
+    let [x, y, ans] = [n, 1, 1];
+    
+    while (y < m) {
+        ans = Math.floor(ans * x / y)
+        y++;
+        x++;
+    }
+    
+    return ans;
+};
