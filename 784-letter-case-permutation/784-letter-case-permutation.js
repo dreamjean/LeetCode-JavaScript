@@ -3,18 +3,18 @@
  * @return {string[]}
  */
 var letterCasePermutation = function(s) {
-    const queue = [s]
+    const q = [s];
     
     for (let i = 0; i < s.length; i++) {
         if (/[0-9]/.test(s[i])) continue;
-
-        const size = queue.length;
+        
+        const size = q.length;
         for (let j = 0; j < size; j++) {
-            const str = queue.shift();
-            queue.push(str.slice(0, i) + str[i].toLowerCase() + str.slice(i + 1));
-            queue.push(str.slice(0, i) + str[i].toUpperCase() + str.slice(i + 1));
+            const str = q.shift();           
+            q.push(str.slice(0, i) + str[i].toLowerCase() + str.slice(i + 1));
+            q.push(str.slice(0, i) + str[i].toUpperCase() + str.slice(i + 1));
         }
     }
-
-    return queue;
+    
+    return q;
 };
