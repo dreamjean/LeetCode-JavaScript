@@ -13,8 +13,7 @@ var canChange = function(start, target) {
         while (i < n && start[i] === '_') i++;
         while (j < n && target[j] === '_') j++;
         
-        if (start[i] === 'L' && i < j) return false;
-        if (start[i] === 'R' && i > j) return false;  
+        if ((start[i] === 'L' && i < j) || (start[i] === 'R' && i > j)) return false;
     }
     
     return true;
