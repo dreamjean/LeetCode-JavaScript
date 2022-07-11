@@ -13,23 +13,21 @@
 var rightSideView = function(root) {
     if (!root) return [];
     
-    let queue = [root];
+    const queue = [root];
     const ans = [];
     
     while (queue.length) {
         const size = queue.length;
-        const currRow = [];
         let currVal = 0;
         for (let i = size - 1; i >= 0; i--) {
             const { val, left, right } = queue.shift();
-            if (left) currRow.push(left);
-            if (right) currRow.push(right);
+            if (left) queue.push(left);
+            if (right) queue.push(right);
             
             currVal = val;
         }
         
         ans.push(currVal);
-        queue = currRow;
     }
     
     return ans;
