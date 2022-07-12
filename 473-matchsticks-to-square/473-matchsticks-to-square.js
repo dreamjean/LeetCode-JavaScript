@@ -2,30 +2,34 @@
  * @param {number[]} matchsticks
  * @return {boolean}
  */
-var makesquare = function(M) {
-    let n = M.length, side = M.reduce((a,c) => a + c) / 4
-    M.sort((a,b) => b - a)
-    if (side !== ~~side || M[0] > side)
-        return false
-    const btrack = (i, space, done) => {
-        if (done === 3)
-            return true
+var makesquare = function(matchsticks) {
+    matchsticks.sort((a, b) => b - a);
+    const side = matchsticks.reduce((a, b) => a + b) / 4;
+    const n = matchsticks.length;
+    
+    if (side !== ~~side || matchsticks[0] > side) return false;
+    
+    const backtrack = (space, done, i) => {
+        if (done === 3) return true;
+        
         for (; i < n; i++) {
-            let num = M[i], res
-            if (num > space)
-                continue
-            M[i] = side + 1
-            if (num === space)
-                res = btrack(1, side, done+1)
-            else
-                res = btrack(i+1, space-num, done)
-            if (res)
-                return true
-            M[i] = num
-            while (M[i+1] === num)
-                i++
+            let num = matchsticks[i];
+            let res = false;
+            
+            if (num > space) continue;
+            
+            matchsticks[i] = side + 1;
+            if (num === space) res = backtrack(side, done + 1, 1);
+            else res = backtrack(space - num, done, i + 1);
+            
+            if (res) return true;
+            
+            matchsticks[i] = num;
+            while (matchsticks[i + 1] === num) i++;
         }
-        return false
+        
+        return false;
     }
-    return btrack(0, side, 0)
+    
+    return backtrack(side, 0, 0);
 };
