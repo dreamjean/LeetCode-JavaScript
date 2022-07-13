@@ -4,15 +4,17 @@
  * @return {boolean}
  */
 var backspaceCompare = function(s, t) {
-    return edit(s) === edit(t)
+    return edit(s) === edit(t);
 };
 
 const edit = str => {
-    let [res, backpace] = ['', 0]
+    let [res, backspace] = ['', 0];
+    
     for (let i = str.length - 1; i >= 0; i--) {
-        if (str[i] === '#') backpace++;
-        else if (backpace) backpace--;
-        else res = str[i] + res;
+        const ch = str[i];
+        if (ch === '#') backspace++;
+        else if (backspace > 0) backspace--;
+        else res = ch + res;
     }
     
     return res;
