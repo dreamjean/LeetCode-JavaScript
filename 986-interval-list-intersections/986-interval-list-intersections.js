@@ -4,15 +4,17 @@
  * @return {number[][]}
  */
 var intervalIntersection = function(firstList, secondList) {
-    let [i, j] = [0, 0];
     const ans = [];
+    let [i, j] = [0, 0];
     
     while (i < firstList.length && j < secondList.length) {
-        const start = Math.max(firstList[i][0], secondList[j][0]);
-        const end = Math.min(firstList[i][1], secondList[j][1]);
+        const [a1, b1] = firstList[i];
+        const [a2, b2] = secondList[j];
+        const start = Math.max(a1, a2);
+        const end = Math.min(b1, b2);
         if (start <= end) ans.push([start, end]);
         
-        firstList[i][1] < secondList[j][1] ? ++i : ++j;
+        b1 < b2 ? i++ : j++;
     }
     
     return ans;
