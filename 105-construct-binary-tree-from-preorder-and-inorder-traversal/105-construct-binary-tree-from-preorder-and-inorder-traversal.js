@@ -12,9 +12,9 @@
  * @return {TreeNode}
  */
 var buildTree = function(preorder, inorder) {
-    let [root, top, pop, i] = [null, null, null, 0];
+    let [root, pop, top, i] = [null, null, null, 0];
     
-    for (const val of preorder) {
+    for (let val of preorder) {
         const node = new TreeNode(val);
         if (pop) [pop.right, pop] = [node, null];
         else if (top) top.left = node;
@@ -26,7 +26,7 @@ var buildTree = function(preorder, inorder) {
             pop = top;
             top = pop.right;
             pop.right = null;
-            ++i
+            ++i;
         }
     }
     
