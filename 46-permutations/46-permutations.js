@@ -2,19 +2,24 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-var permute = function(nums) {
-    nums.sort((a, b) => a - b);
-    const ans = [];
-    
-    const backtrack = (path = []) => {
-        if (path.length === nums.length) return ans.push([...path]);
-        
-        nums.forEach(num => {
-            if (!path.includes(num)) backtrack([...path, num]);
-        })
+var permute = function (nums) {
+  nums.sort((a, b) => a - b);
+  const ans = [];
+
+  const backtrack = (arr, path = []) => {
+    if (!arr.length) return ans.push([...path]);
+
+    let prev = Infinity;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === prev) continue;
+
+      const newArr = arr.slice(0, i).concat(arr.slice(i + 1));
+      backtrack(newArr, [...path, arr[i]]);
+      prev = arr[i];
     }
-    
-    backtrack();
-    
-    return ans;
+  };
+
+  backtrack(nums);
+
+  return ans;
 };
