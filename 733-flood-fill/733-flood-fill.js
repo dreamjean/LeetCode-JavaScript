@@ -7,22 +7,22 @@
  */
 var floodFill = function(image, sr, sc, color) {
     const [m, n, oldColor] = [image.length, image[0].length, image[sr][sc]];
-    const dirs = [[1, 0], [0, 1], [-1, 0], [0, -1]];
     
     if (oldColor === color) return image;
     
-    const fill = (row, col) => {        
-        image[row][col] = color;
+    const dirs = [[1, 0], [0, 1], [-1, 0], [0, -1]];
+    
+    const dfs = (r, c) => {
+        if (r < 0 || r >= m || c < 0 || c >= n || image[r][c] !== oldColor) return;
+        
+        image[r][c] = color;
         
         for (const [dx, dy] of dirs) {
-            const [x, y] = [row + dx, col + dy];
-            if (x < 0 || x >= m || y < 0 || y >= n || image[x][y] !== oldColor) continue;
-            
-            fill(x, y);
-        } 
+            dfs(r + dx, c + dy);
+        }
     }
     
-    fill(sr, sc);
+    dfs(sr, sc);
     
     return image;
 };
