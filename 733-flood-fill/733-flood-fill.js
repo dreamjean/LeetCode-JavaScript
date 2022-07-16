@@ -12,13 +12,14 @@ var floodFill = function(image, sr, sc, color) {
     
     const dirs = [[1, 0], [0, 1], [-1, 0], [0, -1]];
     
-    const dfs = (r, c) => {
-        if (r < 0 || r >= m || c < 0 || c >= n || image[r][c] !== oldColor) return;
-        
+    const dfs = (r, c) => {      
         image[r][c] = color;
         
         for (const [dx, dy] of dirs) {
-            dfs(r + dx, c + dy);
+            const [x, y] = [r + dx, c + dy];
+            if (x < 0 || x >= m || y < 0 || y >= n || image[x][y] !== oldColor) continue;
+            
+            dfs(x, y);
         }
     }
     
