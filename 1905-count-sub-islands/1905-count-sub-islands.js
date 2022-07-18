@@ -19,13 +19,15 @@ var countSubIslands = function (grid1, grid2) {
     grid2[r][c] = 0;
     let res = 1;
 
-    for (const [dx, dy] of dirs) if (!dfs(dx + r, dy + c)) res = 0;
+    for (const [dx, dy] of dirs) 
+        if (!dfs(dx + r, dy + c)) res = 0;
 
     return res && grid1[r][c];
   };
 
   for (let i = 0; i < m; i++)
-    for (let j = 0; j < n; j++) if (grid2[i][j] === 1) count += +dfs(i, j);
+    for (let j = 0; j < n; j++) 
+        if (grid2[i][j] === 1) count += +dfs(i, j);
 
   return count;
 };
