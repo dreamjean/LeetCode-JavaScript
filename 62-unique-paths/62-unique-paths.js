@@ -7,10 +7,11 @@ var uniquePaths = function(m, n) {
     let [x, y, ans] = [n, 1, 1];
     
     while (y < m) {
-        ans = Math.floor(ans * x / y)
-        y++;
+        ans = ~~(ans * x / y);
         x++;
-    }
+        y++;
+    };
+    
     
     return ans;
 };
