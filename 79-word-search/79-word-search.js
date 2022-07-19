@@ -24,10 +24,9 @@ var exist = function (board, word) {
 
     return res;
   };
-    
-    for (let i = 0; i < m; i++)
-        for (let j = 0; j < n; j++)
-            if (dfs(i, j)) return true;
-    
-    return false;
+
+  for (let i = 0; i < m; i++)
+    for (let j = 0; j < n; j++) if (dfs(i, j)) return true;
+
+  return false;
 };
