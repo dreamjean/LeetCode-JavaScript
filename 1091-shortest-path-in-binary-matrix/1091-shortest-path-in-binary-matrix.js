@@ -11,8 +11,8 @@ var shortestPathBinaryMatrix = function (grid) {
     [-1, 0],
     [0, -1],
     [1, 1],
-    [-1, 1],
     [1, -1],
+    [-1, 1],
     [-1, -1],
   ];
   const n = grid.length;
@@ -36,5 +36,5 @@ var shortestPathBinaryMatrix = function (grid) {
     }
   }
 
-  return -1;
+  return - 1;
 };
