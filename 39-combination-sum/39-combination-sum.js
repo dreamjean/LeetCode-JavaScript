@@ -6,18 +6,18 @@
 var combinationSum = function(candidates, target) {
     const ans = [];
     
-    const backtrack = (sum = 0, start = 0, path = []) => {
-        if (sum === target) return ans.push([...path]);
+    const backtrack = (diff, start = 0, path = []) => {
+        if (!diff) return ans.push([...path]);
         
         for (let i = start; i < candidates.length; i++) {
-            const newSum = sum + candidates[i];
-            if (newSum > target) continue;
-
-            backtrack(newSum, i, [...path, candidates[i]]);
+            const currDiff = diff - candidates[i];
+            if (currDiff < 0) continue;
+            
+            backtrack(currDiff, i, [...path, candidates[i]]);
         }
     }
     
-    backtrack();
+    backtrack(target);
     
     return ans;
 };
