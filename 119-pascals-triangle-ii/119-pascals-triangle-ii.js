@@ -5,8 +5,6 @@
 var getRow = function(rowIndex) {
     let ans = [1];
     
-    if (!rowIndex) return ans;
-    
     for (let i = 1; i <= rowIndex; i++) {
         const row = [];
         for (let j = 0; j <= i; j++)
