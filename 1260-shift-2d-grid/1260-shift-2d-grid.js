@@ -9,7 +9,7 @@ var shiftGrid = function(grid, k) {
     const ans = [];
     k %= m * n;
     
-    while (k--) arr.unshift(arr.pop());
+    arr.unshift(...arr.splice(m * n - k))
     
     while (arr.length) ans.push(arr.splice(0, n));
     
