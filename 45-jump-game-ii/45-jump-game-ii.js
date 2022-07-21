@@ -7,6 +7,7 @@ var jump = function(nums) {
     
     for (let i = 0; i < nums.length - 1; i++) {
         maxPos = Math.max(maxPos, nums[i] + i);
+        
         if (end === i) {
             end = maxPos;
             steps++;
