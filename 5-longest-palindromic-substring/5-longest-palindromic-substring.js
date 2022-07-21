@@ -3,19 +3,16 @@
  * @return {string}
  */
 var longestPalindrome = function(s) {
+    let [start, maxLen] = [0, 0];
     const n = s.length;
-    let [start, maxLen] = [0, 1];
     
-    const expendAroundMiddle = (left, right) => {
-        while (left >= 0 && right < n && s[left] === s[right]) {
-            const currLen = right - left + 1;
-            if (currLen > maxLen) {
-                maxLen = currLen;
-                start = left;
-            }
+    const expendAroundMiddle = (l, r) => {
+        while (l >= 0 && r < n && s[l] === s[r]) {
+            const currLen = r - l + 1;
+            if (currLen > maxLen) [start, maxLen] = [l, currLen];
             
-            left--;
-            right++;
+            l--;
+            r++;
         }
     }
     
