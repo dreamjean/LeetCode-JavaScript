@@ -7,10 +7,10 @@ var rob = function (nums) {
 
   return n === 1
     ? nums[0]
-    : Math.max(helper(nums, 0, n - 2), helper(nums, 1, n - 1));
+    : Math.max(helper(0, n - 2, nums), helper(1, n - 1, nums));
 };
 
-const helper = (nums, start, end) => {
+const helper = (start, end, nums) => {
   let [include, exclude] = [0, 0];
 
   for (let j = start; j <= end; j++) {
