@@ -2,18 +2,21 @@
  * @param {number[][]} isConnected
  * @return {number}
  */
-var findCircleNum = function(isConnected) {
-    const dfs = (k) => {
-        isConnected[k][k] = 0;
-        isConnected.forEach((_, i) => isConnected[i][i] && isConnected[k][i] && dfs(i));
+var findCircleNum = function (isConnected) {
+  const n = isConnected.length;
+
+  const dfs = (k) => {
+    isConnected[k][k] = 0;
+    isConnected.forEach(
+      (_, i) => isConnected[i][i] && isConnected[i][k] && dfs(i)
+    );
+  };
+
+  return isConnected.reduce((cnt, _, i) => {
+    if (isConnected[i][i]) {
+      dfs(i);
+      cnt++;
     }
-    
-    return isConnected.reduce((cnt, _, i) => {
-        if (isConnected[i][i] === 1) {
-            dfs(i);
-            cnt++;
-        }
-        
-        return cnt;
-    }, 0);
+    return cnt;
+  }, 0);
 };
