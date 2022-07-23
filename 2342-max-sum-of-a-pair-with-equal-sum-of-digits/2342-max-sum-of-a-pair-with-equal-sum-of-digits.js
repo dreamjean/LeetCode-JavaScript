@@ -16,12 +16,6 @@ var maximumSum = function (nums) {
   return res;
 };
 
-const digitsSum = (num) => {
-  let sum = 0;
-  while (num) {
-    sum += num % 10;
-    num = ~~(num / 10);
-  }
+const digitsSum = num => [...`${num}`].reduce((acc, curr) => acc += +curr, 0);
 
-  return sum;
-};
+
