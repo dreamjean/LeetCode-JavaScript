@@ -13,13 +13,14 @@ var minCost = function(grid) {
         const [cost, r, c] = pq.dequeue().element;
         if (r === m - 1 && c === n - 1) return cost;
         
+        if(visited[r][c]) continue;
         visited[r][c] = true;
         
         for (const [dx, dy, dr] of dirs) {
             const [x, y] = [dx + r, dy + c];
             if (x < 0 || x >= m || y < 0 || y >= n || visited[x][y]) continue;
             
-            grid[r][c] === dr ? pq.enqueue([cost, x, y]) : pq.enqueue([cost + 1, x, y]);
+            pq.enqueue([cost + +(grid[r][c] !== dr), x, y]);
         }
     }
 };
