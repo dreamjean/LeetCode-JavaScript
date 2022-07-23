@@ -27,4 +27,6 @@ var minimumObstacles = function (grid) {
       pq.enqueue([cost + +(grid[x][y] === 1), x, y]);
     }
   }
+
+  return -1;
 };
