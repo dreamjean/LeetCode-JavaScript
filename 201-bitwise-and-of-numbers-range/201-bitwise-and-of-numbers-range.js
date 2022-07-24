@@ -4,13 +4,7 @@
  * @return {number}
  */
 var rangeBitwiseAnd = function (left, right) {
-  let steps = 0;
+  while (left < right) right &= right - 1;
 
-  while (left < right) {
-    left >>= 1;
-    right >>= 1;
-    steps++;
-  }
-
-  return right << steps;
+  return left & right;
 };
