@@ -5,14 +5,12 @@
  * @return {number}
  */
 var distanceBetweenBusStops = function (distance, start, destination) {
-  const [min, max] = [
-    Math.min(start, destination),
-    Math.max(start, destination),
-  ];
   let [res1, res2] = [0, 0];
 
+  if (start > destination) [start, destination] = [destination, start];
+
   distance.forEach((val, i) =>
-    i >= min && i < max ? (res1 += val) : (res2 += val)
+    i >= start && i < destination ? (res1 += val) : (res2 += val)
   );
 
   return Math.min(res1, res2);
