@@ -4,22 +4,20 @@
  */
 var countSmaller = function (nums) {
   const sorted = [];
-  const result = [];
+  const ans = [];
 
   for (let i = nums.length - 1; i >= 0; i--) {
-    let left = 0,
-      right = sorted.length;
+    let [left, right] = [0, sorted.length];
+
     while (left < right) {
-      let mid = left + Math.floor((right - left) / 2);
-      if (nums[i] > sorted[mid]) {
-        left = mid + 1;
-      } else {
-        right = mid;
-      }
+      let mid = left + ((right - left) >> 1);
+      if (nums[i] > sorted[mid]) left = mid + 1;
+      else right = mid;
     }
-    result.unshift(left);
+
+    ans.unshift(left);
     sorted.splice(left, 0, nums[i]);
   }
 
-  return result;
+  return ans;
 };
