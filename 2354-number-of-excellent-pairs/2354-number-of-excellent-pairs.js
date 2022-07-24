@@ -23,8 +23,9 @@ var countExcellentPairs = function(nums, k) {
 function bitCount(num) {
     let cnt = 0
     while (num) {
-        if (num & 1 === 1) cnt++
-        num >>= 1
+        let tmp = num & (~num + 1)
+        cnt++
+        num = num ^ tmp
     }
     return cnt
 }
