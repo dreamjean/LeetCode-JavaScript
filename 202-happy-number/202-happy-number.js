@@ -2,15 +2,16 @@
  * @param {number} n
  * @return {boolean}
  */
-var isHappy = function(n) {
-    const set = new Set();
-    
-    while (n > 1 && !set.has(n)) {
-        set.add(n)
-        n = sumOfSqure(n);
-    }
-    
-    return n === 1;
+var isHappy = function (n) {
+  const set = new Set();
+
+  while (n > 1 && !set.has(n)) {
+    set.add(n);
+    n = squareDigitsSum(n);
+  }
+
+  return n === 1;
 };
 
-const sumOfSqure = n => [...`${n}`].reduce((sum, num) => sum += (+num) ** 2, 0);
+const squareDigitsSum = (n) =>
+  [...`${n}`].reduce((acc, curr) => acc + (+curr) ** 2, 0);
