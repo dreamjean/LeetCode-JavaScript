@@ -4,6 +4,9 @@
  * @param {number} d
  * @return {number}
  */
-var findTheDistanceValue = function(arr1, arr2, d) {
-    return arr1.reduce((acc, curr) => acc += arr2.every(num => Math.abs(curr - num) > d) ? 1 : 0, 0)
+var findTheDistanceValue = function (arr1, arr2, d) {
+  return arr1.reduce(
+    (acc, curr) => (acc += +arr2.every((num) => Math.abs(curr - num) > d)),
+    0
+  );
 };
