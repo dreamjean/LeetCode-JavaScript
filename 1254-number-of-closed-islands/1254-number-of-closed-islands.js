@@ -9,23 +9,20 @@ var closedIsland = function(grid) {
     
     const dfs = (r, c) => {
         if (grid[r][c]) return true;
-        if (!r || !c || r === m - 1 || c === n - 1) return false;
+        if (!r || r === m - 1 || !c || c === n - 1) return false;
         
         grid[r][c] = 1;
         let res = true;
         
-        for (const [dx, dy] of dirs) {
+        for (const [dx, dy] of dirs)
             if (!dfs(dx + r, dy + c)) res = false;
-        }
         
         return res;
     }
     
-    for (let i = 0; i < m; i++) {
-        for (let j = 0; j < n; j++) {
+    for (let i = 0; i < m; i++) 
+        for (let j = 0; j < n; j++)
             if (!grid[i][j]) count += +dfs(i, j);
-        }
-    }
     
     return count;
 };
