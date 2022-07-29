@@ -16,7 +16,7 @@ var isBipartite = function (graph) {
       const node = queue[0];
       for (const next of graph[node]) {
         if (!colors[next]) {
-          colors[next] = -colors[node];
+          colors[next] = -colors[node] ^ 1;
           queue.push(next);
         } else if (colors[next] === colors[node]) return false;
       }
