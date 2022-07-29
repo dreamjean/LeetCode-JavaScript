@@ -3,7 +3,6 @@
  * @return {number}
  */
 var countLatticePoints = function (circles) {
-  circles.sort((a, b) => a[2] - b[2]);
   let [maxX, maxY, count] = [0, 0, 0];
 
   for (const [x, y, r] of circles)
