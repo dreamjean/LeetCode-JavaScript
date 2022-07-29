@@ -3,20 +3,27 @@
  * @return {boolean}
  */
 var isBipartite = function (graph) {
-  const colors = {};
+  const n = graph.length;
+  const colors = new Array(n).fill(0);
 
-  const dfs = (i, color) => {
-    if (i in colors) return colors[i] === color;
+  for (let i = 0; i < n; i++) {
+    if (colors[i]) continue;
 
-    colors[i] = color;
+    colors[i] = 1;
+    const queue = [i];
 
-    for (const next of graph[i]) if (!dfs(next, !color)) return false;
+    while (queue.length) {
+      const node = queue[0];
+      for (const next of graph[node]) {
+        if (!colors[next]) {
+          colors[next] = -colors[node];
+          queue.push(next);
+        } else if (colors[next] === colors[node]) return false;
+      }
 
-    return true;
-  };
-
-  for (let i = 0; i < graph.length; i++)
-    if (!(i in colors) && !dfs(i, true)) return false;
+      queue.shift();
+    }
+  }
 
   return true;
 };
