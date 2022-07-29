@@ -16,13 +16,13 @@ Solution.prototype.reset = function () {
  * @return {number[]}
  */
 Solution.prototype.shuffle = function () {
-  const shiffle = [...this.nums];
-  const n = shiffle.length;
-  const swap = (i, j) => ([shiffle[i], shiffle[j]] = [shiffle[j], shiffle[i]]);
+  const arr = [...this.nums];
+  const n = arr.length;
+  const swap = (i, j) => ([arr[i], arr[j]] = [arr[j], arr[i]]);
 
   for (let i = 0; i < n; i++) swap(i, ~~(Math.random() * n));
 
-  return shiffle;
+  return arr;
 };
 
 /**
