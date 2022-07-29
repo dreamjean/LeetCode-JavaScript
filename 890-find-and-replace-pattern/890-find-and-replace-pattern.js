@@ -11,11 +11,10 @@ const countCharator = (word) => {
   const map = new Map();
   const res = [];
 
-  for (let i = 0; i < word.length; i++) {
-    const char = word[i];
+  for (let char of word) {
     if (!map.has(char)) map.set(char, map.size);
 
-    res[i] = map.get(char);
+    res.push(map.get(char));
   }
 
   return res.join("");
