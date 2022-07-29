@@ -14,7 +14,10 @@ var maximalNetworkRank = function (n, roads) {
 
   for (let i = 0; i < n; i++)
     for (let j = i + 1; j < n; j++)
-      ans = Math.max(ans, connect[i].size + connect[j].size - +connect[i].has(j));
+      ans = Math.max(
+        ans,
+        connect[i].size + connect[j].size - +connect[i].has(j)
+      );
 
   return ans;
 };
