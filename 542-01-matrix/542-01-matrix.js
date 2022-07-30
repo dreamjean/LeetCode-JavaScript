@@ -4,23 +4,26 @@
  */
 var updateMatrix = function(mat) {
     const [m, n] = [mat.length, mat[0].length];
-    const dirt = [[1, 0], [0, 1], [-1, 0], [0, -1]];
-    const queue = [];
+    const dirs = [[1, 0], [0, 1], [-1, 0], [0, -1]];
     
-    for (let i = 0; i < m; i++) 
-        for (let j = 0; j < n; j++) 
-            !mat[i][j] ? queue.push([i, j]) : mat[i][j] = -1;
-    
-    while (queue.length) {
-        const [row, col] = queue.shift();
-        for (const [dx, dy] of dirt) {
-            const [x, y] = [row + dx, col + dy];
-            if (x < 0 || x >= m || y < 0 || y >= n || mat[x][y] !== -1) continue;
-            
-            mat[x][y] = mat[row][col] + 1;
-            queue.push([x, y]);
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            if (!mat[i][j]) continue;
+                
+            mat[i][j] = Infinity;
+            if (i > 0) mat[i][j] = Math.min(mat[i][j], mat[i - 1][j] + 1);
+            if (j > 0) mat[i][j] = Math.min(mat[i][j], mat[i][j - 1] + 1);
         }
     }
-     
+    
+    for (let i = m - 1; i >= 0; i--) {
+        for (let j = n - 1; j >= 0; j--) {
+            if (!mat[i][j]) continue;
+            
+            if (i + 1 < m) mat[i][j] = Math.min(mat[i][j], mat[i + 1][j] + 1);
+            if (j + 1 < n) mat[i][j] = Math.min(mat[i][j], mat[i][j + 1] + 1);
+        }
+    }
+    
     return mat;
 };
