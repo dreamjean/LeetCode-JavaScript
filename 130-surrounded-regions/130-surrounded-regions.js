@@ -16,7 +16,9 @@ var solve = function (board) {
 
     board[r][c] = "*";
 
-    for (const [dx, dy] of dirs) dfs(r + dx, c + dy);
+    for (const [dx, dy] of dirs) {
+      dfs(dx + r, dy + c);
+    }
   };
 
   for (let i = 0; i < m; i++) {
