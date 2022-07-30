@@ -4,18 +4,18 @@
  * @return {string[]}
  */
 var findAndReplacePattern = function (words, pattern) {
-  return words.filter((word) => countCharator(word) === countCharator(pattern));
+  return words.filter((word) => replaceToNum(word) === replaceToNum(pattern));
 };
 
-const countCharator = (word) => {
+const replaceToNum = (word) => {
   const map = new Map();
-  const res = [];
+  let num = "";
 
   for (let char of word) {
     if (!map.has(char)) map.set(char, map.size);
 
-    res.push(map.get(char));
+    num += map.get(char).toString();
   }
 
-  return res.join("");
+  return num;
 };
