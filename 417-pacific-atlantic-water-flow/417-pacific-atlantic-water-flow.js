@@ -14,7 +14,7 @@ var pacificAtlantic = function (heights) {
   ];
   const ans = [];
 
-  const dfs = (r, c, ocean, prev = Number.MIN_SAVE_INTEGER) => {
+  const dfs = (r, c, ocean, prev = Number.MIN_SAFE_INTEGER) => {
     if (
       r < 0 ||
       r >= m ||
