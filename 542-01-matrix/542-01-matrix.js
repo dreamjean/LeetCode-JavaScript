@@ -3,7 +3,7 @@
  * @return {number[][]}
  */
 var updateMatrix = function (mat) {
-  const [m, n] = [mat.length, mat[0].length];
+  let [m, n] = [mat.length, mat[0].length];
 
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
