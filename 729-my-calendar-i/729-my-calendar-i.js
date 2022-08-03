@@ -8,9 +8,8 @@ var MyCalendar = function () {
  * @return {boolean}
  */
 MyCalendar.prototype.book = function (start, end) {
-  if (this.books.length)
-    for (let [a, b] of this.books)
-      if (Math.max(a, start) < Math.min(b, end)) return false;
+  for (let [a, b] of this.books)
+    if (Math.max(a, start) < Math.min(b, end)) return false;
 
   this.books.push([start, end]);
   return true;
