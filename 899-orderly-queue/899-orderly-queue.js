@@ -9,9 +9,10 @@ var orderlyQueue = function (s, k) {
   const [doubleS, n] = [s + s, s.length];
   let ans = s;
 
-  for (let i = 1; i < n; i++) {
-    const temp = doubleS.slice(i, i + n);
-    if (temp < ans) ans = temp;
+  for (let i = 0; i < n; i++) {
+    const tmp = doubleS.slice(i, i + n);
+
+    if (tmp < ans) ans = tmp;
   }
 
   return ans;
