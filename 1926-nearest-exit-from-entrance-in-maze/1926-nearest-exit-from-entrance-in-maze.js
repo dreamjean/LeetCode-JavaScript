@@ -15,8 +15,8 @@ var nearestExit = function (maze, entrance) {
   let steps = 0;
 
   while (queue.length) {
-    let size = queue.length;
-    while (size--) {
+    const size = queue.length;
+    for (let i = 0; i < size; i++) {
       const [r, c] = queue.shift();
       if (
         (r !== entrance[0] || c !== entrance[1]) &&
