@@ -6,13 +6,13 @@ var allPathsSourceTarget = function (graph) {
   const n = graph.length;
   const ans = [];
 
-  const backtrack = (curr = 0, path = [0]) => {
-    if (curr === n - 1) return ans.push([...path]);
+  const dfs = (i = 0, path = [0]) => {
+    if (i === n - 1) return ans.push([...path]);
 
-    for (const next of graph[curr]) backtrack(next, [...path, next]);
+    for (let next of graph[i]) dfs(next, [...path, next]);
   };
 
-  backtrack();
+  dfs();
 
   return ans;
 };
