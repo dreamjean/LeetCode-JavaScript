@@ -7,6 +7,7 @@ var findCircleNum = function (isConnected) {
 
   const dfs = (k) => {
     isConnected[k][k] = 0;
+
     isConnected.forEach(
       (_, i) => isConnected[i][i] && isConnected[i][k] && dfs(i)
     );
@@ -14,9 +15,10 @@ var findCircleNum = function (isConnected) {
 
   return isConnected.reduce((cnt, _, i) => {
     if (isConnected[i][i]) {
-      dfs(i);
       cnt++;
+      dfs(i);
     }
+
     return cnt;
   }, 0);
 };
