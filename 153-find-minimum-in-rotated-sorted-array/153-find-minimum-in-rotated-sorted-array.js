@@ -2,14 +2,14 @@
  * @param {number[]} nums
  * @return {number}
  */
-var findMin = function(nums) {
-    let [left, right] = [0, nums.length - 1];
-    
-    while (left < right) {
-        const mid = (left + right) >>> 1;
-        
-        nums[mid] > nums[right] ? (left = mid + 1) : (right = mid);
-    }
-    
-    return nums[left];
+var findMin = function (nums) {
+  let [l, r] = [0, nums.length - 1];
+
+  while (l < r) {
+    const mid = (l + r) >>> 1;
+    if (nums[mid] > nums[r]) l = mid + 1;
+    else r = mid;
+  }
+
+  return nums[l];
 };
