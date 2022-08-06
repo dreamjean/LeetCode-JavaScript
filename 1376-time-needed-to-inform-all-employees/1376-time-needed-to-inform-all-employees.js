@@ -8,7 +8,8 @@
 var numOfMinutes = function (n, headID, manager, informTime) {
   let ans = 0;
 
-  for (let i = 0; i < n; i++) ans = Math.max(ans, dfs(i, manager, informTime));
+  for (let i = 0; i < n; i++) 
+    ans = Math.max(ans, dfs(i, manager, informTime));
 
   return ans;
 };
