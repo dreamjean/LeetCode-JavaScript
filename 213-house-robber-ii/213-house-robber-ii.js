@@ -11,13 +11,10 @@ var rob = function (nums) {
 };
 
 const helper = (start, end, nums) => {
-  let [include, exclude] = [0, 0];
+  let [prev1, prev2] = [0, 0];
 
-  for (let j = start; j <= end; j++) {
-    let [i, e] = [include, exclude];
-    include = e + nums[j];
-    exclude = Math.max(i, e);
-  }
+  for (let i = start; i <= end; i++)
+    [prev1, prev2] = [prev2, Math.max(prev2, prev1 + nums[i])];
 
-  return Math.max(include, exclude);
+  return prev2;
 };
