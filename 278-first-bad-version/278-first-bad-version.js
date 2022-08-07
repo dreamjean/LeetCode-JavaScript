@@ -18,13 +18,13 @@ var solution = function (isBadVersion) {
    * @return {integer} The first bad version
    */
   return function (n) {
-    let [low, high] = [1, n];
+    let [lo, hi] = [1, n];
 
-    while (low <= high) {
-      const mid = (low + high) >>> 1;
-      isBadVersion(mid) ? (high = mid - 1) : (low = mid + 1);
+    while (lo <= hi) {
+      const mid = (lo + hi) >>> 1;
+      isBadVersion(mid) ? (hi = mid - 1) : (lo = mid + 1);
     }
 
-    return low;
+    return lo;
   };
 };
