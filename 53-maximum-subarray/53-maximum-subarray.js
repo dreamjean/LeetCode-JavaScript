@@ -3,7 +3,7 @@
  * @return {number}
  */
 var maxSubArray = function(nums) {
-  let [sum, max] = [-Infinity, -Infinity];
+  let [sum, max] = [0, nums[0]];
   
   for (let num of nums) {
     sum = Math.max(num, num + sum);
