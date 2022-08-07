@@ -14,8 +14,7 @@ var minMutation = function (start, end, bank) {
 
     for (let i = 0; i < gen.length; i++) {
       for (let c = 65; c <= 122; c++) {
-        const newGen =
-          gen.slice(0, i) + String.fromCharCode(c) + gen.slice(i + 1);
+        const newGen = gen.slice(0, i) + String.fromCharCode(c) + gen.slice(i + 1);
         if (!seen.has(newGen)) continue;
 
         seen.delete(newGen);
