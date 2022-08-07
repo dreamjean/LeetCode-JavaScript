@@ -12,9 +12,8 @@ var exclusiveTime = function (n, logs) {
     if (point === "start") stack.push([id, time]);
     else {
       const [startId, startTime] = stack.pop();
-      const diff = time - startTime + 1;
-      times[startId] += diff;
-      if (stack.length) times[stack.at(-1)[0]] -= diff;
+      times[startId] += time - startTime + 1;
+      if (stack.length) times[stack.at(-1)[0]] -= time - startTime + 1;
     }
   }
 
