@@ -4,13 +4,13 @@
  * @return {number}
  */
 var search = function (nums, target) {
-  let [left, right] = [0, nums.length - 1];
+  let [l, r] = [0, nums.length - 1];
 
-  while (left <= right) {
-    const mid = (left + right) >>> 1;
+  while (l <= r) {
+    const mid = (l + r) >>> 1;
     if (nums[mid] === target) return mid;
 
-    nums[mid] > target ? (right = mid - 1) : (left = mid + 1);
+    nums[mid] > target ? (r = mid - 1) : (l = mid + 1);
   }
 
   return -1;
