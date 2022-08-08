@@ -4,12 +4,12 @@
  */
 var lengthOfLIS = function (nums) {
   return nums.reduce(
-    (acc, curr) => (
-      curr > acc.at(-1)
-        ? acc.push(curr)
-        : (acc[acc.findIndex((num) => num >= curr)] = curr),
-      acc
-    ),
+    (acc, curr) => {
+      if (curr > acc[acc.length - 1]) acc.push(curr);
+      else acc[acc.findIndex((v) => v >= curr)] = curr;
+      
+      return acc;
+    },
     [nums[0]]
   ).length;
 };
