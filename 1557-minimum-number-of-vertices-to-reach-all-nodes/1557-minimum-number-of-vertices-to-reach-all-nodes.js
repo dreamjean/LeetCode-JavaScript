@@ -3,10 +3,10 @@
  * @param {number[][]} edges
  * @return {number[]}
  */
-var findSmallestSetOfVertices = function(n, edges) {
-    const degree = new Array(n).fill(0);
-    
-    edges.forEach(([_, to]) => degree[to]++);
+var findSmallestSetOfVertices = function (n, edges) {
+  const degree = new Array(n).fill(0);
 
-    return degree.reduce((acc, curr, i) => (!curr && acc.push(i), acc), []);
+  edges.forEach(([_, b]) => degree[b]++);
+
+  return degree.reduce((acc, curr, i) => (!curr && acc.push(i), acc), []);
 };
