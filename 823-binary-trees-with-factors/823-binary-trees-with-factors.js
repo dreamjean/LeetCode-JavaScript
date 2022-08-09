@@ -11,7 +11,7 @@ var numFactoredBinaryTrees = function(arr) {
     map[num1] = 1;
     for (let num2 of arr) {
       const k = num1 / num2;
-      if (!(num1 % num2) && map[k]) map[num1] = (map[num1] + map[num2] * map[k]) % MOD;
+      if (!(num1 % num2) && map[k]) map[num1] = map[num1] + map[num2] * map[k];
     }
   }
   
