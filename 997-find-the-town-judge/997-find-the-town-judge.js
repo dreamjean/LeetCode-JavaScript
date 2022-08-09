@@ -11,8 +11,5 @@ var findJudge = function (n, trust) {
     ++indegree[b];
   }
 
-  return indegree.reduce(
-    (acc, curr, i) => (curr === n - 1 ? (acc = i) : acc),
-    -1
-  );
+  return indegree.reduce((acc, curr, i) => (curr === n - 1 ? (acc = i) : acc), -1);
 };
