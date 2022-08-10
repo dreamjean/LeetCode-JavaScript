@@ -17,16 +17,14 @@ var numIslands = function (grid) {
 
     grid[r][c] = "0";
 
-    for (const [dx, dy] of dirs) {
-      dfs(dx + r, dy + c);
-    }
+    for (let [dx, dy] of dirs) dfs(dx + r, dy + c);
   };
 
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
       if (grid[i][j] === "1") {
         dfs(i, j);
-        ++count;
+        count++;
       }
     }
   }
