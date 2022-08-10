@@ -11,7 +11,7 @@ var numDecodings = function (s) {
 
   for (let i = 1; i < n; i++) {
     if (s[i] === "0") last1 = 0;
-    if (s[i - 1] === "1" || (s[i - 1] === "2" && s[i] <= "6")) {
+    if (s[i - 1] === "1" || (s[i - 1] === "2" && s[i] <= 6)) {
       last1 += last2;
       last2 = last1 - last2;
     } else last2 = last1;
