@@ -7,11 +7,7 @@ var fib = function (n) {
 
   let [a, b] = [0, 1];
 
-  for (let i = 2; i <= n; i++) {
-    const sum = a + b;
-    a = b;
-    b = sum;
-  }
+  for (let i = 2; i <= n; i++) [a, b] = [b, a + b];
 
   return b;
 };
