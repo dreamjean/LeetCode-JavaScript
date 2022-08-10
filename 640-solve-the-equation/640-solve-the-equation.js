@@ -19,16 +19,14 @@ var solveEquation = function (equation) {
 
 const evalSide = (str) => {
   const arr = str.replace(/\+/g, " ").replace(/-/g, " -").split(" ");
-
-  return arr.reduce(
-    (acc, curr) => {
-      if (curr === "x") acc[0]++;
-      else if (curr === "-x") acc[0]--;
-      else if (curr.includes("x")) acc[0] += +curr.slice(0, -1);
-      else acc[1] += +curr;
-
-      return acc;
-    },
-    [0, 0]
-  );
+  let [x, num] = [0, 0];
+    
+  for (let ch of arr) {
+      if (ch === "x") x++;
+      else if (ch === "-x") x--;
+      else if (ch.includes("x")) x += +ch.slice(0, -1);
+      else num += +ch;
+    }
+  
+  return [x, num];
 };
