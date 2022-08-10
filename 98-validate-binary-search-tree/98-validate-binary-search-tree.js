@@ -10,13 +10,17 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isValidBST = function(root) {
-    return helper(root)
+var isValidBST = function (root) {
+  return check(root);
 };
 
-const helper = (node, min = Number.MIN_SAFE_INTEGER, max = Number.MAX_SFFE_INTEGER) => {
-    if (!node) return true;
-    if (node.val <= min || node.val >= max) return false;
-    
-    return helper(node.left, min, node.val) && helper(node.right, node.val, max);
-}
+const check = (
+  node,
+  min = Number.MIN_SAFE_INTEGER,
+  max = Number.MAX_SAFE_INTEGER
+) => {
+  if (!node) return true;
+  if (node.val <= min || node.val >= max) return false;
+
+  return check(node.left, min, node.val) && check(node.right, node.val, max);
+};
