@@ -11,10 +11,10 @@
  * @return {boolean}
  */
 var isValidBST = function (root) {
-  return check(root);
+  return isValid(root);
 };
 
-const check = (
+const isValid = (
   node,
   min = Number.MIN_SAFE_INTEGER,
   max = Number.MAX_SAFE_INTEGER
@@ -22,5 +22,7 @@ const check = (
   if (!node) return true;
   if (node.val <= min || node.val >= max) return false;
 
-  return check(node.left, min, node.val) && check(node.right, node.val, max);
+  return (
+    isValid(node.left, min, node.val) && isValid(node.right, node.val, max)
+  );
 };
