@@ -4,6 +4,6 @@ class Solution:
         a, s = 0, x
         while s > 0:
             a = a * 10 + s % 10
-            s = s // 10
+            s //= 10
         return a == x
         
