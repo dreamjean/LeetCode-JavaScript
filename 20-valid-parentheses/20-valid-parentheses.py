@@ -7,5 +7,5 @@ class Solution:
                 stack.append(pairsMap[p])
             elif len(stack) == 0 or p != stack.pop():
                 return False
-        return stack == []
+        return not len(stack)
       
