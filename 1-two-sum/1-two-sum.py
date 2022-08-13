@@ -1,16 +1,9 @@
-/**
- * @param {number[]} nums
- * @param {number} target
- * @return {number[]}
- */
-var twoSum = function(nums, target) {
-  const map = {};
-  for (let i = 0; i < nums.length; i++) {
-    const diff = target - nums[i];
-    if (diff in map) return [map[diff], i];
-    
-    map[nums[i]] = i;
-  }
-  
-  return [];
-};
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+      seen = {}
+      for i, val in enumerate(nums):
+          diff = target - val
+          if diff in seen:
+              return [seen[diff], i]
+          seen[val] = i
+        
