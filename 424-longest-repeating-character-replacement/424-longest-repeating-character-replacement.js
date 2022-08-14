@@ -4,18 +4,18 @@
  * @return {number}
  */
 var characterReplacement = function(s, k) {
-    const map = {};
-    let [left, right, maxCnt] = [0, 0, 0];
+  const cnt = new Array(26).fill(0);
+  const a = 'A'.charCodeAt();
+  let [l, r, maxCount] = [0, 0, 0];
+  
+  while (r < s.length) {
+    const key = s.charCodeAt(r) - a;
+    maxCount = Math.max(maxCount, ++cnt[key]);
     
-    while (right < s.length) {
-        const char = s.charAt(right);
-        map[char] ? map[char]++ : map[char] = 1;
-        maxCnt = Math.max(maxCnt, map[char]);
-        
-        while (maxCnt + k < right - left + 1) map[s.charAt(left++)]--;
-        
-        right++;
-    }
+    while (r - l + 1 - maxCount > k) cnt[s.charCodeAt(l++) - a]--;
     
-    return right - left;
+    r++;
+  }
+  
+  return r - l;
 };
