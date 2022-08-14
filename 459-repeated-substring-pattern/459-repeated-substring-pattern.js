@@ -3,5 +3,7 @@
  * @return {boolean}
  */
 var repeatedSubstringPattern = function(s) {
-  return (s + s).slice(1, -1).includes(s);
+  const ss = (s + s).slice(1, -1);
+  
+  return ss.includes(s);
 };
