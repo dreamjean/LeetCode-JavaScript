@@ -4,5 +4,6 @@ class Solution:
         for num in nums:
             sum = max(num, sum + num)
             res = max(res, sum)
-            
         return res
+            
+            
