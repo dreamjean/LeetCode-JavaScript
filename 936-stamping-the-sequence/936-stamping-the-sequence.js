@@ -12,9 +12,11 @@ var movesToStamp = function(stamp, target) {
     const i = getReplaceIdx(S, T);
     if (i < 0) return [];
     
-    ans.unshift(i);
+    ans.push(i);
     cnt += replace(i, i + S.length, T);
   }
+  
+  ans.reverse();
   
   return ans;
 };
