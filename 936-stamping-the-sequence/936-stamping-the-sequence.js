@@ -3,27 +3,50 @@
  * @param {string} target
  * @return {number[]}
  */
-var movesToStamp = function (stamp, target) {
-  if (stamp === target) return [0];
-  let slen = stamp.length,
-    tlen = target.length - slen + 1,
-    ans = [],
-    tdiff = true,
-    sdiff,
-    i,
-    j;
-  (stamp = stamp.split("")), (target = target.split(""));
-  while (tdiff)
-    for (i = 0, tdiff = false; i < tlen; i++) {
-      for (j = 0, sdiff = false; j < slen; j++)
-        if (target[i + j] === "*") continue;
-        else if (target[i + j] !== stamp[j]) break;
-        else sdiff = true;
-      if (j === slen && sdiff) {
-        for (j = i, tdiff = true; j < slen + i; j++) target[j] = "*";
-        ans.unshift(i);
-      }
-    }
-  for (i = 0; i < target.length; i++) if (target[i] !== "*") return [];
+var movesToStamp = function(stamp, target) {
+  const [S, T] = [stamp.split(''), target.split('')];
+  const ans = [];
+  let cnt = 0;
+  
+  while (cnt < T.length) {
+    const i = getReplaceIdx(S, T);
+    if (i < 0) return [];
+    
+    ans.unshift(i);
+    cnt += replace(i, i + S.length, T);
+  }
+  
   return ans;
 };
+
+const getReplaceIdx = (S, T) => {
+  const [sLen, tLen] = [S.length, T.length];
+  for (let i = 0; i <= tLen - sLen; i++) {
+    let match = 0;
+    for (let j = 0; j < sLen; j++) {
+      const ch = T[i + j];
+      if (ch === '?') continue;
+      if (ch !== S[j]) {
+        match = -1;
+        break;
+      }
+      match = 1;
+    }
+    
+    if (match > 0) return i;
+  }
+  
+  return -1;
+}
+
+const replace = (begin, end, T) => {
+  let count = 0;
+  for (let i = begin; i < end; i++) {
+    if (T[i] !== '?') {
+      T[i] = '?';
+      count++;
+    }
+  }
+  
+  return count;
+}
