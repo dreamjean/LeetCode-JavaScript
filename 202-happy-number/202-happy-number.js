@@ -13,13 +13,4 @@ var isHappy = function (n) {
   return n === 1;
 };
 
-const digitsSqrSum = (n) => {
-  let sum = 0;
-
-  while (n) {
-    sum += (n % 10) ** 2;
-    n = ~~(n / 10);
-  }
-
-  return sum;
-};
+const digitsSqrSum = (n) => [...`${n}`].reduce((acc, curr) => acc + (+curr) ** 2, 0)
