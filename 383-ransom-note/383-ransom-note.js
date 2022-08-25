@@ -4,14 +4,11 @@
  * @return {boolean}
  */
 var canConstruct = function(ransomNote, magazine) {
-  const map = {};
-  
-  for (let ch of ransomNote) 
-    map[ch] ? map[ch]++ : map[ch] = 1;
-  
-  for (let ch of magazine) {
-    if (ch in map) map[ch]--;
+  for (let ch of ransomNote) {
+    if (!magazine.includes(ch)) return false;
+    
+    magazine = magazine.replace(ch, '');
   }
-  
-  return Object.values(map).every(num => num <= 0);
+    
+  return true;
 };
