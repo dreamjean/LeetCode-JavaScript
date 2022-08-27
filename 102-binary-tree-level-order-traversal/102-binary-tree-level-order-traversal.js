@@ -17,16 +17,16 @@ var levelOrder = function(root) {
   const ans = [];
   
   while (queue.length) {
-    const tmp = [];
+    const temp = [];
     const size = queue.length;
     for (let i = 0; i < size; i++) {
       const { val, left, right } = queue.shift();
-      tmp.push(val);
+      temp.push(val);
       if (left) queue.push(left);
       if (right) queue.push(right);
     }
     
-    ans.push(tmp);
+    ans.push(temp);
   }
   
   return ans;
