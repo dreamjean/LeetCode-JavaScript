@@ -10,18 +10,18 @@
  * @param {Node|null} root
  * @return {number[]}
  */
-var preorder = function (root) {
-  if (!root) return [];
-
-  const stack = [root];
+var preorder = function(root) {
   const ans = [];
-
-  while (stack.length) {
-    const { val, children } = stack.pop();
-    ans.push(val);
-    for (let i = children.length - 1; i >= 0; --i) 
-      stack.push(children[i]);
+  
+  const helper = (node) => {
+    if (!node) return
+    
+    ans.push(node.val);
+    for (let child of node.children)
+      helper(child);
   }
-
+  
+  helper(root);
+  
   return ans;
 };
