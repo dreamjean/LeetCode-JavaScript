@@ -17,7 +17,7 @@ var numIslands = function (grid) {
 
     grid[r][c] = "0";
 
-    for (let [dx, dy] of dirs) dfs(dx + r, dy + c);
+    for (const [dx, dy] of dirs) dfs(dx + r, dy + c);
   };
 
   for (let i = 0; i < m; i++) {
