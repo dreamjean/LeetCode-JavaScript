@@ -2,25 +2,26 @@
  * @param {number[][]} mat
  * @return {number[][]}
  */
-var diagonalSort = function (mat) {
-  let map = {}
-    for(let i=0;i<mat.length;i++){
-        for(let j=0;j<mat[0].length;j++){
-            let d = i-j
-            if(!map[d]){
-                map[d]=[]
-            }
-            map[d].push(mat[i][j])
-        }
+var diagonalSort = function(mat) {
+  const map = {};
+  const [m, n] = [mat.length, mat[0].length];
+  
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      const key = i - j;
+      if (!(key in map)) {
+        map[key] = new MinPriorityQueue();
+        map[key].enqueue(mat[i][j]);
+      }
+      else map[key].enqueue(mat[i][j]);
     }
-    for(let key in map){
-        map[key].sort((a,b)=>{return a-b})
+  }
+  
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      mat[i][j] = map[i - j].dequeue().element;
     }
-    for(let i=0;i<mat.length;i++){
-        for(let j=0;j<mat[0].length;j++){
-            let d = i-j
-            mat[i][j] = map[d].shift()
-        }
-    }
-    return mat
+  }
+  
+  return mat;
 };
