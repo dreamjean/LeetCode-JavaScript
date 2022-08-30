@@ -12,10 +12,7 @@
  * @return {TreeNode}
  */
 var insertIntoMaxTree = function (root, val) {
-  if (root?.val > val) {
-    root.right = insertIntoMaxTree(root.right, val);
-    return root;
-  }
-
-  return new TreeNode(val, root, null);
+  return root && root.val > val
+    ? new TreeNode(root.val, root.left, insertIntoMaxTree(root.right, val))
+    : new TreeNode(val, root, null);
 };
