@@ -3,10 +3,10 @@
  * @param {number[]} popped
  * @return {boolean}
  */
-var validateStackSequences = function(pushed, popped) {
+var validateStackSequences = function (pushed, popped) {
   const stack = [];
   let i = 0;
-  
+
   for (let num of pushed) {
     stack.push(num);
     while (stack.length && stack.at(-1) === popped[i]) {
@@ -14,6 +14,6 @@ var validateStackSequences = function(pushed, popped) {
       i++;
     }
   }
-  
-  return i === pushed.length;
+
+  return !stack.length;
 };
