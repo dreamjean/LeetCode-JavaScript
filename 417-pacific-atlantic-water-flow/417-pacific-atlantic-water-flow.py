@@ -1,51 +1,25 @@
-/**
- * @param {number[][]} heights
- * @return {number[][]}
- */
-var pacificAtlantic = function (heights) {
-  const [m, n] = [heights.length, heights[0].length];
-  const pacific = Array.from({ length: m }, () => new Array(n).fill(false));
-  const atlantic = Array.from({ length: m }, () => new Array(n).fill(false));
-  const dirs = [
-    [1, 0],
-    [0, 1],
-    [-1, 0],
-    [0, -1],
-  ];
-  const ans = [];
-
-  const dfs = (r, c, ocean, prev = Number.MIN_SAFE_INTEGER) => {
-    if (
-      r < 0 ||
-      r >= m ||
-      c < 0 ||
-      c >= n ||
-      heights[r][c] < prev ||
-      ocean[r][c]
-    )
-      return;
-
-    ocean[r][c] = true;
-    for (const [dx, dy] of dirs) 
-      dfs(dx + r, dy + c, ocean, heights[r][c]);
-    
-  };
-
-  for (let i = 0; i < m; i++) {
-    dfs(i, 0, pacific);
-    dfs(i, n - 1, atlantic);
-  }
-  
-  for (let j = 0; j < n; j++) {
-    dfs(0, j, pacific);
-    dfs(m - 1, j, atlantic);
-  }
-
-  for (let i = 0; i < m; i++) {
-    for (let j = 0; j < n; j++) {
-      if (pacific[i][j] && atlantic[i][j]) ans.push([i, j]);
-    }
-  }
-
-  return ans;
-};
+class Solution:
+    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+        m, n = len(heights), len(heights[0])
+        dirs = [(1, 0), (0, 1), (-1, 0), (0, -1)]
+        pacific = set()
+        atlantic = set()
+        
+        def dfs(r, c, ocean):
+            ocean.add((r, c))
+            for dx, dy in dirs:
+                x, y = dx + r, dy + c
+                if 0 <= x < m and 0 <= y < n and (x, y) not in ocean and heights[x][y] >= heights[r][c]:
+                    dfs(x, y, ocean)
+        
+        
+        for i in range(m):
+            dfs(i, 0, pacific)
+            dfs(i, n - 1, atlantic)
+        
+        for j in range(n):
+            dfs(0, j, pacific)
+            dfs(m - 1, j, atlantic)
+          
+        return list(pacific.intersection(atlantic))
+         
