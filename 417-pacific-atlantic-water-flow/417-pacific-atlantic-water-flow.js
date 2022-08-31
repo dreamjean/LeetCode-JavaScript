@@ -26,23 +26,26 @@ var pacificAtlantic = function (heights) {
       return;
 
     ocean[r][c] = true;
-
-    for (const [dx, dy] of dirs) dfs(dx + r, dy + c, ocean, heights[r][c]);
+    for (const [dx, dy] of dirs) 
+      dfs(dx + r, dy + c, ocean, heights[r][c]);
+    
   };
 
   for (let i = 0; i < m; i++) {
     dfs(i, 0, pacific);
     dfs(i, n - 1, atlantic);
   }
-
+  
   for (let j = 0; j < n; j++) {
     dfs(0, j, pacific);
     dfs(m - 1, j, atlantic);
   }
 
-  for (let i = 0; i < m; i++)
-    for (let j = 0; j < n; j++)
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
       if (pacific[i][j] && atlantic[i][j]) ans.push([i, j]);
+    }
+  }
 
   return ans;
 };
