@@ -10,12 +10,12 @@
  * @return {number}
  */
 var getDecimalValue = function(head) {
-  let num = '';
+  let num = 0;
   
   while (head) {
-    num += head.val;
+    num = (num << 1) | head.val;
     head = head.next;
   }
   
-  return parseInt(num, 2);
+  return num;
 };
