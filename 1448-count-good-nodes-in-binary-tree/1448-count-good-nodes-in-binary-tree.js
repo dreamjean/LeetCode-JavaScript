@@ -11,13 +11,13 @@
  * @return {number}
  */
 var goodNodes = function(root) {
-    return preorder(root, root.val);
+  return helper(root, root.val);
 };
 
-const preorder = (node, val) => {
-    if (!node) return 0;
-    
-    const max = Math.max(val, node.val);
-    
-    return (node.val >= val ? 1 : 0) + preorder(node.left, max) + preorder(node.right, max);
+const helper = (node, max) => {
+  if (!node) return 0;
+  
+  max = Math.max(max, node.val);
+  
+  return +(node.val >= max) + helper(node.left, max) + helper(node.right, max);
 }
