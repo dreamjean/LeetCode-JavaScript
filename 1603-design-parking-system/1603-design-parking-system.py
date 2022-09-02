@@ -1,22 +1,13 @@
-/**
- * @param {number} big
- * @param {number} medium
- * @param {number} small
- */
-var ParkingSystem = function(big, medium, small) {
-  this.park = [big, medium, small];
-};
+class ParkingSystem:
 
-/** 
- * @param {number} carType
- * @return {boolean}
- */
-ParkingSystem.prototype.addCar = function(carType) {
-  return --this.park[carType - 1] >= 0;
-};
+    def __init__(self, big: int, medium: int, small: int):
+        self.count = [big, medium, small]
 
-/** 
- * Your ParkingSystem object will be instantiated and called as such:
- * var obj = new ParkingSystem(big, medium, small)
- * var param_1 = obj.addCar(carType)
- */
+    def addCar(self, carType: int) -> bool:
+        self.count[carType - 1] -= 1
+        return self.count[carType - 1] >= 0
+
+
+# Your ParkingSystem object will be instantiated and called as such:
+# obj = ParkingSystem(big, medium, small)
+# param_1 = obj.addCar(carType)
