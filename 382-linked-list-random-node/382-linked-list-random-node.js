@@ -8,22 +8,25 @@
 /**
  * @param {ListNode} head
  */
-var Solution = function (head) {
-  this.list = [];
-  while (head) {
-    this.list.push(head.val);
-    head = head.next;
-  }
+var Solution = function(head) {
+  this.head = head;
 };
 
 /**
  * @return {number}
  */
-Solution.prototype.getRandom = function () {
-  return this.list[~~(Math.random() * this.list.length)];
+Solution.prototype.getRandom = function() {
+  let [node, i, ans] = [this.head, 1, 0];
+  while (node) {
+    if (~~(Math.random() * i++) === 0) ans = node.val;
+    
+    node = node.next;
+  }
+  
+  return ans;
 };
 
-/**
+/** 
  * Your Solution object will be instantiated and called as such:
  * var obj = new Solution(head)
  * var param_1 = obj.getRandom()
