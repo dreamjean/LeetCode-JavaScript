@@ -5,9 +5,9 @@
 var maxProfit = function(prices) {
   let [min, res] = [prices[0], 0];
   
-  for (let price of prices) {
-    min = Math.min(min, price);
-    res = Math.max(res, price - min);
+  for (let p of prices) {
+    min = Math.min(min, p);
+    res = Math.max(res, p - min);
   }
   
   return res;
