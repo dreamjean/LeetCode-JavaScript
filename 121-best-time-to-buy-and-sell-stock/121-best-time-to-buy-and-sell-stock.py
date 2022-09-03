@@ -1,7 +1,14 @@
-class Solution:
-    def maxProfit(self, prices: List[int]) -> int:
-        min_p, max_d = prices[0], 0
-        for p in prices:
-            min_p = min(min_p, p)
-            max_d = max(max_d, p - min_p)
-        return max_d
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+  let [min, res] = [prices[0], 0];
+  
+  for (let p of prices) {
+    min = Math.min(min, p);
+    res = Math.max(res, p - min);
+  }
+  
+  return res;
+};
