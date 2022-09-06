@@ -4,7 +4,7 @@
  */
 var reorderSpaces = function(text) {
   const spaces = text.split('').filter(x => x === ' ').length;
-  const words = text.trim().split(/\s+/);
+  const words = text.trim().split(' ').filter(word => word);
   const n = words.length;
   
   return n === 1
