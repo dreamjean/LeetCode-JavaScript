@@ -10,13 +10,12 @@
  * @param {TreeNode} root
  * @return {TreeNode}
  */
-var pruneTree = function (root) {
+var pruneTree = function(root) {
   if (!root) return null;
-
+  
   root.left = pruneTree(root.left);
   root.right = pruneTree(root.right);
-
-  if (!root.left && !root.right && !root.val) return null;
-
+  if (!root.val && !root.left && !root.right) return null;
+  
   return root;
 };
