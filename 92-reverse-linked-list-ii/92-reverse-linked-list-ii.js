@@ -15,10 +15,9 @@ var reverseBetween = function(head, left, right) {
   const dummy = new ListNode(-1, head);
   let prev = dummy;
   
-  for (let i = 0; i < left - 1; i++)
-    prev = prev.next
+  for (let i = 0; i < left - 1; i++) prev = prev.next
 
-  let curr = prev.next
+  let curr = prev.next;
   for (let i = 0; i < right - left; i++) {
     const next = curr.next;
     curr.next = next.next;
