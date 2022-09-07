@@ -1,30 +1,24 @@
-/**
- * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
- * }
- */
-/**
- * @param {TreeNode} root
- * @return {number}
- */
-var maxPathSum = function(root) {
-  let max = -Infinity;
-  
-  const helper = (node) => {
-    if (!node) return 0;
-    
-    const { val, left, right } = node;
-    const leftGain = Math.max(0, helper(node.left));
-    const rightGain = Math.max(0, helper(node.right));
-    max = Math.max(max, val + leftGain + rightGain);
-    
-    return val + Math.max(leftGain, rightGain);
-  }
-  
-  helper(root);
-  
-  return max;
-};
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:   
+        max_path = float('-inf')
+        def helper(node):
+            nonlocal max_path
+            if not node:
+                return 0
+            left_gain = max(0, helper(node.left))
+            right_gain = max(0, helper(node.right))
+            max_path = max(max_path, node.val + left_gain + right_gain)
+            
+            return node.val + max(left_gain, right_gain)
+        
+        
+        
+        helper(root)
+        return max_path
+      
