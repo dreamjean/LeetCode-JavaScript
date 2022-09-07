@@ -10,20 +10,19 @@
  * @param {TreeNode} root
  * @return {TreeNode[]}
  */
-var findDuplicateSubtrees = function(root) {
+var findDuplicateSubtrees = function (root) {
   const ans = [];
   helper(root, ans);
-  
+
   return ans;
 };
 
-const helper = (node, ans, map = new Map) => {
-  if (!node) return '#';
-  
+const helper = (node, ans, map = new Map()) => {
+  if (!node) return "#";
+
   const subtree = `${node.val}-${helper(node.left, ans, map)}-${helper(node.right, ans, map)}`;
   map.set(subtree, (map.get(subtree) || 0) + 1);
-  
   if (map.get(subtree) === 2) ans.push(node);
-  
+
   return subtree;
-}
+};
