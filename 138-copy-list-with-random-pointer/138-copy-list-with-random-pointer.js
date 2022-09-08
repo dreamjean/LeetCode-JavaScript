@@ -12,16 +12,14 @@
  * @return {Node}
  */
 var copyRandomList = function(head) {
-  const map = new Map();
-  
-  const deepCopy = (node) => {
+  const deepCopy = (node, map = new Map()) => {
     if (!node) return null;
     if (map.has(node)) return map.get(node);
     
     const currNode = new Node(node.val);
     map.set(node, currNode);
-    currNode.next = deepCopy(node.next);
-    currNode.random = deepCopy(node.random);
+    currNode.next = deepCopy(node.next, map);
+    currNode.random = deepCopy(node.random, map);
     
     return currNode;
   }
