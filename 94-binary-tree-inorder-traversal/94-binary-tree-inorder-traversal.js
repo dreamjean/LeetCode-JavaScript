@@ -11,7 +11,17 @@
  * @return {number[]}
  */
 var inorderTraversal = function(root) {
-    if (!root) return [];
+  const ans = [];
+  
+  const helper = (node) => {
+    if (!node) return;
     
-    return [...inorderTraversal(root.left), root.val, ...inorderTraversal(root.right)];
+    helper(node.left);
+    ans.push(node.val);
+    helper(node.right);
+  }
+  
+  helper(root);
+  
+  return ans;
 };
