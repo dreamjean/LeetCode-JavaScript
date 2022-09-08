@@ -10,22 +10,26 @@ var maxAreaOfIsland = function (grid) {
     [-1, 0],
     [0, -1],
   ];
-  let ans = 0;
+  let max = 0;
 
   const dfs = (r, c) => {
-    if (r < 0 || r >= m || c < 0 || c >= n || grid[r][c] !== 1) return 0;
+    if (r < 0 || r >= m || c < 0 || c >= n || !grid[r][c]) return 0;
 
     grid[r][c] = 0;
     let count = 1;
 
-    for (const [dx, dy] of dirs) count += dfs(dx + r, dy + c);
+    for (const [dx, dy] of dirs) {
+      count += dfs(dx + r, dy + c);
+    }
 
     return count;
   };
 
-  for (let i = 0; i < m; i++)
-    for (let j = 0; j < n; j++)
-      if (grid[i][j] === 1) ans = Math.max(ans, dfs(i, j));
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (grid[i][j] === 1) max = Math.max(max, dfs(i, j));
+    }
+  }
 
-  return ans;
+  return max;
 };
