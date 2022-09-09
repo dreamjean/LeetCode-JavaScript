@@ -4,41 +4,36 @@
  * @return {number}
  */
 var findKthLargest = function(nums, k) {
-    return quickSelect(nums, k)
+  const n = nums.length;
+  const last = n - k;
+  let [l, r] = [0, n - 1];
+  
+  while (l <= r) {
+    const pivot = partition(nums, l, r);
+    if (pivot === last) return nums[pivot];
+    if (pivot < last) l = pivot + 1;
+    else r = pivot - 1;
+  }
 };
 
-const swap = (arr, i, j) => [arr[i], arr[j]] = [arr[j], arr[i]];
+const swap = (nums, i, j) => [nums[i], nums[j]] = [nums[j], nums[i]];
 
-const partition = (arr, start, end) => {
-    const pivot = arr[end];
-    let [i, j] = [start, end - 1];
-    while (i <= j) {
-        while (arr[i] < pivot) i++;
-        while (arr[j] > pivot) j--;
+const partition = (nums, start, end) => {
+  const pivot = nums[end];
+  let [l, r] = [start, end - 1];
+  
+  while (l <= r) {
+    while (nums[l] < pivot) l++;
+    while (nums[r] > pivot) r--;
     
-        if (i <= j) {
-            swap(arr, i, j);
-            i++;
-            j--;
-        }
+    if (l <= r) {
+      swap(nums, l, r);
+      l++;
+      r--;
     }
-    
-    swap(arr, i, end);
-    
-    return i;
-}
-
-const quickSelect = (arr, k) => {
-    const n = arr.length;
-    const finalIdx = n - k;
-    let [low, high] = [0, n - 1];
-    
-    while (low <= high) {
-        const pivotIdx = partition(arr, low, high);
-        
-        if (pivotIdx === finalIdx) return arr[pivotIdx];
-        
-        if (pivotIdx < finalIdx) low = pivotIdx + 1;
-        else high = pivotIdx - 1;
-    }
+  }
+  
+  swap(nums, l, end);
+  
+  return l;
 }
