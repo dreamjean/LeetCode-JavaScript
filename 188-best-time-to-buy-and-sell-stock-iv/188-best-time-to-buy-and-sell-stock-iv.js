@@ -4,19 +4,18 @@
  * @return {number}
  */
 var maxProfit = function(k, prices) {
-  const n = prices.length;
-  if (n <= 1) return 0;
-    
-  const sells = new Array(k + 1).fill(0);
-  const buys = new Array(k + 1).fill(Number.MAX_SAFE_INTEGER);
-  buys[0] = 0;
+  if (prices.length <= 1) return 0;
   
-  for (let i = 0; i < n; i++) {
-    for (let j = 1; j <= k; j++) {
-      sells[j] = Math.max(sells[j], prices[i] - buys[j]);
-      buys[j] = Math.min(buys[j], prices[i] - sells[j - 1]);
+  const sell = new Array(k + 1).fill(0);
+  const buy = new Array(k + 1).fill(Number.MAX_SAFE_INTEGER);
+  buy[0] = 0;
+  
+  for (let price of prices) {
+    for (let i = 1; i <= k; i++) {
+      sell[i] = Math.max(sell[i], price - buy[i]);
+      buy[i] = Math.min(buy[i], price - sell[i - 1]);
     }
   }
   
-  return sells[k];
+  return sell[k];
 };
