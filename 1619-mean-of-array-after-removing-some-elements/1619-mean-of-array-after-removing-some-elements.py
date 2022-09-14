@@ -1,13 +1,5 @@
-/**
- * @param {number[]} arr
- * @return {number}
- */
-var trimMean = function(arr) {
-  const size = arr.length;
-  const skip = size / 20;
-  
-  return arr
-    .sort((a, b) => a - b)
-    .slice(skip, size - skip)
-    .reduce((a, b) => a + b) / (size - 2 * skip);
-};
+class Solution:
+    def trimMean(self, arr: List[int]) -> float:
+        n = len(arr)
+        skip = n // 20
+        return sum(sorted(arr)[skip:-skip]) / (n - 2*skip)
