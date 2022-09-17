@@ -16,8 +16,8 @@ var rotateRight = function (head, k) {
   let [first, second, n] = [head, head, 1];
 
   while (second.next) {
-    n++;
     second = second.next;
+    n++;
   }
 
   for (let i = 1; i < n - (k % n); i++) first = first.next;
