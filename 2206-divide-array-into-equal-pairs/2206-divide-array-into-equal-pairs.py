@@ -1,13 +1,9 @@
-/**
- * @param {number[]} nums
- * @return {boolean}
- */
-var divideArray = function(nums) {
-  nums.sort((a, b) => a - b);
-  
-  for (let i = 0; i < nums.length - 1; i += 2) {
-    if (nums[i] !== nums[i + 1]) return false;
-  }
-  
-  return true;
-};
+class Solution:
+    def divideArray(self, nums: List[int]) -> bool:
+        seen = set()
+        for num in nums:
+            if num in seen:
+                seen.remove(num)
+            else:
+                seen.add(num)
+        return not seen
