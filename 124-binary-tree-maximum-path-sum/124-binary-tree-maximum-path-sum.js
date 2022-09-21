@@ -16,12 +16,11 @@ var maxPathSum = function(root) {
   const helper = (node) => {
     if (!node) return 0;
     
-    const { val, left, right } = node;
     const leftGain = Math.max(0, helper(node.left));
     const rightGain = Math.max(0, helper(node.right));
-    max = Math.max(max, val + leftGain + rightGain);
+    max = Math.max(max, node.val + leftGain + rightGain);
     
-    return val + Math.max(leftGain, rightGain);
+    return node.val + Math.max(leftGain, rightGain);
   }
   
   helper(root);
