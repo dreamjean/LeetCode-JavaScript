@@ -1,10 +1,3 @@
-/**
- * @param {string} s
- * @return {string}
- */
-var reverseWords = function (s) {
-  return s
-    .split(" ")
-    .map((word) => word.split("").reverse().join(""))
-    .join(" ");
-};
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        return ' '.join(s.split()[::-1])[::-1]
