@@ -1,9 +1,6 @@
 class Solution:
     def concatenatedBinary(self, n: int) -> int:
-        MOD = 10 ** 9 + 7
-        res, m = 1, 0b100
+        MOD, res = 10 ** 9 + 7, 1        
         for i in range(2, n + 1):
-            if i == m:
-                m <<= 1
-            res = (res*m + i) % MOD
+            res = (res << i.bit_length() | i) % MOD
         return res
