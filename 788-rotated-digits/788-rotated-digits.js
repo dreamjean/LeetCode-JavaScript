@@ -11,14 +11,14 @@ var rotatedDigits = function(n) {
 };
 
 const isGood = (num) => {
-  const set1 = new Set('347');
-  const set2 = new Set('2569');
-  const str = num.toString().split('');
   let good = false;
   
-  for (let c of str) {
-    if (set1.has(c)) return false;
-    if (set2.has(c)) good = true;
+  while (num) {
+    const x = num % 10;
+    if (x === 3 || x === 4 || x === 7) return false;
+    if (x === 2 || x === 5 || x === 6 || x === 9) good = true;
+    
+    num = ~~(num / 10);
   }
   
   return good;
