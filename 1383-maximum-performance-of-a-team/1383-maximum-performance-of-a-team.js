@@ -6,11 +6,11 @@
  * @return {number}
  */
 var maxPerformance = function(n, speed, efficiency, k) {
-  const persons = efficiency.map((item, i) => [item, speed[i]]).sort((a, b) => b[0] - a[0]);
-  const ll = BigInt;
-  const mod = ll(1e9 + 7);
+  const persons = efficiency.map((e, i) => [e, speed[i]]).sort((a, b) => b[0] - a[0]);
   const pq = new MinPriorityQueue();
-  let [sum, res] = [0, 0n];
+  const ll = BigInt;
+  const mod = ll(10 ** 9 + 7);
+  let [res, sum] = [0n, 0];
   
   for (const [e, s] of persons) {
     sum += s;
@@ -20,7 +20,6 @@ var maxPerformance = function(n, speed, efficiency, k) {
     const curr = ll(sum) * ll(e);
     if (curr > res) res = curr;
   }
-  
   
   return res % mod;
 };
