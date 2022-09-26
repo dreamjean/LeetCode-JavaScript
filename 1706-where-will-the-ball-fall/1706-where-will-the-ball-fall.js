@@ -9,8 +9,8 @@ var findBall = function (grid) {
   for (let c = 0; c < n; c++) {
     let c1 = c;
     for (let r = 0; r < m; r++) {
-      const curr = grid[r][c1];
-      if (curr === grid[r][c1 + curr]) c1 += curr;
+      const cur = grid[r][c1];
+      if (grid[r][c1 + cur] === cur) c1 += cur;
       else [r, c1] = [m, -1];
     }
 
