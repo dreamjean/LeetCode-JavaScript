@@ -11,17 +11,15 @@ var equationsPossible = function (equations) {
 
     return uf[x];
   };
-  
+
   for (let i = 0; i < 26; i++) uf[i] = i;
 
   for (let e of equations) {
     if (e[1] === "=") uf[find(e.charCodeAt(0) - a)] = find(e.charCodeAt(3) - a);
   }
 
-  for (let e of equations) {
-    if (e[1] === "!" && find(e.charCodeAt(0) - a) === find(e.charCodeAt(3) - a))
-      return false;
-  }
-
-  return true;
+  return !equations.some(
+    (e) =>
+      e[1] === "!" && find(e.charCodeAt(0) - a) === find(e.charCodeAt(3) - a)
+  );
 };
