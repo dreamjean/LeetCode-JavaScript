@@ -15,5 +15,10 @@ var minimumTime = function (time, totalTrips) {
   return low;
 };
 
-const graterThanTotal = (time, mid, totalTrips) =>
-  time.reduce((acc, curr) => acc + Math.floor(mid / curr), 0) >= totalTrips;
+const graterThanTotal = (time, mid, totalTrips) => {
+  let trips = 0;
+  
+  for (let t of time) trips += Math.floor(mid / t);
+  
+  return trips >= totalTrips;
+}
