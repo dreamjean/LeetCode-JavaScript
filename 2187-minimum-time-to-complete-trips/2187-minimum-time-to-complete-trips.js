@@ -4,7 +4,7 @@
  * @return {number}
  */
 var minimumTime = function (time, totalTrips) {
-  let [low, high] = [1, totalTrips * time[0]];
+  let [low, high] = [1, 1e14];
 
   while (low < high) {
     const mid = low + Math.floor((high - low) / 2);
