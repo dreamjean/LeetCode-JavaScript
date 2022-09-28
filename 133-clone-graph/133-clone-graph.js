@@ -10,19 +10,19 @@
  * @param {Node} node
  * @return {Node}
  */
-var cloneGraph = function(node) {
-    const copy = {};
-    
-    const dfs = (node) => {
-        if (!node) return node;
-        
-        if (!(node.val in copy)) {
-            copy[node.val] = new Node(node.val);
-            copy[node.val].neighbors = node.neighbors.map(dfs);
-        }
-        
-        return copy[node.val];
+var cloneGraph = function (node) {
+  const copy = {};
+
+  const dfs = (node) => {
+    if (!node) return node;
+
+    if (!(node.val in copy)) {
+      copy[node.val] = new Node(node.val);
+      copy[node.val].neighbors = node.neighbors.map(dfs);
     }
-    
-    return dfs(node);
+
+    return copy[node.val];
+  };
+
+  return dfs(node);
 };
