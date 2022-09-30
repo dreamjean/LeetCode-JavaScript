@@ -6,8 +6,8 @@
  */
 var mincostToHireWorkers = function (quality, wage, k) {
   const persons = quality
-    .map((item, i) => [item, wage[i]])
-    .sort(([a1, b1], [a2, b2]) => b1 / a1 - b2 / a2);
+    .map((q, i) => [q, wage[i]])
+    .sort(([a1, a2], [b1, b2]) => a2 / a1 - b2 / b1);
   const pq = new MaxPriorityQueue();
   let [sum, ans] = [0, Infinity];
 
@@ -17,7 +17,7 @@ var mincostToHireWorkers = function (quality, wage, k) {
     if (pq.size() > k) sum -= pq.dequeue().element;
     if (pq.size() === k) {
       const unitWage = w / q;
-      ans = Math.min(ans, unitWage * sum);
+      ans = Math.min(ans, sum * unitWage);
     }
   }
 
