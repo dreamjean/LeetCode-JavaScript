@@ -1,18 +1,15 @@
 class Solution:
-    def specialArray(self, nums: List[int]) -> int:
-        nums.sort(reverse=True)
-        def findSpecial(mid):
-            return sum(num >= mid for num in nums)
-        
-        
-        l, r = 0, max(nums)
+    def specialArray(self, nums: List[int]) -> int:            
+        nums.sort()
+        l, r = 0, len(nums)
         while l <= r:
             mid = (l + r) >> 1
-            num = findSpecial(mid)
-            if num == mid:
-                return num
-            if num > mid:
-                l = mid + 1
-            else:
+            cnt = sum(x >= mid for x in nums)
+            if cnt == mid:
+                return mid
+            if cnt < mid:
                 r = mid - 1
+            else:
+                l = mid + 1
         return -1
+            
