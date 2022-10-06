@@ -4,14 +4,14 @@
  */
 var findLongestChain = function(pairs) {
   pairs.sort((a, b) => a[1] === b[1] ? a[0] - b[0] : a[1] - b[1]);
-  let [curr, count] = [-Infinity, 0];
+  let [curr, ans] = [-Infinity, 0];
   
-  for (const [x, y] of pairs) {
-    if (curr < x) {
-      curr = y;
-      count++;
+  for (let [a, b] of pairs) {
+    if (curr < a) {
+      curr = b;
+      ans++;
     }
   }
   
-  return count;
+  return ans;
 };
