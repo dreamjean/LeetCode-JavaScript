@@ -8,8 +8,8 @@ var shortestPathLength = function (graph) {
   const queue = [];
 
   for (let i = 0; i < n; i++) {
-    queue.push([i, 1 << i, 0]);
     seen[i][1 << i] = true;
+    queue.push([i, 1 << i, 0]);
   }
 
   while (queue.length) {
@@ -24,6 +24,4 @@ var shortestPathLength = function (graph) {
       queue.push([v, maskV, cost + 1]);
     }
   }
-
-  return -1;
 };
