@@ -4,15 +4,14 @@
  * @return {number}
  */
 var minCost = function(colors, neededTime) {
-  let [ans, max] = [0, neededTime[0]];
+  let [ans, maxCost] = [0, neededTime[0]];
   
-  for (let i = 1; i < colors.length; i++) {
-    if (colors[i - 1] === colors[i]) {
-      ans += Math.min(max, neededTime[i]);
-      max = Math.max(max, neededTime[i]);
+  for (let i = 0; i < colors.length; i++) {
+    if (colors[i] === colors[i - 1]) {
+      ans += Math.min(maxCost, neededTime[i]);
+      maxCost = Math.max(maxCost, neededTime[i]);
     }
-    
-    else max = neededTime[i];
+    else maxCost = neededTime[i];
   }
   
   return ans;
