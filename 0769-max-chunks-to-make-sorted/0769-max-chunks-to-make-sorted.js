@@ -5,10 +5,10 @@
 var maxChunksToSorted = function(arr) {
   let [currMax, ans] = [0, 0];
   
-  for (let [i, num] of arr.entries()) {
+  arr.forEach((num, i) => {
     currMax = Math.max(currMax, num);
     if (currMax === i) ans++;
-  }
+  })
   
   return ans;
 };
