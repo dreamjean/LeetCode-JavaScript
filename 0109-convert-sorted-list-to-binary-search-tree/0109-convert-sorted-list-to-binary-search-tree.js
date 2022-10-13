@@ -18,20 +18,26 @@
  * @return {TreeNode}
  */
 var sortedListToBST = function(head) {
-  if (!head) return null;
-  if (!head.next) return new TreeNode(head.val);
+  let [curr, cnt] = [head, 0];
   
-  let [first, second, fast] = [null, head, head];
-  while (fast && fast.next) {
-    first = second;
-    second = second.next;
-    fast = fast.next.next;
+  while (curr) {
+    cnt++;
+    curr = curr.next;
   }
   
-  first.next = null;
-  const node = new TreeNode(second.val);
-  node.left = sortedListToBST(head);
-  node.right = sortedListToBST(second.next);
-  
-  return node;
+  const buildTree = (l, r) => {
+    if (l > r) return null;
+    
+    const mid = (l + r) >> 1;
+    const node = new TreeNode();
+    
+    node.left = buildTree(l, mid - 1);
+    node.val = head.val;
+    head = head.next;
+    node.right = buildTree(mid + 1, r);
+    
+    return node;
+  }
+    
+  return buildTree(1, cnt);
 };
