@@ -5,11 +5,14 @@
 var distinctSubseqII = function(s) {
   const end = new Array(26).fill(0);
   const mod = 1e9 + 7;
+  let ans = 0;
   
-  for (let char of s) {
-    const i = char.charCodeAt() - 'a'.charCodeAt();
-    end[i] = (end.reduce((a, b) => a + b) + 1) % mod;
+  for (let ch of s) {
+    const i = ch.charCodeAt() - 'a'.charCodeAt();
+    const others = (ans - end[i] + mod) % mod;
+    end[i] = ans + 1;
+    ans = (end[i] + others) % mod;
   }
   
-  return end.reduce((a, b) => a + b) % mod;
+  return ans;
 };
