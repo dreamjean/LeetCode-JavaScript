@@ -4,13 +4,17 @@
  * @return {string[]}
  */
 var buildArray = function(target, n) {
-  const set = new Set(target);
   const stack = [];
+  let j = 0;
   
   for (let i = 1; i <= n; i++) {
-    stack.push('Push');
-    if (!set.has(i)) stack.push('Pop');
-    if (i == target.at(-1)) break;
+    if (target[j] === i) {
+      stack.push('Push');
+      j++;
+    }
+    else stack.push('Push', 'Pop');
+    
+    if (i === target.at(-1)) break;
   }
   
   return stack;
