@@ -41,8 +41,6 @@ const reverse = (node) => {
 }
 
 const isSameList = (a, b) => {
-  let [aNext, bNext] = [null, null]
-  
   while (a && b) {
     if (a.val !== b.val) return false;
     
