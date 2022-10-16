@@ -13,22 +13,22 @@
 var partition = function(head, x) {
   const dummy1 = new ListNode(0);
   const dummy2 = new ListNode(0);
-  let [first, second] = [dummy1, dummy2];
+  let [p1, p2] = [dummy1, dummy2];
   
   while (head) {
     if (head.val < x) {
-      first.next = head;
-      first = head;
+      p1.next = head;
+      p1 = head;
     } else {
-      second.next = head;
-      second = head;
+      p2.next = head;
+      p2 = head;
     }
     
     head = head.next;
   }
   
-  first.next = dummy2.next;
-  second.next = null;
+  p1.next = dummy2.next;
+  p2.next = null;
   
   return dummy1.next;
 };
