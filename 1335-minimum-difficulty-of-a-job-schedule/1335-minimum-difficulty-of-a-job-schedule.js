@@ -5,6 +5,8 @@
  */
 var minDifficulty = function(jobDifficulty, d) {
   const n = jobDifficulty.length;
+  if (n < d) return -1;
+  
   const map = new Map();
   
   const dfs = (i, d) => {
@@ -22,5 +24,5 @@ var minDifficulty = function(jobDifficulty, d) {
     return map[key] = res;
   }
   
-  return n < d ? -1 : dfs(0, d)
+  return dfs(0, d)
 };
