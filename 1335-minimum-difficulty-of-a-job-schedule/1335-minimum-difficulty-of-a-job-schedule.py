@@ -1,28 +1,15 @@
-/**
- * @param {number[]} jobDifficulty
- * @param {number} d
- * @return {number}
- */
-var minDifficulty = function(jobDifficulty, d) {
-  const n = jobDifficulty.length;
-  if (n < d) return -1;
-  
-  const map = new Map();
-  
-  const dfs = (i, d) => {
-    const key = `${i}-${d}`;
-    if (d === 1) return Math.max(...jobDifficulty.slice(i));
-    if (key in map) return map[key];
-    
-    let [res, max] = [Infinity, 0];
-    
-    for (let j = i; j <= n - d; ++j) {
-      max = Math.max(max, jobDifficulty[j]);
-      res = Math.min(res, max + dfs(j + 1, d - 1));
-    }
-    
-    return map[key] = res;
-  }
-  
-  return dfs(0, d)
-};
+class Solution:
+    def minDifficulty(self, jobDifficulty: List[int], d: int) -> int:
+        @lru_cache(None)
+        def dfs(i, d):
+            if d == 1:
+                return max(jobDifficulty[i:])
+            res, mx = float('inf'), 0
+            for j in range(i, n - d + 1):
+                mx = max(mx, jobDifficulty[j])
+                res = min(res, mx + dfs(j + 1, d - 1))
+            return res
+          
+        n = len(jobDifficulty)
+        return -1 if n < d else dfs(0, d)
+            
