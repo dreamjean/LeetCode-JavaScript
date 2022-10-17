@@ -3,11 +3,7 @@
  * @return {boolean}
  */
 var checkIfPangram = function(sentence) {
-  const cnt = new Array(26).fill(0);
+  const set = new Set(sentence);
   
-  for (let char of sentence) {
-    cnt[char.charCodeAt() - 'a'.charCodeAt()]++;
-  }
-  
-  return cnt.every((num) => num);
+  return set.size === 26;
 };
