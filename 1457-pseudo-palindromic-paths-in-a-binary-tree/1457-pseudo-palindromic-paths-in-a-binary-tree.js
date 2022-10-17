@@ -11,14 +11,14 @@
  * @return {number}
  */
 var pseudoPalindromicPaths = function (root) {
-  return helper(root);
+  return dfs(root);
 };
 
-const helper = (node, count = 0) => {
+const dfs = (node, count = 0) => {
   if (!node) return 0;
 
   count ^= 1 << node.val;
   if (!node.left && !node.right) return count & (count - 1) ? 0 : 1;
 
-  return helper(node.left, count) + helper(node.right, count);
+  return dfs(node.left, count) + dfs(node.right, count);
 };
