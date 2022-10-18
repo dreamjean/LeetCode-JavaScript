@@ -11,7 +11,7 @@ var atMostNGivenDigitSet = function(digits, n) {
   for (let j = 1; j < nLen; j++) res += dLen ** j;
   
   while (i < nLen) {
-    res += digits.reduce((acc, curr) => acc + (+curr < +str[i]), 0) * (dLen ** (nLen - i - 1));
+    res += digits.reduce((acc, curr) => acc + (curr < str[i] ? 1 : 0), 0) * (dLen ** (nLen - i - 1));
     if (!digits.includes(str[i])) break
     
     i++;
