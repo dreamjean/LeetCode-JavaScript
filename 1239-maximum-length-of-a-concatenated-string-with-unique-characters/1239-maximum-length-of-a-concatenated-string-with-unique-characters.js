@@ -5,7 +5,7 @@
 var maxLength = function(arr) {
   let ans = 0;
   
-  const dfs = (start, path) => {
+  const dfs = (start = 0, path = '') => {
     if (path.length !== new Set(path).size) return;
     
     ans = Math.max(ans, path.length);
@@ -15,7 +15,7 @@ var maxLength = function(arr) {
     }
   }
   
-  dfs(0, '');
+  dfs();
   
   return ans;
 };
