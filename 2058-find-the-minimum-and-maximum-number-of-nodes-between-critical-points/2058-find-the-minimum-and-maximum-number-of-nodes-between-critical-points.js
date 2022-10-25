@@ -9,30 +9,31 @@
  * @param {ListNode} head
  * @return {number[]}
  */
-var nodesBetweenCriticalPoints = function(head) {
+var nodesBetweenCriticalPoints = function (head) {
   const indexs = [];
-  let [curr, i] = [head, 1];
-  let [min, max] = [Infinity, 0];
-  
+  let [curr, i, min] = [head, 0, Infinity];
+
   while (curr) {
     i++;
-    
+
     if (curr.next && curr.next.next) {
-      const [p1, p2, p3] = [curr.val, curr.next.val, curr.next.next.val];
-      if ((p1 < p2 && p2 > p3) || (p1 > p2 && p2 < p3)) indexs.push(i);
+      const [a, b, c] = [curr.val, curr.next.val, curr.next.next.val];
+      if ((b > a && b > c) || (b < a && b < c)) indexs.push(i);
     }
-    
+
     curr = curr.next;
   }
-  
+
   const n = indexs.length;
-  if (n < 2) return [-1, -1];  
-  if (n === 2) return [indexs[1] - indexs[0], indexs[1] - indexs[0]];
-  
-  for (let i = 1; i < n; i++) {
-    min = Math.min(min, indexs[i] - indexs[i - 1]);
-    if (i === n - 1) max = indexs[i] - indexs[0];
+  if (n < 2) return [-1, -1];
+  if (n === 2) {
+    const num = indexs[1] - indexs[0];
+    return [num, num];
   }
-  
-  return [min, max];
+
+  for (let i = 1; i < indexs.length; i++) {
+    min = Math.min(min, indexs[i] - indexs[i - 1]);
+  }
+
+  return [min, indexs[n - 1] - indexs[0]];
 };
