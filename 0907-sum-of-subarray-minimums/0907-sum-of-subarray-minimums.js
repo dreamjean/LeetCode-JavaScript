@@ -3,17 +3,19 @@
  * @return {number}
  */
 var sumSubarrayMins = function(arr) {
-  const n = arr.length;
+  arr.push(-1);
+  const stack = [-1];
   const mod = 1e9 + 7;
-  let sum = 0;
+  let ans = 0;
   
-  for (let i = 0; i < n; i++) {
-    let min = arr[i];
-    for (let j = i; j < n; j++) {
-      min = Math.min(min, arr[j]);
-      sum += min;
+  for (let i = 0; i < arr.length; i++) {
+    while (stack.length > 1 && arr[stack.at(-1)] >= arr[i]) {
+      let j = stack.pop();
+      ans += arr[j] * (j - stack.at(-1)) * (i - j);
     }
+    
+    stack.push(i);
   }
   
-  return sum % mod;
+  return ans % mod;
 };
