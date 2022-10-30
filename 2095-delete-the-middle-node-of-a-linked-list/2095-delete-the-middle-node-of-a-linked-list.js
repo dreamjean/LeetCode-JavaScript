@@ -9,16 +9,18 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-var deleteMiddle = function(head) {
+var deleteMiddle = function (head) {
   if (!head.next) return null;
-  
-  let [slow, fast] = [head, head.next.next];
+
+  let [prev, slow, fast] = [null, head, head];
+
   while (fast && fast.next) {
+    prev = slow;
     slow = slow.next;
     fast = fast.next.next;
   }
-  
-  slow.next = slow.next.next;
-  
+
+  prev.next = prev.next.next;
+
   return head;
 };
