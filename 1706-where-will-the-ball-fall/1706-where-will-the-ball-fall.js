@@ -4,17 +4,17 @@
  */
 var findBall = function (grid) {
   const [m, n] = [grid.length, grid[0].length];
-  const ans = [];
+  const ans = new Array(n).fill(-1);
 
-  for (let c = 0; c < n; c++) {
-    let c1 = c;
-    for (let r = 0; r < m; r++) {
-      const cur = grid[r][c1];
-      if (grid[r][c1 + cur] === cur) c1 += cur;
-      else [r, c1] = [m, -1];
+  for (let col = 0; col < n; col++) {
+    let start = col;
+    for (let row = 0; row < m; row++) {
+      const curr = grid[row][start];
+      if (curr === grid[row][start + curr]) start += curr;
+      else [row, start] = [m, -1];
     }
 
-    ans.push(c1);
+    ans[col] = start;
   }
 
   return ans;
