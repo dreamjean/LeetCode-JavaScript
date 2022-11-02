@@ -2,21 +2,17 @@
  * @param {number[][]} intervals
  * @return {number[][]}
  */
-var merge = function(intervals) {
-  intervals.sort((a, b) => a[0] === b[0] ? a[1] - b[1] : a[0] - b[0]);
-  const ans = [];
-  let [start, end] = intervals[0]
+var merge = function (intervals) {
+  return intervals
+    .sort((a, b) => a[0] - b[0])
+    .reduce((acc, curr, i) => {
+      if (!i) acc.push(curr);
 
-  for (let i = 1; i < intervals.length; i++) {
-    const [currStart, currEnd] = intervals[i];
-    if (currStart > end) {
-      ans.push([start, end]);
-      start = currStart;    
-      end = currEnd;
-    }
-    
-    else end = Math.max(end, currEnd);    
-  }
-  
-  return [...ans, [start, end]];
+      let last = acc.at(-1);
+      curr[0] <= last[1]
+        ? (last[1] = Math.max(last[1], curr[1]))
+        : acc.push(curr);
+
+      return acc;
+    }, []);
 };
