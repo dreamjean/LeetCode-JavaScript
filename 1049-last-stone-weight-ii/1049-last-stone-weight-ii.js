@@ -3,19 +3,16 @@
  * @return {number}
  */
 var lastStoneWeightII = function(stones) {
-  const max = Math.max(...stones) * stones.length;
-  const dp = new Array(max + 1).fill(0);
-  let sum = 0;
+  const sum = stones.reduce((a, b) => a + b);
+  const volumn = sum >> 1;
+  const dp = new Array(volumn + 1).fill(0);
   dp[0] = 1;
-
+  
   for (let stone of stones) {
-    sum += stone;
-    for (let i = Math.min(max, sum); i >= stone; --i)
+    for (let i = volumn; i >= stone; --i) {
       dp[i] |= dp[i - stone];
+    }
   }
-
-  for (let i = ~~(sum / 2); i >= 0; --i) 
-    if (dp[i]) return sum - i - i;
-
-  return 0;
+  
+  return sum - 2 * dp.lastIndexOf(1);
 };
