@@ -11,8 +11,8 @@ const isSubsequences = (word, s, map = new Map()) => {
   if (map.has(word)) return map.get(word);
   
   let index = -1;
-  for (let ch of word) {
-    index = s.indexOf(ch, index + 1);
+  for (let c of word) {
+    index = s.indexOf(c, index + 1);
     if (index === -1) {
       map.set(word, false);
       return false;
