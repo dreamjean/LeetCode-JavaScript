@@ -15,8 +15,8 @@ var getIntersectionNode = function(headA, headB) {
   let [p1, p2] = [headA, headB];
   
   while (p1 !== p2) {
-    p1 = !p1 ? headB : p1.next;
-    p2 = !p2 ? headA : p2.next;
+    p1 = p1 ? p1.next : headB;
+    p2 = p2 ? p2.next : headA;
   }
   
   return p1;
