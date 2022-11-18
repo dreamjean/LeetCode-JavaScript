@@ -9,7 +9,7 @@ var numberOfWeakCharacters = function(properties) {
   for (let i = properties.length - 1; i >= 0; --i) {
     const defense = properties[i][1];
     maxDef = Math.max(maxDef, defense);
-    if (defense < maxDef) ++weak;
+    if (defense < maxDef) weak++;
   }
   
   return weak;
