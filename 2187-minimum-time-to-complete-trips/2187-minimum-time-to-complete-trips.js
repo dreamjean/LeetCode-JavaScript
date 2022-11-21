@@ -4,21 +4,21 @@
  * @return {number}
  */
 var minimumTime = function(time, totalTrips) {
-  let [low, high] = [1, totalTrips * time[0]];
+  let [lo, hi] = [1, time[0] * totalTrips];
   
-  while (low < high) {
-    const mid = low + Math.floor((high - low) / 2);
-    if (biggerThanTotal(time, mid, totalTrips)) high = mid;
-    else low = mid + 1;
+  while (lo < hi) {
+    const mid = lo + Math.floor((hi - lo) / 2);
+    if (graterThanTotal(time, mid, totalTrips)) hi = mid;
+    else lo = mid + 1;
   }
   
-  return low;
+  return lo;
 };
 
-const biggerThanTotal = (time, mid, totalTrips) => {
-  let trips = 0;
+const graterThanTotal = (time, mid, totalTrips) => {
+  let sum = 0;
   
-  for (let t of time) trips += Math.floor(mid / t);
+  for (let t of time) sum += Math.floor(mid / t);
   
-  return trips >= totalTrips;
+  return sum >= totalTrips;
 }
