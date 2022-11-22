@@ -6,7 +6,7 @@ var minimumDeviation = function(nums) {
   const pq = new MaxPriorityQueue();
   
   for (let num of nums) {
-    if (num & 1) num *= 2;
+    if (num % 2) num *= 2;
     
     pq.enqueue(num);
   }
