@@ -13,7 +13,7 @@ var minimumDeviation = function(nums) {
   
   let ans = pq.front().element - pq.back().element;
   
-  while (!(pq.front().element & 1)) {
+  while (!(pq.front().element % 2)) {
     pq.enqueue(pq.dequeue().element / 2);
     
     ans = Math.min(ans, pq.front().element - pq.back().element);
