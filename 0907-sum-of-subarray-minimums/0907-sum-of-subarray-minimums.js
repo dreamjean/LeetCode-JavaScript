@@ -8,13 +8,13 @@ var sumSubarrayMins = function(arr) {
   const mod = 1e9 + 7;
   let ans = 0;
   
-  for (let i = 0; i < arr.length; i++) {
-    while (stack.length > 1 && arr[stack.at(-1)] >= arr[i]) {
-      let j = stack.pop();
-      ans += arr[j] * (j - stack.at(-1)) * (i - j);
+  for (let r = 0; r < arr.length; r++) {
+    while (stack.length > 1 && arr[stack.at(-1)] >= arr[r]) {
+      let l = stack.pop();
+      ans += arr[l] * (l - stack.at(-1)) * (r - l);
     }
     
-    stack.push(i);
+    stack.push(r);
   }
   
   return ans % mod;
