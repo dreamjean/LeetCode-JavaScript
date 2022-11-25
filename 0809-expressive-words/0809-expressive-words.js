@@ -16,13 +16,15 @@ const check = (s, word) => {
       i++;
       j++;
     }
-    else if (
-      (i > 0 && s[i - 1] === s[i] && s[i] === s[i + 1]) ||
-      (i > 1 && s[i - 2] === s[i] && s[i - 1] === s[i])
-    ) i++;
-    
-    else return false;
+    else {
+      if (s[i] !== s[i - 1]) return false;
+      
+      let k = i;
+      while (s[i] === s[k]) i++;
+      
+      if (i - k === 1 && s[k] !== s[k - 2]) return false;
+    }
   }
-
+  
   return j === n;
 }
