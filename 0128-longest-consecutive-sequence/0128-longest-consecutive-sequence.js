@@ -7,10 +7,12 @@ var longestConsecutive = function(nums) {
   let ans = 0;
   
   for (let num of nums) {
-    let [start, end] = [num - 1, num];
-    if (!set.has(start)) while (set.has(end + 1)) end++;
+    if (set.has(num - 1)) continue;
     
-    ans = Math.max(ans, end - start);
+    let end = num + 1;
+    while (set.has(end)) end++;
+    
+    ans = Math.max(ans, end - num);
   }
   
   return ans;
