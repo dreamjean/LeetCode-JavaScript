@@ -2,10 +2,10 @@
  * @param {number[]} nums
  * @return {number}
  */
-var subArrayRanges = function (nums) {
+var subArrayRanges = function(nums) {
   const n = nums.length;
   let sum = 0;
-
+  
   for (let i = 0; i < n; i++) {
     let [min, max] = [nums[i], nums[i]];
     for (let j = i; j < n; j++) {
@@ -14,6 +14,6 @@ var subArrayRanges = function (nums) {
       sum += max - min;
     }
   }
-
+  
   return sum;
 };
