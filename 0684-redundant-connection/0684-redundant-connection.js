@@ -7,9 +7,7 @@ var findRedundantConnection = function(edges) {
   const parents = Array.from({ length: n + 1 }, (_, i) => i);
   
   for (let [x, y] of edges) {
-    if (find(x, parents) === find(y, parents)) return [x, y];
-    
-    union(x, y, parents);
+    if (union(x, y, parents)) return [x, y];    
   }
 };
 
@@ -23,7 +21,8 @@ const find = (x, parents) => {
 const union = (x, y, parents) => {
   const rootX = find(x, parents);
   const rootY = find(y, parents);
-  if (rootX === rootY) return;
+  if (rootX === rootY) return true;
   
   parents[rootX] = rootY;
+  return false;
 }
