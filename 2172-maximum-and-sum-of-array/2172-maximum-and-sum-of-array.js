@@ -14,7 +14,7 @@ var maximumANDSum = function(nums, numSlots) {
     for (let j = 0; j < numSlots * 2; ++j) {
       if (i & (1 << j)) continue;
       
-      const mask = i + (1 << j);
+      const mask = i | (1 << j);
       dp[mask] = Math.max(dp[mask], dp[i] + ((~~(j / 2) + 1) & nums[c]));
     }
   }
