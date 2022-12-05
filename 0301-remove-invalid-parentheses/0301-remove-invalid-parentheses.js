@@ -6,18 +6,13 @@ var removeInvalidParentheses = function(s) {
   const set = new Set();
   const queue = [s];
   const ans = [];
-  let found = false;
   
   while (queue.length) {
     const size = queue.length;
     for (let i = 0; i < size; i++) {
       const str = queue.shift();
-      if (isValid(str)) {
-        ans.push(str);
-        found = true;
-      }
-      
-      if (found) continue;
+      if (isValid(str)) ans.push(str);
+      if (ans.length) continue;
       
       for (let j = 0; j < str.length; j++) {
         if (/[(/)]/.test(str[j])) {
