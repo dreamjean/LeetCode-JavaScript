@@ -15,10 +15,10 @@ var oddEvenList = function(head) {
   let [odd, even] = [head, head.next];
   
   while (odd.next && odd.next.next) {
-    let temp = odd.next;
-    odd.next = odd.next.next;
+    let tmp = odd.next;
+    odd.next = tmp.next;
     odd = odd.next;
-    temp.next = odd.next;
+    tmp.next = odd.next;
   }
   
   odd.next = even;
