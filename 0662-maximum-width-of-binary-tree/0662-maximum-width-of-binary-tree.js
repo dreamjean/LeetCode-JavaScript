@@ -12,7 +12,7 @@
  */
 var widthOfBinaryTree = function(root) {
   const queue = [[root, 0]];
-  let ans = 1;
+  let ans = 0;
   
   while (queue.length) {
     const size = queue.length;
@@ -22,7 +22,7 @@ var widthOfBinaryTree = function(root) {
     for (let i = 0; i < size; i++) {
       let [node, index] = queue.shift();
       index -= start;
-
+      
       if (node.left) queue.push([node.left, index * 2]);
       if (node.right) queue.push([node.right, index * 2 + 1]);
     }
