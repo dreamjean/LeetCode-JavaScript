@@ -22,7 +22,7 @@ class Solution:
             grid[x][y] = -2
             empty -= 1
             
-            for [dx, dy] in dirs:
+            for dx, dy in dirs:
                 dfs(dx + x, dy + y, empty)
             
             grid[x][y] = 0
