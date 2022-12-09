@@ -1,42 +1,34 @@
-/**
- * @param {character[][]} board
- * @return {void} Do not return anything, modify board in-place instead.
- */
-var solveSudoku = function(board) {
-  backtrack(board);
-};
-
-const backtrack = (board) => {
-  for (let i = 0; i < 9; i++) {
-    for (let j = 0; j < 9; j++) {
-      if (board[i][j] !== '.') continue;
+class Solution:
+    def solveSudoku(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        def isValid(row, col, digit, board):
+            for i in range(9):
+                if board[row][i] == digit or board[i][col] == digit:
+                    return False
+                if board[(row // 3) * 3 + i // 3][(col // 3) * 3 + i % 3] == digit:
+                    return False
+            return True
+          
+          
+        def backtrack(board):
+            for i in range(9):
+                for j in range(9):
+                    if board[i][j] != '.':
+                        continue
+                    for c in '123456789':
+                        if not isValid(i, j, c, board):
+                            continue
+                        board[i][j] = c
+                        if backtrack(board):
+                            return True
+                        
+                        board[i][j] = '.'
+                        
+                    return False
+                  
+            return True
+          
       
-      for (let d = 1; d < 10; d++) {
-        const digit = d.toString();
-        if (!isValid(i, j, digit, board)) continue;
-        
-        board[i][j] = digit;
-        if (backtrack(board)) return true;
-        
-        board[i][j] = '.';
-      }
-      
-      return false;
-    }
-  }
-  
-  return true;
-}
-
-const isValid = (row, col, digit, board) => {
-  for (let i = 0; i < 9; i++) {
-    if (board[row][i] === digit || board[i][col] === digit) return false;
-    
-    const boxRow = ~~(row / 3) * 3 + ~~(i / 3);
-    const boxCol = ~~(col / 3) * 3 + i % 3;
-    if (board[boxRow][boxCol] === digit) return false;
-  }
-  
-  return true;
-}
-
+        backtrack(board)
