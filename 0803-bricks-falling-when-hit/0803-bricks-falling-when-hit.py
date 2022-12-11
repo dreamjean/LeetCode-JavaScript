@@ -1,84 +1,69 @@
-/**
- * @param {number[][]} grid
- * @param {number[][]} hits
- * @return {number[]}
- */
-var hitBricks = function(grid, hits) {
-  const [m, n, k] = [grid.length, grid[0].length, hits.length];
-  const uf = new UnionFind(m * n + 1);
-  const ans = new Array(k).fill(0);
-  
-  hits.forEach(([x, y]) => {
-    if (grid[x][y] === 1) grid[x][y] = 2;
-  })
-  
-  for (let i = 0; i < m; i++) {
-    for (let j = 0; j < n; j++) {
-      if (grid[i][j] === 1) unionAround(i, j, grid, uf)
-    }
-  }
-  
-  for (let i = k - 1; i >= 0; i--) {
-    const [x, y] = hits[i];
-    if (grid[x][y] !== 2) continue;
-    
-    grid[x][y] = 1;
-    let originBricks = uf.componentSize(0);
-    unionAround(x, y, grid, uf);
-    let currBricks = uf.componentSize(0);
-    ans[i] = Math.max(0, currBricks - originBricks - 1);
-    
-    originBricks = currBricks;
-  }
-  
-  return ans;
-};
+class DSU:
+    def __init__(self, n: int):
+        self.parent = [i for i in range(n)]
+        self.size = [1] * n
+        
+    def find(self, x):
+        if x != self.parent[x]:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
+      
+    def componentSize(self, x):
+        root = self.find(x)
+        return self.size[root]
+      
+    def union(self, x, y):
+        rootX, rootY = self.find(x), self.find(y)
+        if rootX == rootY:
+            return
+        if self.size[rootX] < self.size[rootY]:
+            self.parent[rootX] = rootY
+            self.size[rootY] += self.size[rootX]
+        else:
+            self.parent[rootY] = rootX
+            self.size[rootX] += self.size[rootY]
+        
 
-const mark = (x, y, n) => x * n + y + 1;
-
-const unionAround = (x, y, grid, uf) => {
-  const dirs = [[1, 0], [0, 1], [-1, 0], [0, -1]];
-  const [m, n] = [grid.length, grid[0].length];
-  const currMark = mark(x, y, n);
-  
-  if (!x) uf.union(0, currMark);
-  
-  for (let [dx, dy] of dirs) {
-    const [nx, ny] = [dx + x, dy + y];
-    if (nx >= 0 && nx < m && ny >= 0 && ny < n && grid[nx][ny] === 1)
-      uf.union(currMark, mark(nx, ny, n));
-  }
-}
-
-class UnionFind {
-  constructor(n) {
-    this.parent = Array.from({ length: n }, (_, i) => i);
-    this.size = new Array(n).fill(1);
-  }
-  
-  find(x) {
-    if (x !== this.parent[x]) this.parent[x] = this.find(this.parent[x]);
+class Solution:
+    def hitBricks(self, grid: List[List[int]], hits: List[List[int]]) -> List[int]:
+        self.grid = grid
+        self.rows, self.cols, m = len(grid), len(grid[0]), len(hits)
+        ds = DSU(self.rows * self.cols + 1)
+        ans = [0] * m
+        
+        for x, y in hits:
+            if grid[x][y] == 1:
+                grid[x][y] = 2
+                
+        for i in range(self.rows):
+            for j in range(self.cols):
+                if grid[i][j] == 1:
+                    self.unionAround(i, j, ds)
+                    
+        for i in range(m - 1, -1, -1):
+            x, y = hits[i]
+            if grid[x][y] == 2:
+                grid[x][y] = 1
+                origin_bricks = ds.componentSize(0)
+                self.unionAround(x, y, ds)
+                curr_bricks = ds.componentSize(0)
+                ans[i] = max(0, curr_bricks - origin_bricks - 1)
+                orgin_bricks = curr_bricks
+                
+        return ans
+        
+                
+    def mark(self, x, y):
+        return x * self.cols + y + 1
     
-    return this.parent[x];
-  }
-  
-  componentSize(x) {
-    let root = this.find(x);
-    return this.size[root];
-  }
-  
-  union(x, y) {
-    const rootX = this.find(x);
-    const rootY = this.find(y);
-    
-    if (rootX === rootY) return;
-    if (this.size[rootX] < this.size[rootY]) {
-      this.parent[rootX] = rootY;
-      this.size[rootY] += this.size[rootX];
-    }
-    else {
-      this.parent[rootY] = rootX;
-      this.size[rootX] += this.size[rootY];
-    }
-  }
-}
+    def unionAround(self, x, y, ds):
+        dirs = [[1, 0], [0, 1], [-1, 0], [0, -1]]
+        curr_mark = self.mark(x, y)
+        
+        if x == 0:
+            ds.union(0, curr_mark)
+            
+        for dx, dy in dirs:
+            nx, ny = dx + x, dy + y
+            if 0 <= nx < self.rows and 0 <= ny < self.cols and self.grid[nx][ny] == 1:
+                ds.union(curr_mark, self.mark(nx, ny))
