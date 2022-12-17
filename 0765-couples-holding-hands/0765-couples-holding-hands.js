@@ -4,19 +4,18 @@
  */
 var minSwapsCouples = function(row) {
   const n = row.length / 2;
-  const uf = new UnionFind(2 * n);
+  const uf = new UnionFind(n);
   
   for (let i = 0; i < 2 * n; i += 2) {
     uf.union(~~(row[i] / 2), ~~(row[i + 1] / 2));
   }
 
-  return 2 * n - uf.count;
+  return n - uf.count;
 };
 
 class UnionFind {
   constructor(n) {
     this.parent = Array.from({ length: n }, (_, i) => i);
-    this.size = new Array(n).fill(1);
     this.count = n;
   }
   
@@ -35,15 +34,7 @@ class UnionFind {
     let rootY = this.find(y);
     if (rootX === rootY) return;
     
-    const { parent, size } = this;
-    if (size[rootX] < size[rootY]) {
-      parent[rootX] = rootY;
-      size[rootY] += size[rootX]
-    }
-    else {
-      parent[rootY] = rootX;
-      size[rootX] += size[rootY]
-    }
+    this.parent[rootX] = rootY;
     this.count--;
   }
 }
