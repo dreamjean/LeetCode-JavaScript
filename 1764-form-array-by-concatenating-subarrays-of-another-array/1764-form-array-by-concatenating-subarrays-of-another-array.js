@@ -8,7 +8,7 @@ var canChoose = function(groups, nums) {
   let [i, start] = [0, 0];
   
   while (i < n && start + groups[i].length <= nums.length) {
-    if (isSubArray(groups[i], nums, start)) start += groups[i++].length - 1;
+    if (search(groups[i], nums, start)) start += groups[i++].length - 1;
     
     start++;
   }
@@ -16,4 +16,4 @@ var canChoose = function(groups, nums) {
   return i === n;
 };
 
-const isSubArray = (group, nums, start) => !group.some((x, i) => x !== nums[i + start]);
+const search = (group, nums, start) => !group.some((x, i) => x !== nums[i + start]);
