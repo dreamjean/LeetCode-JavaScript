@@ -4,32 +4,40 @@
  * @return {boolean}
  */
 var possibleBipartition = function(n, dislikes) {
-  const graph = Array.from({ length: n }, () => []);
-  const color = new Array(n).fill(0);
+  const uf = new UnionFind(2 * n + 1);
   
-  dislikes.forEach(([a, b]) => {
-    graph[a - 1].push(b - 1);
-    graph[b - 1].push(a - 1);
-  })
-  
-  for (let i = 0; i < n; i++) {
-    if (color[i]) continue;
+  for (let [a, b] of dislikes) {
+    if (uf.connected(a, b)) return false;
     
-    color[i] = 1;
-    const queue = [i];
-    
-    while (queue.length) {
-      const curr = queue.shift();
-      for (let next of graph[curr]) {
-        if (!color[next]) {
-          color[next] = -color[curr] ^ 1;
-          queue.push(next);
-        }
-        
-        else if (color[next] === color[curr]) return false;
-      }
-    }
+    uf.union(a, b + n);
+    uf.union(a + n, b);
   }
   
   return true;
 };
+
+class UnionFind {
+  constructor (n) {
+    this.parent = Array.from({ length: n }, (_, i) => i);
+  }
+  
+  find(x) {
+    const parent = this.parent;
+    while (x !== parent[x]) {
+      parent[x] = parent[parent[x]];
+      x = parent[x];
+    }
+    
+    return x;
+  }
+  
+  connected(x, y) {
+    return this.find(x) === this.find(y);
+  }
+  
+  union(x, y) {
+    const rootX = this.find(x);
+    const rootY = this.find(y);
+    this.parent[rootX] = rootY;
+  }
+}
