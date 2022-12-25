@@ -7,7 +7,7 @@ var smallestStringWithSwaps = function(s, pairs) {
   const n = s.length;
   const uf = new UnionFind(n);
   const map = {};
-  const ans = [];
+  let ans = '';
   
   pairs.forEach(([a, b]) => uf.union(a, b)); 
   
@@ -20,10 +20,10 @@ var smallestStringWithSwaps = function(s, pairs) {
   
   for (let i = 0; i < n; i++) {
     const root = uf.find(i);
-    if (root in map) ans.push(map[root].pop());
+    if (root in map) ans += map[root].pop();
   }
   
-  return ans.join('');
+  return ans;
 };
 
 class UnionFind {
