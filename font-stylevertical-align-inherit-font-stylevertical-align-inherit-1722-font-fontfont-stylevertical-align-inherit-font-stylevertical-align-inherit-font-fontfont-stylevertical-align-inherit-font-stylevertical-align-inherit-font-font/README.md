@@ -1,0 +1,44 @@
+<h2><a href="https://leetcode.com/problems/minimize-hamming-distance-after-swap-operations/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1722 </font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">交换操作后最小化汉明距离</font></font></a></h2><h3>Medium</h3><hr><div><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">给定两个整数数组，</font></font><code>source</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><code>target</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，长度均为</font></font><code>n</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">您还会得到一个数组</font></font><code>allowedSwaps</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，其中每个数组都</font><font style="vertical-align: inherit;">表示您可以交换</font><font style="vertical-align: inherit;">array的索引</font><font style="vertical-align: inherit;">和索引</font><strong><font style="vertical-align: inherit;">（从 0 开始）</font></strong><font style="vertical-align: inherit;">处的元素。</font><font style="vertical-align: inherit;">请注意，您可以以</font><strong><font style="vertical-align: inherit;">任意</font></strong><font style="vertical-align: inherit;">顺序</font><strong><font style="vertical-align: inherit;">多次</font></strong><font style="vertical-align: inherit;">交换特定索引对处的元素。</font></font><code>allowedSwaps[i] = [a<sub>i</sub>, b<sub>i</sub>]</code><font style="vertical-align: inherit;"></font><code>a<sub>i</sub></code><font style="vertical-align: inherit;"></font><code>b<sub>i</sub></code> <strong><font style="vertical-align: inherit;"></font></strong><font style="vertical-align: inherit;"></font><code>source</code><font style="vertical-align: inherit;"></font><strong><font style="vertical-align: inherit;"></font></strong><font style="vertical-align: inherit;"></font><strong><font style="vertical-align: inherit;"></font></strong><font style="vertical-align: inherit;"></font></p>
+
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">两个长度相同的数组的</font><font style="vertical-align: inherit;">汉</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">明距离</font></font></strong><font style="vertical-align: inherit;"></font><code>source</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，和</font></font><code>target</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，是元素不同的位置的个数。</font><font style="vertical-align: inherit;">形式上，它是</font><font style="vertical-align: inherit;">where </font><strong><font style="vertical-align: inherit;">(0-indexed) 的索引</font></strong></font><code>i</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">数</font><font style="vertical-align: inherit;">。</font></font><code>0 &lt;= i &lt;= n-1</code><font style="vertical-align: inherit;"></font><code>source[i] != target[i]</code> <strong><font style="vertical-align: inherit;"></font></strong><font style="vertical-align: inherit;"></font></p>
+
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">返回对 array</font><em><font style="vertical-align: inherit;">执行</font></em><em><strong><font style="vertical-align: inherit;">任意</font></strong></em><em><font style="vertical-align: inherit;">数量的交换操作</font></em><em><font style="vertical-align: inherit;">后</font></em><em><font style="vertical-align: inherit;">和</font></em></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">最小汉明距离</font></font></strong><font style="vertical-align: inherit;"></font></em><font style="vertical-align: inherit;"><em><font style="vertical-align: inherit;">。</font></em></font><code>source</code><em><font style="vertical-align: inherit;"></font></em><code>target</code><em><font style="vertical-align: inherit;"></font><strong><font style="vertical-align: inherit;"></font></strong><font style="vertical-align: inherit;"></font></em><code>source</code><em><font style="vertical-align: inherit;"></font></em></p>
+
+<p>&nbsp;</p>
+<p><strong class="example"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">示例 1：</font></font></strong></p>
+
+<pre><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">输入：</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> source = [1,2,3,4], target = [2,1,4,5], allowedSwaps = [[0,1],[2,3]]
+</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">输出：</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 1
+</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">解释：</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> source 可以被转换以下方式：</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+- 交换索引 0 和 1：source = [ </font></font><u><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></u><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , </font></font><u><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></u><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ,3,4]</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+- 交换索引 2 和 3：source = [2,1, </font></font><u><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></u><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> , </font></font><u><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></u><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ]</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+源和目标的汉明距离为 1，因为它们在 1 个位置不同：索引 3。</font></font><font></font>
+</pre>
+
+<p><strong class="example"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">示例 2：</font></font></strong></p>
+
+<pre><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">输入：</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> source = [1,2,3,4], target = [1,3,2,4], allowedSwaps = []
+</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">输出：</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 2
+</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">解释：</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">没有允许的交换。</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+源和目标的汉明距离为 2，因为它们在 2 个位置不同：索引 1 和索引 2。</font></font><font></font>
+</pre>
+
+<p><strong class="example"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">示例 3：</font></font></strong></p>
+
+<pre><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">输入：</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">源 = [5,1,2,4,3]，目标 = [1,5,4,2,3]，allowedSwaps = [[0,4],[4,2],[1,3] ,[1,4]]
+</font></font><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">输出：</font></font></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 0
+</font></font></pre>
+
+<p>&nbsp;</p>
+<p><strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">约束：</font></font></strong></p>
+
+<ul>
+	<li><code>n == source.length == target.length</code></li>
+	<li><code>1 &lt;= n &lt;= 10<sup>5</sup></code></li>
+	<li><code>1 &lt;= source[i], target[i] &lt;= 10<sup>5</sup></code></li>
+	<li><code>0 &lt;= allowedSwaps.length &lt;= 10<sup>5</sup></code></li>
+	<li><code>allowedSwaps[i].length == 2</code></li>
+	<li><code>0 &lt;= a<sub>i</sub>, b<sub>i</sub> &lt;= n - 1</code></li>
+	<li><code>a<sub>i</sub> != b<sub>i</sub></code></li>
+</ul>
+</div>
