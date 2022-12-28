@@ -4,20 +4,17 @@
  * @return {number}
  */
 var minStoneSum = function(piles, k) {
-  const pq = new MaxPriorityQueue();
-  let ans = 0;
+  const max = Math.max(...piles);
+  const cnt = new Array(max + 1).fill(0);
+  let sum = 0;
   
-  piles.forEach((num) => pq.enqueue(num));
+  piles.forEach((pile) => cnt[pile]++);
   
-  while (k) {
-    const num = Math.ceil(pq.dequeue().element / 2);
-    pq.enqueue(num);
-    k--;
+  for (let i = max; i >= 0; i--) {
+    while (cnt[i]-- > 0) {
+      k-- > 0 ? cnt[Math.ceil(i / 2)]++ : sum += i;
+    }
   }
   
-  while (!pq.isEmpty()) {
-    ans += pq.dequeue().element;
-  }
-  
-  return ans;
+  return sum;
 };
