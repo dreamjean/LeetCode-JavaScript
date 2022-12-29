@@ -17,7 +17,7 @@ var getOrder = function(tasks) {
   let [i, currTime] = [0, tasks[0][0]];
   
   while (i < n || !pq.isEmpty()) {
-    if (pq.isEmpty() && currTime < tasks[i][0]) currTime = tasks[i][0];
+    if (pq.isEmpty()) currTime = Math.max(currTime, tasks[i][0]);
     
     while (i < n && currTime >= tasks[i][0]) {
       pq.enqueue([tasks[i][1], tasks[i][2]]);
