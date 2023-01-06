@@ -6,7 +6,7 @@
 var minOperations = function(nums, x) {
   const sum = nums.reduce((a, b) => a + b) - x;
   const n = nums.length;
-  let [start, end, currSum, diff] = [0, 0, 0, -1];
+  let [start, end, currSum, diff] = [0, 0, 0, 0];
   
   if (!sum) return n;
   
@@ -17,5 +17,5 @@ var minOperations = function(nums, x) {
     if (currSum === sum) diff = Math.max(diff, end - start);
   }
   
-  return diff > -1 ? n - diff : diff;;
+  return diff > 0 ? n - diff : -1;
 };
