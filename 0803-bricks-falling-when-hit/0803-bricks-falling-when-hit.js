@@ -16,15 +16,17 @@ var hitBricks = function(grid, hits) {
     for (let j = 0; j < n; j++) 
       if (grid[i][j] === 1) unionAround(i, j, grid, uf);
   
+  let originBricks = uf.getSize(0);
+  
   for (let t = k - 1; t >= 0; t--) {
     const [x, y] = hits[t];
     if (grid[x][y] === 2) {
-      grid[x][y] = 1;
-      let originBricks = uf.getSize(0);
+      grid[x][y] = 1;      
       unionAround(x, y, grid, uf);
       const currBricks = uf.getSize(0);
     
       ans[t] = Math.max(0, currBricks - originBricks - 1);
+      originBricks = currBricks;
     }    
   }
     
