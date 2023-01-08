@@ -8,10 +8,10 @@ var largestComponentSize = function(nums) {
   const count = new Array(max + 1).fill(0);
   
   for (let num of nums) {
-    for (let j = 2; j <= Math.sqrt(num); j++) {
-      if (!(num % j)) {
-        uf.union(num, j);
-        uf.union(num, num / j);
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+      if (!(num % i)) {
+        uf.union(num, i);
+        uf.union(num, num / i);
       }
     }
   }
@@ -22,25 +22,31 @@ var largestComponentSize = function(nums) {
 class UnionFind {
   constructor(n) {
     this.parent = Array.from({ length: n }, (_, i) => i);
-    this.rank = new Array(n).fill(1);
+    this.size = new Array(n).fill(1);
   }
-  
+
   find(x) {
-    if (x !== this.parent[x]) this.parent[x] = this.find(this.parent[x]);
-    return this.parent[x];
+    const parent = this.parent;
+    while (x !== parent[x]) {
+      parent[x] = parent[parent[x]];
+      x = parent[x];
+    }
+
+    return x;
   }
-  
+
   union(x, y) {
-    let rootX = this.find(x);
-    let rootY = this.find(y);
+    const rootX = this.find(x);
+    const rootY = this.find(y);
     if (rootX === rootY) return;
-    
-    if (this.rank[rootX] < this.rank[rootY]) {
-      this.parent[rootX] = rootY;
-      this.rank[rootY] += this.rank[rootX];
+
+    const { parent, size } = this;
+    if (size[rootX] < size[rootY]) {
+      parent[rootX] = rootY;
+      size[rootY] += size[rootX]; 
     } else {
-      this.parent[rootY] = rootX;
-      this.rank[rootX] += this.rank[rootY];
+      parent[rootY] = rootX;
+      size[rootX] += size[rootY]; 
     }
   }
 }
