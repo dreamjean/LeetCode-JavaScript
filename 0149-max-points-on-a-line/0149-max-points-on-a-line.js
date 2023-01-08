@@ -3,26 +3,17 @@
  * @return {number}
  */
 var maxPoints = function(points) {
-  const n = points.length;
-  let ans = 1;
+  let ans = 0;
   
-  for (let i = 0; i < n; i++) {
+  for (let [x1, y1] of points) {
     const map = {};
-    let max = 0;
-    for (let j = 1; j < n; j++) {
-      const [x1, y1] = points[i];
-      const [x2, y2] = points[j];
-      const [diffX, diffY] = [x2 - x1, y2 - y1];
-      const k = gcd(diffX, diffY);
-      const key = `${diffX / k}-${diffY / k}`;
+    for (let [x2, y2] of points) {
+      if (x1 === x2 && y1 === y2) continue;
+      const key = (y2 - y1) / (x2 - x1);
       map[key] ? map[key]++ : map[key] = 1;
-      max = Math.max(max, map[key]);
+      ans = Math.max(ans, map[key]);
     }
-    
-    ans = Math.max(ans, max + 1);
   }
   
-  return ans;
+  return ans + 1;
 };
-
-const gcd = (a, b) => (!b ? a : gcd(b, a % b));
