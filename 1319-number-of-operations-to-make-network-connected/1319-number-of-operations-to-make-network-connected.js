@@ -28,10 +28,6 @@ class UnionFind {
 
     return x;
   }
-  
-  connected(x, y) {
-    return this.find(x) === this.find(y);
-  }
 
   componentSize() {
     return this.count;
