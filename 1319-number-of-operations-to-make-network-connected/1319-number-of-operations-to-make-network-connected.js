@@ -4,15 +4,13 @@
  * @return {number}
  */
 var makeConnected = function(n, connections) {
+  if (connections.length < n - 1) return -1;
+  
   const uf = new UnionFind(n);
-  let extract = 0;
   
-  for (let [a, b] of connections) {
-    if (uf.connected(a, b)) extract++;
-    else uf.union(a, b);
-  }
+  connections.forEach(([a, b]) => uf.union(a, b));
   
-  return extract >= uf.getCount() - 1 ? uf.getCount() - 1 : -1;
+  return uf.componentSize() - 1;
 };
 
 class UnionFind {
@@ -35,7 +33,7 @@ class UnionFind {
     return this.find(x) === this.find(y);
   }
 
-  getCount() {
+  componentSize() {
     return this.count;
   }
 
