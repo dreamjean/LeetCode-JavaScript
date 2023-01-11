@@ -6,7 +6,6 @@
  */
 var areConnected = function(n, threshold, queries) {
   const uf = new UnionFind(n + 1);
-  const map = {};
   
   for (let i = threshold + 1; i <= n; i++) {
     if (uf.parentChanged(i)) continue;
