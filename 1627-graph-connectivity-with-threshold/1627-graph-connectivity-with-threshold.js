@@ -10,7 +10,7 @@ var areConnected = function(n, threshold, queries) {
   
   for (let i = threshold + 1; i <= n; i++) {
     if (uf.parentChanged(i)) continue;
-    for (let j = i * 2; j <= n; j++) {
+    for (let j = i * 2; j <= n; j += i) {
       if (!(j % i)) uf.union(i, j);
     }
   }
