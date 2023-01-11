@@ -21,7 +21,6 @@ var areConnected = function(n, threshold, queries) {
 class UnionFind {
   constructor(n) {
     this.parent = Array.from({ length: n }, (_, i) => i);
-    this.size = new Array(n).fill(1);
   }
   
   find(x) {
@@ -47,13 +46,8 @@ class UnionFind {
     const rootY = this.find(y);
     if (rootX === rootY) return;
     
-    const { parent, size } = this;
-    if (size[rootX] < size[rootY]) {
-      parent[rootX] = rootY;
-      size[rootY] += size[rootX];
-    } else {
-      parent[rootY] = rootX;
-      size[rootX] += size[rootY];
-    }
+    rootX < rootY
+      ? this.parent[rootX] = rootY
+      : this.parent[rootY] = rootX
   }
 }
