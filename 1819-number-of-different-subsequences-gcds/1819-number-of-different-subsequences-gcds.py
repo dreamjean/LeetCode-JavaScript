@@ -1,23 +1,17 @@
-/**
- * @param {number[]} nums
- * @return {number}
- */
-var countDifferentSubsequenceGCDs = function(nums) {
-  const seen = new Set(nums);
-  const max = Math.max(...seen);
-  let ans = 0;
-
-  for (i = 1; i <= max; i++) {
-    let g = 0;
-    for (let j = i; j <= max; j += i) {
-      if (seen.has(j)) g = gcd(g, j);
-      if (g === i) break;
-    }
-    
-    if (g === i) ans++;
-  }
-  
-  return ans;
-};
-
-const gcd = (a, b) => (!b ? a : gcd(b, a % b));
+class Solution:
+    def countDifferentSubsequenceGCDs(self, nums: List[int]) -> int:
+        def gcd(a, b):
+            return a if not b else gcd(b, a % b)
+          
+        
+        seen, large = set(nums), max(nums) + 1
+        ans = 0
+        for i in range(1, large):
+            g = 0
+            for j in range(i, large, i):
+                if j in seen:
+                    g = gcd(j, g)
+                if g == i:
+                    break
+            ans += 1 if g == i else 0
+        return ans
