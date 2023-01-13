@@ -11,15 +11,16 @@ var longestPath = function(parent, s) {
   for (let i = 1; i < n; i++) children[parent[i]].push(i);
   
   const dfs = (curr) => {
-    const pq = new MaxPriorityQueue();
+    let [maxDepth1, maxDepth2] = [0, 0];  
 
     for (let next of children[curr]) {
       const depth = dfs(next);
-      if (s[next] !== s[curr]) pq.enqueue(depth);
+      if (s[next] === s[curr]) continue;
+      
+      if (depth > maxDepth1) [maxDepth1, maxDepth2] = [depth, maxDepth1];
+      else if (depth > maxDepth2) maxDepth2 = depth;
     }
 
-    const maxDepth1 = pq.isEmpty() ? 0 : pq.dequeue().element;
-    const maxDepth2 = pq.isEmpty() ? 0 : pq.dequeue().element;
     ans = Math.max(ans, maxDepth1 + maxDepth2 + 1);
 
     return maxDepth1 + 1;
