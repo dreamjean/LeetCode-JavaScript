@@ -8,6 +8,8 @@ var longestPath = function(parent, s) {
   const children = Array.from({ length: n }, () => []);
   let ans = 0;
   
+  for (let i = 1; i < n; i++) children[parent[i]].push(i);
+  
   const dfs = (curr) => {
     const pq = new MaxPriorityQueue();
 
@@ -22,9 +24,7 @@ var longestPath = function(parent, s) {
 
     return maxDepth1 + 1;
   }
-  
-  for (let i = 1; i < n; i++) children[parent[i]].push(i);
-  
+    
   dfs(0);
   
   return ans;
