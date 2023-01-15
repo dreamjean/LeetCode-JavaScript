@@ -13,22 +13,21 @@ var numberOfGoodPaths = function(vals, edges) {
   
   vals.forEach((val, i) => map[val] ? map[val].push(i) : map[val] = [i]);
   
-  for (let [a, b] of edges) {
-    const max = Math.max(vals[a], vals[b]);
-    adj[max].push([a, b]);
+  for (let [u, v] of edges) {
+    const maxVal = Math.max(vals[u], vals[v]);
+    adj[maxVal].push([u, v]);
   }
   
-  for (let [num, indexs] of Object.entries(map)) {
-    adj[num].forEach(([a, b]) => uf.union(a, b));
+  for (let [val, indexs] of Object.entries(map)) {
+    adj[val].forEach(([u, v]) => uf.union(u, v));
     
     const group = {};
-    for (let i of indexs) {
+    indexs.forEach((i) => {
       const root = uf.find(i);
-      group[root] ? group[root]++ : group[root] = 1;
-      
-    }
+      group[root] ? group[root]++ : group[root] = 1; 
+    })
     
-    ans += Object.values(group).reduce((acc, curr) => acc + (curr - 1) * curr / 2, 0);
+    ans += Object.values(group).reduce((acc, curr) => acc + ~~((curr - 1) * curr / 2), 0);
   }
   
   return ans;
@@ -37,7 +36,6 @@ var numberOfGoodPaths = function(vals, edges) {
 class UnionFind {
   constructor(n) {
     this.parent = Array.from({ length: n }, (_, i) => i);
-    this.size = new Array(n).fill(1);
   }
 
   find(x) {
@@ -49,23 +47,15 @@ class UnionFind {
 
     return x;
   }
-  
-  getSize(x) {
-    return this.size[this.find(x)]
-  }
 
   union(x, y) {
     const rootX = this.find(x);
     const rootY = this.find(y);
     if (rootX === rootY) return;
 
-    const { parent, size } = this;
-    if (size[rootX] < size[rootY]) {
-      parent[rootX] = rootY;
-      size[rootY] += size[rootX];
-    } else {
-      parent[rootY] = rootX;
-      size[rootX] += size[rootY];
-    }
+    rootX > rootY 
+      ? this.parent[rootX] = rootY
+      : this.parent[rootY] = rootX;
   }
 }
+
