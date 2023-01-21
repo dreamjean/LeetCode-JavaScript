@@ -7,7 +7,7 @@ var restoreIpAddresses = function(s) {
   const ans = [];
   
   const backtract = (start = 0, path = []) => {
-    if (start === n && path.length === 4) ans.push(path.join('.'));
+    if (start === n && path.length === 4) return ans.push(path.join('.'));
     
     let num = '';
     for (let i = start; i < n; i++) {
