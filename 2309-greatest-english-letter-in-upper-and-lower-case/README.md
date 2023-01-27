@@ -3,7 +3,7 @@
 <p>An English letter <code>b</code> is <strong>greater</strong> than another letter <code>a</code> if <code>b</code> appears <strong>after</strong> <code>a</code> in the English alphabet.</p>
 
 <p>&nbsp;</p>
-<p><strong>Example 1:</strong></p>
+<p><strong class="example">Example 1:</strong></p>
 
 <pre><strong>Input:</strong> s = "l<strong><u>Ee</u></strong>TcOd<u><strong>E</strong></u>"
 <strong>Output:</strong> "E"
@@ -11,7 +11,7 @@
 The letter 'E' is the only letter to appear in both lower and upper case.
 </pre>
 
-<p><strong>Example 2:</strong></p>
+<p><strong class="example">Example 2:</strong></p>
 
 <pre><strong>Input:</strong> s = "a<strong><u>rR</u></strong>AzFif"
 <strong>Output:</strong> "R"
@@ -20,7 +20,7 @@ The letter 'R' is the greatest letter to appear in both lower and upper case.
 Note that 'A' and 'F' also appear in both lower and upper case, but 'R' is greater than 'F' or 'A'.
 </pre>
 
-<p><strong>Example 3:</strong></p>
+<p><strong class="example">Example 3:</strong></p>
 
 <pre><strong>Input:</strong> s = "AbCdEfGhIjK"
 <strong>Output:</strong> ""
