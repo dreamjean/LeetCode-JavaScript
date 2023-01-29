@@ -3,7 +3,12 @@
  * @return {number}
  */
 var countAsterisks = function(s) {
-    return s
-        .split('|')
-        .reduce((cnt, str, i) => cnt += !(i % 2) ? str.replace(/\w/g, '').length : 0, 0)
+  let [ans, cnt] = [0, 0];
+  
+  for (let ch of s) {
+    if (ch === '|') cnt++;
+    if (!(cnt % 2) && ch === '*') ans++;
+  }
+  
+  return ans;
 };
