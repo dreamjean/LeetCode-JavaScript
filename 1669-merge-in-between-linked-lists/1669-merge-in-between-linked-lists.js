@@ -14,21 +14,20 @@
  */
 var mergeInBetween = function(list1, a, b, list2) {
   const dummy = new ListNode(-1, list1);
-  let [p1, p2] = [dummy, dummy];
+  let [first, second] = [dummy, dummy];
   
-  for (let i = 0; i <= b - a; i++) p2 = p2.next;
+  for (let i = 0; i <= b - a; i++) second = second.next;
   
   for (let i = 0; i < a; i++) {
-    p1 = p1.next;
-    p2 = p2.next;
+    first = first.next;
+    second = second.next;
   }
   
-  p1.next = list2;
+  first.next = list2;
+  while (first.next) first = first.next;
   
-  while (p1.next) p1 = p1.next;
-  
-  p1.next = p2.next;
-  p2.next = null;
+  first.next = second.next;
+  second.next = null;
   
   return dummy.next;
 };
