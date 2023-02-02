@@ -4,14 +4,14 @@
  * @return {string}
  */
 var getSmallestString = function(n, k) {
-  let [curr, res] = [0, ''];
   k -= n;
+  let [curr, ans] = [0, ''];
   
   while (n--) {
     curr = Math.min(25, k);
-    res = String.fromCharCode(97 + curr) + res;
+    ans = String.fromCharCode(curr + 97) + ans;
     k -= curr;
   }
   
-  return res;
+  return ans;
 };
