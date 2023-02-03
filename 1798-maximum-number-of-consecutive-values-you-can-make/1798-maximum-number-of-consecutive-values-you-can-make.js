@@ -7,7 +7,7 @@ var getMaximumConsecutive = function(coins) {
   let ans = 1;
   
   for (let coin of coins) {
-    if (coin > ans) break;
+    if (ans < coin) break;
     
     ans += coin;
   }
