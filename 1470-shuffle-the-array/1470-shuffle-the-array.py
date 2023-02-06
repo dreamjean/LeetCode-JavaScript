@@ -1,13 +1,7 @@
-/**
- * @param {number[]} nums
- * @param {number} n
- * @return {number[]}
- */
-var shuffle = function(nums, n) {
-  const ans = [];
-  
-  for (let i = 0; i < n; i++) 
-    ans.push(nums[i], nums[i + n]);
-  
-  return ans;
-};
+class Solution:
+    def shuffle(self, nums: List[int], n: int) -> List[int]:
+        ans = []
+        for i in range(n):
+            ans.append(nums[i])
+            ans.append(nums[i + n])
+        return ans
