@@ -11,7 +11,6 @@
  * @return {boolean}
  */
 var evaluateTree = function(root) {
-  if (!root) return;
   if (!root.left && !root.right) return root.val;
   
   const left = evaluateTree(root.left);
