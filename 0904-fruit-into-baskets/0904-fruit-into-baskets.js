@@ -3,7 +3,7 @@
  * @return {number}
  */
 var totalFruit = function(fruits) {
-  let [fruitA, fruitB, currA, currB, currMax, max] = [-1, -1, 0, 0, 0, 0];
+  let [fruitA, fruitB, currB, currMax, max] = [-1, -1, 0, 0, 0];
   
   for (let fruit of fruits) {
     currMax = fruit === fruitA || fruit === fruitB ? currMax + 1 : currB + 1;
