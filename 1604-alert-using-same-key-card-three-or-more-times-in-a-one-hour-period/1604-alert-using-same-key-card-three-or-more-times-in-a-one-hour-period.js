@@ -18,7 +18,7 @@ var alertNames = function(keyName, keyTime) {
   for (let [name, times] of Object.entries(map)) 
     if (getAlert(times)) ans.push(name);
   
-  return ans.sort((a, b) => a.localeCompare(b));
+  return ans.sort();
 };
 
 const getAlert = (times) => times.sort((a, b) => a - b).some((time, i) => time - times[i - 2] <= 60);
