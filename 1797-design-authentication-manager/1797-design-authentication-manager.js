@@ -23,9 +23,9 @@ AuthenticationManager.prototype.generate = function(tokenId, currentTime) {
 AuthenticationManager.prototype.renew = function(tokenId, currentTime) {
   if (!this.tokens.has(tokenId)) return;
   
-  const token = this.tokens.get(tokenId);
-  if (token > currentTime) this.tokens.set(tokenId, currentTime + this.timeToLive);
-  else this.tokens.delete(tokenId);
+  const { tokens, timeToLive } = this;
+  if (tokens.get(tokenId) > currentTime) tokens.set(tokenId, currentTime + timeToLive);
+  else tokens.delete(tokenId);
 };
 
 /** 
