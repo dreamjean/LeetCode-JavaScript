@@ -6,30 +6,31 @@
  */
 var shortestAlternatingPaths = function(n, redEdges, blueEdges) {
   const grid = Array.from({ length: n }, () => [[], []]);
-  const visited = [new Set(), new Set()];
-  const queue = [[0, 0], [0, 1]]; // red: 0, blue: 1
+  const visited = [new Set([0]), new Set([0])];
+  const queue = [[0, 0], [0, 1]];
   const ans = new Array(n).fill(-1);
-  let depth = 0;
+  let step = 0;
   
-  redEdges.forEach(([x, y]) => grid[x][0].push(y));
-  blueEdges.forEach(([x, y]) => grid[x][1].push(y));
+  redEdges.forEach(([a, b]) => grid[a][0].push(b));
+  blueEdges.forEach(([a, b]) => grid[a][1].push(b));
   
   while (queue.length) {
     const size = queue.length;
+    
     for (let i = 0; i < size; i++) {
       const [currNode, currColor] = queue.shift();
-      if (ans[currNode] === -1) ans[currNode] = depth;
+      if (ans[currNode] === -1) ans[currNode] = step;
       
-      const nextColor = !currColor ? 1 : 0;
-      grid[currNode][currColor].forEach((nextNode) => {
-        if (!visited[currColor].has(nextNode)) {
-          visited[currColor].add(nextNode);
-          queue.push([nextNode, nextColor]);
-        }
-      })
+      const nextColor = currColor ^ 1;
+      for (let next of grid[currNode][currColor]) {
+        if (visited[nextColor].has(next)) continue;
+        
+        visited[nextColor].add(next);
+        queue.push([next, nextColor])
+      }
     }
     
-    depth++;
+    step++;
   }
   
   return ans;
