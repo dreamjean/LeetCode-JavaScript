@@ -4,5 +4,5 @@
  * @return {number}
  */
 var countOdds = function(low, high) {
-  return Math.ceil(high / 2) - Math.floor(low / 2); 
+  return Math.ceil(high / 2) - Math.floor(low / 2);
 };
