@@ -4,14 +4,9 @@
  */
 var numberOfPairs = function(nums) {
   const count = new Array(101).fill(0);
-  const ans = [0, 0];
+  let pairs = 0;
   
-  nums.forEach((num) => count[num]++);
+  nums.forEach((num) => pairs += (++count[num] % 2 ^ 1));
   
-  for (let x of count) {
-    ans[0] += ~~(x / 2);
-    ans[1] += x % 2;
-  }
-  
-  return ans;
+  return [pairs, nums.length - pairs * 2];
 };
