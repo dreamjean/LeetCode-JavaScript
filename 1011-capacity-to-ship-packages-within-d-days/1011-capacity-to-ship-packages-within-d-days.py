@@ -1,31 +1,24 @@
-/**
- * @param {number[]} weights
- * @param {number} days
- * @return {number}
- */
-var shipWithinDays = function(weights, days) {
-  let start = Math.max(...weights);
-  let end = weights.reduce((a, b) => a + b);
-  
-  while (start < end) {
-    const mid = (start + end) >>> 1;
-    if (!isPossable(weights, mid, days)) start = mid + 1;
-    else end = mid;
-  }
-  
-  return start;
-};
-
-const isPossable = (weights, mid, days) => {
-  let [sum, count] = [0, 1];
-  
-  weights.forEach((weight) => {
-    sum += weight;
-    if (sum > mid) {
-      count++;
-      sum = weight;
-    }
-  })
-  
-  return sum <= mid && count <= days; 
-}
+class Solution:
+    def shipWithinDays(self, weights: List[int], days: int) -> int:
+        def isPossable(weights, mid, days):
+            s, count = 0, 1
+            for w in weights:
+                if s + w > mid:
+                    count += 1
+                    s = 0
+                s += w
+                if count > days:
+                    return False
+            return True
+          
+          
+        start, end = max(weights), sum(weights)
+        while start < end:
+            mid = (start + end) >> 1
+            if isPossable(weights, mid, days):
+                end = mid
+            else:
+                start = mid + 1
+        return start
+                
+                        
