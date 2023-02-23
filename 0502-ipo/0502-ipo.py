@@ -1,23 +1,12 @@
-/**
- * @param {number} k
- * @param {number} w
- * @param {number[]} profits
- * @param {number[]} capital
- * @return {number}
- */
-var findMaximizedCapital = function(k, w, profits, capital) {
-  const projects = profits
-    .map((profit, i) => [profit, capital[i]])
-    .sort((a, b) => a[1] - b[1]);
-  const pq = new MaxPriorityQueue();
-  let i = 0;
-  
-  while (k--) {
-    while (i < projects.length && projects[i][1] <= w) 
-      pq.enqueue(projects[i++][0]);
-    
-    if (!pq.isEmpty()) w += pq.dequeue().element;
-  }
-  
-  return w;
-};
+class Solution:
+    def findMaximizedCapital(self, k: int, w: int, profits: List[int], capital: List[int]) -> int:
+        projects = sorted(zip(profits, capital), key=lambda x: x[1])
+        heap = []
+        i = 0
+        for _ in range(k):
+            while i < len(projects) and projects[i][1] <= w:
+                heappush(heap, -projects[i][0])
+                i += 1
+            if heap:
+                w -= heappop(heap)
+        return w
