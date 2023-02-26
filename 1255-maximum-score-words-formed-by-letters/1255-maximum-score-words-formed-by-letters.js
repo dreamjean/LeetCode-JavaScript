@@ -11,7 +11,7 @@ var maxScoreWords = function(words, letters, score) {
   
   letters.forEach((ch) => count[ch.charCodeAt() - 'a'.charCodeAt()]++);
   
-  for (let i = 0; i < 1 << n; i++) {
+  for (let i = 1; i < 1 << n; i++) {
     const wordCount = getWordCount(i, words);
     ans = Math.max(ans, calcScore(count, wordCount, score));
   }
