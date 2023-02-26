@@ -5,46 +5,43 @@
  */
 var findWords = function(board, words) {
   const [m, n] = [board.length, board[0].length];
-  const dirs = [[1, 0], [0, 1], [-1, 0], [0, -1]];
+  const dirs = [[0, 1], [1, 0], [0, -1], [-1, 0]];
   const trie = buildTrie(words);
   const ans = [];
   
   const search = (node, r, c) => {
-    if (r < 0 || r >= m || c < 0 || c >= n || !node.children[board[r][c]]) return;
+    if (r < 0 || r >= m || c < 0 || c >= n || !node.next[board[r][c]]) return;
     
     const char = board[r][c];
-    node = node.children[char];
+    board[r][c] = '*';
+    node = node.next[char];
     
     if (node.word) {
       ans.push(node.word);
       node.word = null;
     }
     
-    board[r][c] = '*';
-    
-    dirs.forEach(([dx, dy]) => search(node, dx + r, dy + c));
+    dirs.forEach(([dr, dc]) => search(node, dr + r, dc + c));
     
     board[r][c] = char;
   }
   
-  for (let i = 0; i < m; i++) {
-    for (let j = 0; j < n; j++) {
-      search(trie, i, j);
-    }
-  }
+  for (let r = 0; r < m; r++)
+    for (let c = 0; c < n; c++) 
+      search(trie, r, c);
   
   return ans;
 };
 
 const buildTrie = (words) => {
-  let node = new TrieNode();
+  const node = new TrieNode();
   
   for (let word of words) {
     let curr = node;
-    for (let c of word) {
-      if (!curr.children[c]) curr.children[c] = new TrieNode();
+    for (let char of word) {
+      if (!curr.next[char]) curr.next[char] = new TrieNode();
       
-      curr = curr.children[c];
+      curr = curr.next[char];
     }
     
     curr.word = word;
@@ -54,8 +51,8 @@ const buildTrie = (words) => {
 }
 
 class TrieNode {
-  constructor () {
-    this.children = {};
+  constructor() {
+    this.next = new Map();
     this.word = null;
   }
 }
