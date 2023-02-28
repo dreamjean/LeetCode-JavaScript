@@ -1,9 +1,10 @@
 class Solution:
     def lexicalOrder(self, n: int) -> List[int]:
         def dfs(start, end):
-            for i in range(start, min(n + 1, end + 1)):
-                ans.append(i)
-                dfs(i * 10, i * 10 + 9)
+            while start <= end and start <= n:
+                ans.append(start)
+                dfs(start * 10, start * 10 + 9)
+                start += 1
           
           
         ans = []
