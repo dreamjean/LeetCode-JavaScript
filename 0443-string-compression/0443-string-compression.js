@@ -3,22 +3,22 @@
  * @return {number}
  */
 var compress = function(chars) {
-  let [start, count] = [0, 1];
+  const n = chars.length;
+  let [start, i] = [0, 0];
   
-  for (let i = 1; i <= chars.length; i++) {
-    const prev = chars[i - 1];
-    const curr = chars[i];
-    if (prev === curr) count++;
-    else {
-      if (count === 1) {
-        start = i;
-        continue;
-      }
-      
-      chars.splice(start + 1, count - 1, ...`${count}`);
-      i = start + `${count}`.length + 1;
-      start = i;
-      count = 1;
+  while (i < n) {
+    const char = chars[i];
+    let count = 0;
+    while (i < n && chars[i] === char) {
+      i++;
+      count++;
     }
+    
+    chars[start++] = char;
+    if (count > 1) 
+      for (let ch of `${count}`) chars[start++] = ch;
   }
+  
+  return start;
 };
+
