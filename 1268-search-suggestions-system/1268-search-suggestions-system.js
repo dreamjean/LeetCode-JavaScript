@@ -4,22 +4,48 @@
  * @return {string[][]}
  */
 var suggestedProducts = function(products, searchWord) {
-    products.sort();
-    const ans = [];
-    let left = 0;
-    let right = products.length - 1;
-    
-    for (let i = 0; i < searchWord.length; i++) {
-        const char = searchWord.charAt(i);
-        const tmp = [];
-        
-        while (products[left]?.charAt(i) < char) left++;
-        while (products[right]?.charAt(i) > char) right--;
-        for (let j = 0; j < 3 && left + j <= right; j++) 
-            tmp.push(products[left + j]);
+  products.sort();
+  const trie = new Trie();
+  
+  products.forEach((word) => trie.insert(word));
+  
+  return trie.search(searchWord);
+};
 
-        ans.push(tmp);
+class Trie {
+  constructor() {
+    this.root = new TrieNode();
+  }
+  
+  insert(word) {
+    let node = this.root;
+    
+    for (let ch of word) {
+      const index = ch.charCodeAt() - 'a'.charCodeAt();
+      if (!node.next[index]) node.next[index] = new TrieNode();
+      
+      node = node.next[index];
+      if (node.words.length < 3) node.words.push(word);
+    }
+  }
+  
+  search(word) {
+    const ans = [];
+    let node = this.root;
+    
+    for (let ch of word) {
+      const index = ch.charCodeAt() - 'a'.charCodeAt();
+      if (node) node = node.next[index];
+      ans.push(!node ? [] : node.words);
     }
     
     return ans;
-};
+  }
+}
+
+class TrieNode {
+  constructor() {
+    this.next = new Array(26).fill(null);
+    this.words = [];
+  }
+}
