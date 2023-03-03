@@ -1,51 +1,26 @@
-/**
- * @param {string[]} products
- * @param {string} searchWord
- * @return {string[][]}
- */
-var suggestedProducts = function(products, searchWord) {
-  products.sort();
-  const trie = new Trie();
-  
-  products.forEach((word) => trie.insert(word));
-  
-  return trie.search(searchWord);
-};
+class TrieNode:
+    def __init__(self):
+        self.next = defaultdict(TrieNode)
+        self.words = []
+        
+    def add_word(self, word):
+        if len(self.words) < 3:
+            self.words.append(word)
+            
 
-class Trie {
-  constructor() {
-    this.root = new TrieNode();
-  }
-  
-  insert(word) {
-    let node = this.root;
-    
-    for (let ch of word) {
-      const index = ch.charCodeAt() - 'a'.charCodeAt();
-      if (!node.next[index]) node.next[index] = new TrieNode();
-      
-      node = node.next[index];
-      if (node.words.length < 3) node.words.push(word);
-    }
-  }
-  
-  search(word) {
-    const ans = [];
-    let node = this.root;
-    
-    for (let ch of word) {
-      const index = ch.charCodeAt() - 'a'.charCodeAt();
-      if (node) node = node.next[index];
-      ans.push(!node ? [] : node.words);
-    }
-    
-    return ans;
-  }
-}
-
-class TrieNode {
-  constructor() {
-    this.next = new Array(26).fill(null);
-    this.words = [];
-  }
-}
+class Solution:
+    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
+        trie = TrieNode()
+        ans = []
+        
+        for product in sorted(products):
+            node = trie
+            for ch in product:
+                node = node.next[ch]
+                node.add_word(product)
+                
+        node = trie
+        for ch in searchWord:
+            node = node.next[ch]
+            ans.append(node.words)
+        return ans
