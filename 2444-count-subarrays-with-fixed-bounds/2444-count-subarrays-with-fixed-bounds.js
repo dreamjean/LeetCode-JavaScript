@@ -11,7 +11,6 @@ var countSubarrays = function(nums, minK, maxK) {
     if (num < minK || num > maxK) bad = i;
     if (num === minK) lo = i;
     if (num === maxK) hi = i;
-    
     ans += Math.max(0, Math.min(lo, hi) - bad);
   })
   
