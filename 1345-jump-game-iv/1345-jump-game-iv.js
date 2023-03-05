@@ -4,11 +4,10 @@
  */
 var minJumps = function(arr) {
   const n = arr.length;
-  const visited = new Array(n).fill(false);
+  const visited = new Set();
   const map = {};
   const queue = [0];
   let steps = 0;
-  visited[0] = true;
   
   for (let i = 0; i < n; i++) {
     const num = arr[i];
@@ -23,9 +22,9 @@ var minJumps = function(arr) {
       if (curr === n - 1) return steps;
       
       for (let next of [...(map[num] || []), curr - 1, curr + 1]) {
-        if (next < 0 || next >= n || visited[next]) continue;
+        if (next < 0 || next >= n || visited.has(next)) continue;
         
-        visited[next] = true;
+        visited.add(next);
         queue.push(next);
       }
       
