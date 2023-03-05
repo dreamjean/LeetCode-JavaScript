@@ -6,31 +6,39 @@ var minJumps = function(arr) {
   const n = arr.length;
   const visited = new Set();
   const map = {};
-  const queue = [0];
+  let queue = [0];
   let steps = 0;
   
-  for (let i = 0; i < n; i++) {
-    const num = arr[i];
-    map[num] ? map[num].push(i) : map[num] = [i];
-  }
+  arr.forEach((num, i) => map[num] ? map[num].push(i) : map[num] = [i]);
   
   while (queue.length) {
-    const size = queue.length;
-    for (let i = 0; i < size; i++) {
-      const curr = queue.shift();
-      const num = arr[curr];
-      if (curr === n - 1) return steps;
+    const next = [];
+    for (let i of queue) {
+      const num = arr[i];
+      if (i === n - 1) return steps;
       
-      for (let next of [...map[num], curr - 1, curr + 1]) {
-        if (next < 0 || next >= n || visited.has(next)) continue;
+      for (let val of map[num]) {
+        if (visited.has(val)) continue;
         
-        visited.add(next);
-        queue.push(next);
+        visited.add(val);
+        next.push(val);
       }
       
       map[num] = [];
+      
+      const [l, r] = [i - 1, i + 1];
+      if (l >= 0 && !visited.has(l)) {
+        visited.add(l);
+        next.push(l);
+      }
+      
+      if (r < n && !visited.has(r)) {
+        visited.add(r);
+        next.push(r);
+      }
     }
     
+    queue = next;
     steps++;
   }
 };
