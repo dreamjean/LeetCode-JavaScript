@@ -1,0 +1,37 @@
+/**
+ * @param {number[]} arr
+ * @return {number}
+ */
+var minJumps = function(arr) {
+  const n = arr.length;
+  const visited = new Array(n).fill(false);
+  const map = {};
+  const queue = [0];
+  let steps = 0;
+  visited[0] = true;
+  
+  for (let i = 0; i < n; i++) {
+    const num = arr[i];
+    map[num] ? map[num].push(i) : map[num] = [i];
+  }
+  
+  while (queue.length) {
+    const size = queue.length;
+    for (let i = 0; i < size; i++) {
+      const curr = queue.shift();
+      const num = arr[curr];
+      if (curr === n - 1) return steps;
+      
+      for (let next of [...(map[num] || []), curr - 1, curr + 1]) {
+        if (next < 0 || next >= n || visited[next]) continue;
+        
+        visited[next] = true;
+        queue.push(next);
+      }
+      
+      delete map[num];
+    }
+    
+    steps++;
+  }
+};
