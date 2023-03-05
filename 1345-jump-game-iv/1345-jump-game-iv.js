@@ -21,14 +21,14 @@ var minJumps = function(arr) {
       const num = arr[curr];
       if (curr === n - 1) return steps;
       
-      for (let next of [...(map[num] || []), curr - 1, curr + 1]) {
+      for (let next of [...map[num], curr - 1, curr + 1]) {
         if (next < 0 || next >= n || visited.has(next)) continue;
         
         visited.add(next);
         queue.push(next);
       }
       
-      delete map[num];
+      map[num] = [];
     }
     
     steps++;
