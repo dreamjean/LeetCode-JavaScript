@@ -5,57 +5,57 @@
  * @return {number}
  */
 var countPairs = function(nums, low, high) {
-  return countSmallerPairs(nums, high + 1) - countSmallerPairs(nums, low);
-};
-
-const countSmallerPairs = (nums, limit) => {
-  let root = new TrieNode();
-  let count = 0;
+  const trie = new Trie();
+  let ans = 0;
   
   for (let num of nums) {
-    count += countSmallerNode(root, num, limit);
-    insert(root, num);
+    ans += trie.searchSmallerThan(num, high + 1) - trie.searchSmallerThan(num, low);
+    trie.insert(num);
   }
   
-  return count;
-}
+  return ans;
+};
 
-const countSmallerNode = (root, num, limit) => {
-  let node = root;
-  let count = 0;
+class Trie {
+  constructor() {
+    this.root = new TrieNode();
+  }
   
-  for (let i = 14; i >= 0 && node; i--) {
-    const lbit = (limit >> i) & 1;
-    const nbit = (num >> i) & 1;
-    if (lbit === 1) {
-      if (node.children[nbit]) count += node.children[nbit].count;
+  insert(num) {
+    let node = this.root;
+    
+    for (let i = 14; i >= 0; i--) {
+      const bit = (num >> i) & 1;
+      if (!node.next[bit]) node.next[bit] = new TrieNode();
       
-      node = node.children[1 - nbit];
+      node = node.next[bit];
+      node.count++;
+    }
+  }
+  
+  searchSmallerThan(num, limit) {
+    let node = this.root;
+    let count = 0;
+    
+    for (let i = 14; i >= 0 && node; i--) {
+      const lbit = (limit >> i) & 1;
+      const nbit = (num >> i) & 1;
+      if (lbit === 1) {
+        if (node.next[nbit]) count += node.next[nbit].count;
+        
+        node = node.next[1 - nbit];
+      }
+      
+      else node = node.next[nbit];
     }
     
-    else node = node.children[nbit];
+    return count;
   }
-  
-  return count;
-}
-
-const insert = (root, num) => {
-  let node = root;
-  
-  for (let i = 14; i >= 0; i--) {
-    const bit = (num >> i) & 1;
-    if (!node.children[bit]) node.children[bit] = new TrieNode();
-    
-    node.children[bit].count++;
-    node = node.children[bit];
-  }
-  
-  return node;
 }
 
 class TrieNode {
-  constructor(n) {
-    this.children = [null, null];
+  constructor() {
+    this.next = [null, null];
     this.count = 0;
   }
 }
