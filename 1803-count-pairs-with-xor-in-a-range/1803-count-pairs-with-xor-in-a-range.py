@@ -1,61 +1,37 @@
-/**
- * @param {number[]} nums
- * @param {number} low
- * @param {number} high
- * @return {number}
- */
-var countPairs = function(nums, low, high) {
-  const trie = new Trie();
-  let ans = 0;
-  
-  for (let num of nums) {
-    ans += trie.searchSmallerThan(num, high + 1) - trie.searchSmallerThan(num, low);
-    trie.insert(num);
-  }
-  
-  return ans;
-};
-
-class Trie {
-  constructor() {
-    this.root = new TrieNode();
-  }
-  
-  insert(num) {
-    let node = this.root;
-    
-    for (let i = 14; i >= 0; i--) {
-      const bit = (num >> i) & 1;
-      if (!node.next[bit]) node.next[bit] = new TrieNode();
-      
-      node = node.next[bit];
-      node.count++;
-    }
-  }
-  
-  searchSmallerThan(num, limit) {
-    let node = this.root;
-    let count = 0;
-    
-    for (let i = 14; i >= 0 && node; i--) {
-      const lbit = (limit >> i) & 1;
-      const nbit = (num >> i) & 1;
-      if (lbit === 1) {
-        if (node.next[nbit]) count += node.next[nbit].count;
+class Trie:
+    def __init__(self):
+        self.root = {}
         
-        node = node.next[1 - nbit];
-      }
-      
-      else node = node.next[nbit];
-    }
-    
-    return count;
-  }
-}
+    def insert(self, num):
+        node = self.root
+        for i in range(14, -1, -1):
+            bit = (num >> i) & 1
+            if bit not in node:
+                node[bit] = {"cnt": 0}
+            node = node[bit]
+            node["cnt"] += 1
+            
+    def search(self, num, limit):
+        node, count = self.root, 0
+        for i in range(14, -1, -1):
+            if not node: 
+                break
+            lbit = (limit >> i) & 1
+            nbit = (num >> i) & 1
+            if lbit:
+                if nbit in node:
+                    count += node[nbit]["cnt"]
+                node = node.get(1-nbit, {})
+            else:
+                node = node.get(nbit, {})
+        return count
 
-class TrieNode {
-  constructor() {
-    this.next = [null, null];
-    this.count = 0;
-  }
-}
+      
+class Solution:
+    def countPairs(self, nums: List[int], low: int, high: int) -> int:
+        trie, ans = Trie(), 0
+        for num in nums:
+            ans += trie.search(num, high + 1) - trie.search(num, low)
+            trie.insert(num)
+        return ans
+        
