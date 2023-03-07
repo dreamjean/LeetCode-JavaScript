@@ -5,7 +5,9 @@ class Solution:
             if j == -1:
                 seen.add(exp)
                 return
-            i = exp.rfind('{', 0, j - 1)
+            i = j
+            while exp[i] != '{':
+                i -= 1
             prefix, subfix = exp[:i], exp[j+1:]
             for ch in exp[i+1:j].split(','):
                 dfs(prefix + ch + subfix)
