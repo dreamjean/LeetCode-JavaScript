@@ -15,10 +15,11 @@ var minimumTime = function(time, totalTrips) {
   return lo;
 };
 
-const graterThanTotal = (time, mid, totalTrips) => {
+const graterThanTotal = (time, target, total) => {
   let sum = 0;
   
-  for (let t of time) sum += Math.floor(mid / t);
+  for (let t of time) 
+    sum += Math.floor(target / t);
   
-  return sum >= totalTrips;
+  return sum >= total;
 }
