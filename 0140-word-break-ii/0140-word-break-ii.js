@@ -8,18 +8,19 @@ var wordBreak = function(s, wordDict) {
   const n = s.length;
   const ans = [];
   
-  const dfs = (start, path) => {
-    if (start === n) return ans.push([...path].join(' '));
+  const dfs = (start = 0, path = []) => {
+    if (start === n) {
+      ans.push(path.join(' '));
+      return;
+    }
     
     for (let i = start; i < n; i++) {
       const sub = s.substring(start, i + 1);
-      if (!set.has(sub)) continue;
-      
-      dfs(i + 1, [...path, sub]);
+      if (set.has(sub)) dfs(i + 1, [...path, sub]);
     }
   }
   
-  dfs(0, []);
+  dfs();
   
   return ans;
 };
