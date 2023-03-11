@@ -13,16 +13,16 @@
 var rotateRight = function(head, k) {
   if (!head || !head.next || !k) return head;
   
-  let [p1, p2, n] = [head, head, 1];
+  let [p1, p2, len] = [head, head, 1];
   
   while (p2.next) {
-    n++;
     p2 = p2.next;
+    len++;
   }
   
-  for (let i = 1; i < n - k % n; i++) 
+  for (let i = 1; i < len - k % len; i++)
     p1 = p1.next;
-
+  
   p2.next = head;
   head = p1.next;
   p1.next = null;
