@@ -10,25 +10,24 @@
  * @return {ListNode}
  */
 var mergeKLists = function(lists) {
+  const nums = [];
   const dummy = new ListNode();
-  const pq = new MinPriorityQueue();
-  let curr = null;
+  let curr = dummy;
   
   lists.forEach((list) => {
-    curr = list;
-    while (curr) {
-      pq.enqueue(curr.val);
-      curr = curr.next;
+    let node = list;
+    while (node) {
+      nums.push(node.val);
+      node = node.next;
     }
   })
   
-  curr = dummy;
-  
-  while (!pq.isEmpty()) {
-    const val = pq.dequeue().element;
-    curr.next = new ListNode(val);
-    curr = curr.next;
-  }
+  nums
+    .sort((a, b) => a - b)
+    .forEach((num) => {
+      curr.next = new ListNode(num);
+      curr = curr.next;
+    })
   
   return dummy.next;
 };
