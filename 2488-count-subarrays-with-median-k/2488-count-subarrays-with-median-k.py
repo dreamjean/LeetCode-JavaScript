@@ -1,25 +1,16 @@
-/**
- * @param {number[]} nums
- * @param {number} k
- * @return {number}
- */
-var countSubarrays = function(nums, k) {
-  const kIndex = nums.indexOf(k);
-  const map = {};
-  let [ans, bal] = [0, 0];
-  
-  for (let i = kIndex; i < nums.length; i++) {
-    const num = nums[i];
-    bal += num === k ? 0 : num < k ? -1 : 1;
-    map[bal] ? map[bal]++ : map[bal] = 1;
-  }
-  
-  bal = 0;
-  
-  for (let i = kIndex; i >= 0; i--) {
-    bal += nums[i] === k ? 0 : nums[i] < k ? -1 : 1;
-    ans += (map[-bal] || 0) + (map[-bal + 1] || 0);
-  }
-  
-  return ans;
-};
+class Solution:
+    def countSubarrays(self, nums: List[int], k: int) -> int:
+        count = Counter([0])
+        ans, bal, found = 0, 0, False
+        for num in nums:
+            if num < k:
+                bal -= 1
+            elif num > k:
+                bal += 1
+            else:
+                found = True
+            if found:
+                ans += count[bal] + count[bal - 1]
+            else:
+                count[bal] += 1
+        return ans
