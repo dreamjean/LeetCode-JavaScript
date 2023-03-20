@@ -14,13 +14,11 @@ class Solution:
             return s[-b:] + s[:-b]
         
         
-        dq, seen, smallest = deque([s]), set(), s
+        dq, seen = deque([s]), set()
         while dq:
             curr = dq.popleft()
-            if curr < smallest:
-                smallest = curr
             if curr not in seen:
                 seen.add(curr)
                 dq.append(addA(curr, a))
                 dq.append(rotate(curr, b))
-        return smallest
+        return min(seen)
