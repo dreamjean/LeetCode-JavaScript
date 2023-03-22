@@ -4,15 +4,14 @@
  * @return {number}
  */
 var minScore = function(n, roads) {
-  const uf = new UnionFind(n + 1);
-  const root = uf.find(1);
+  const uf = new UnionFind(n);
   let ans = Infinity;
   
-  roads.forEach(([a, b, _]) => uf.union(a, b));
+  roads.forEach(([a, b]) => uf.union(a, b));
   
-  for (let [a, b, dist] of roads) {
-    if (uf.connected(root, a) || uf.connected(root, b)) ans = Math.min(ans, dist);
-  }
+  roads.forEach(([a, b, distance]) => {
+    if (uf.isConnected(1, a)) ans = Math.min(ans, distance);
+  })
   
   return ans;
 };
@@ -20,7 +19,6 @@ var minScore = function(n, roads) {
 class UnionFind {
   constructor(n) {
     this.parent = Array.from({ length: n }, (_, i) => i);
-    this.rank = new Array(n).fill(1);
   }
   
   find(x) {
@@ -33,7 +31,7 @@ class UnionFind {
     return x;
   }
   
-  connected(x, y) {
+  isConnected(x, y) {
     return this.find(x) === this.find(y);
   }
   
@@ -42,13 +40,6 @@ class UnionFind {
     const rootY = this.find(y);
     if (rootX === rootY) return;
     
-    const { parent, rank } = this;
-    if (rank[rootX] < rank[rootY]) {
-      parent[rootX] = rootY;
-      rank[rootY] += rank[rootX];
-    } else {
-      parent[rootY] = rootX;
-      rank[rootX] += rank[rootY];
-    }
+    this.parent[rootX] = rootY;
   }
 }
