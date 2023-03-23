@@ -1,6 +1,6 @@
 class TrieNode:
     def __init__(self):
-        self.next = defaultdict(TrieNode)
+        self.next = {}
         self.is_word = False
         
 
@@ -11,23 +11,26 @@ class StreamChecker:
         self.root = TrieNode()
         
         for word in words:
-            node = self.root
-            for ch in word[::-1]:
-                node = node.next[ch]
-            node.is_word = True
+            self.insert(word[::-1])
             
 
     def query(self, letter: str) -> bool:
         self.s = letter + self.s
         node = self.root
         for ch in self.s:
-            if not ch in node.next:
+            if ch not in node.next:
                 return False
-              
             node = node.next[ch]
             if node and node.is_word:
                 return True
         return False
+        
+        
+    def insert(self, word):
+        node = self.root
+        for ch in word:
+            node = node.next.setdefault(ch, TrieNode())
+        node.is_word = True
 
 
 # Your StreamChecker object will be instantiated and called as such:
