@@ -3,10 +3,17 @@ class TrieNode {
     this.next = new Array(26).fill(null);
     this.isWord = false;
   }
+}
+
+/**
+ * @param {string[]} words
+ */
+var StreamChecker = function(words) {
+  this.word = '';
+  this.root = new TrieNode();
   
-  insert(word) {
-    let node = this;
-    
+  for (let word of words) {
+    let node = this.root;
     for (let i = word.length - 1; i >= 0; i--) {
       const index = word.charCodeAt(i) - 'a'.charCodeAt();
       if (!node.next[index]) node.next[index] = new TrieNode();
@@ -16,16 +23,7 @@ class TrieNode {
     
     node.isWord = true;
   }
-}
 
-/**
- * @param {string[]} words
- */
-var StreamChecker = function(words) {
-  this.chars = [];
-  this.root = new TrieNode();
-  
-  words.forEach((word) => this.root.insert(word));
 };
 
 /** 
@@ -33,11 +31,11 @@ var StreamChecker = function(words) {
  * @return {boolean}
  */
 StreamChecker.prototype.query = function(letter) {
-  this.chars.push(letter);
+  this.word = letter + this.word;
   let node = this.root;
   
-  for (let i = this.chars.length - 1; i >= 0; i--) {
-    const index = this.chars[i].charCodeAt() - 'a'.charCodeAt();
+  for (let ch of this.word) {
+    const index = ch.charCodeAt() - 'a'.charCodeAt();
     if (!node.next[index]) return false;
     
     node = node.next[index];
