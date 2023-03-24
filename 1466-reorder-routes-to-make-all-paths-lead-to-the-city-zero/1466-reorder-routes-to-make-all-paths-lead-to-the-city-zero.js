@@ -3,25 +3,24 @@
  * @param {number[][]} connections
  * @return {number}
  */
-var minReorder = function (n, connections) {
+var minReorder = function(n, connections) {
   const graph = Array.from({ length: n }, () => []);
   const set = new Set();
   let count = 0;
-
-  const dfs = (curr = 0, parent = -1) => {
-    if (set.has(`${parent}-${curr}`)) count++;
-
-    for (let next of graph[curr]) 
-      if (next !== parent) dfs(next, curr);
-  };
-
-  for (const [u, v] of connections) {
-    graph[u].push(v);
-    graph[v].push(u);
-    set.add(`${u}-${v}`);
+  
+  connections.forEach(([a, b]) => {
+    graph[a].push(b);
+    graph[b].push(a);
+    set.add(`${a}-${b}`);
+  })
+  
+  const dfs = (curr = 0, prev = -1) => {
+    if (set.has(`${prev}-${curr}`)) count++;
+    
+    graph[curr].forEach((next) => next !== prev && dfs(next, curr));
   }
-
+  
   dfs();
-
+  
   return count;
 };
