@@ -1,26 +1,20 @@
-/**
- * @param {number} n
- * @param {number[][]} connections
- * @return {number}
- */
-var minReorder = function(n, connections) {
-  const graph = Array.from({ length: n }, () => []);
-  const set = new Set();
-  let count = 0;
-  
-  connections.forEach(([a, b]) => {
-    graph[a].push(b);
-    graph[b].push(a);
-    set.add(`${a}-${b}`);
-  })
-  
-  const dfs = (curr = 0, prev = -1) => {
-    if (set.has(`${prev}-${curr}`)) count++;
-    
-    graph[curr].forEach((next) => next !== prev && dfs(next, curr));
-  }
-  
-  dfs();
-  
-  return count;
-};
+class Solution:
+    def minReorder(self, n: int, connections: List[List[int]]) -> int:
+        def dfs(curr, prev):
+            nonlocal count
+            count += (prev, curr) in seen
+            for nxt in graph[curr]:
+                if nxt != prev:
+                    dfs(nxt, curr)
+                    
+        
+        graph = defaultdict(list)
+        seen = set()
+        count = 0
+        for [u, v] in connections:
+            seen.add((u, v))
+            graph[u].append(v)
+            graph[v].append(u)
+            
+        dfs(0, -1)
+        return count
