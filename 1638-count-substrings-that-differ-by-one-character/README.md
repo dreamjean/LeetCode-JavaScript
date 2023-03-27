@@ -9,7 +9,7 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre class="notranslate"><strong>Input:</strong> s = "aba", t = "baba"
+<pre><strong>Input:</strong> s = "aba", t = "baba"
 <strong>Output:</strong> 6
 <strong>Explanation:</strong> The following are the pairs of substrings from s and t that differ by exactly 1 character:
 ("<u>a</u>ba", "<u>b</u>aba")
@@ -22,7 +22,7 @@ The underlined portions are the substrings that are chosen from s and t.
 </pre>
 ​​<strong class="example">Example 2:</strong>
 
-<pre class="notranslate"><strong>Input:</strong> s = "ab", t = "bb"
+<pre><strong>Input:</strong> s = "ab", t = "bb"
 <strong>Output:</strong> 3
 <strong>Explanation:</strong> The following are the pairs of substrings from s and t that differ by 1 character:
 ("<u>a</u>b", "<u>b</u>b")
