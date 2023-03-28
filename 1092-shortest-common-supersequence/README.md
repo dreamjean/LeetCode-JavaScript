@@ -3,7 +3,7 @@
 <p>A string <code>s</code> is a <strong>subsequence</strong> of string <code>t</code> if deleting some number of characters from <code>t</code> (possibly <code>0</code>) results in the string <code>s</code>.</p>
 
 <p>&nbsp;</p>
-<p><strong>Example 1:</strong></p>
+<p><strong class="example">Example 1:</strong></p>
 
 <pre><strong>Input:</strong> str1 = "abac", str2 = "cab"
 <strong>Output:</strong> "cabac"
@@ -13,7 +13,7 @@ str2 = "cab" is a subsequence of "cabac" because we can delete the last "ac".
 The answer provided is the shortest such string that satisfies these properties.
 </pre>
 
-<p><strong>Example 2:</strong></p>
+<p><strong class="example">Example 2:</strong></p>
 
 <pre><strong>Input:</strong> str1 = "aaaaaaaa", str2 = "aaaaaaaa"
 <strong>Output:</strong> "aaaaaaaa"
