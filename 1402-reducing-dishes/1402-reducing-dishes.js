@@ -6,11 +6,10 @@ var maxSatisfaction = function(satisfaction) {
   satisfaction.sort((a, b) => b - a);
   let [total, ans] = [0, 0];
   
-  for (let i = 0; i < satisfaction.length; i++) {
-    const curr = satisfaction[i];
-    if (total + curr < 0) break;
+  for (let num of satisfaction) {
+    if (total + num < 0) break;
     
-    total += curr;
+    total += num;
     ans += total;
   }
   
