@@ -1,17 +1,9 @@
-/**
- * @param {string} s
- * @return {string}
- */
-var maskPII = function(s) {
-  const country = ['', '+*-', '+**-', '+***-'];
-  const at = s.indexOf('@');
-  
-  if (at > 0) {
-    s = s.toLowerCase();
-    return s[0] + '*****' + s.substring(at - 1);
-  }
-  
-  s = s.replace(/[^0-9]/g, '');
-  
-  return country[s.length - 10] + '***-***-' + s.slice(-4);
-};
+class Solution:
+    def maskPII(self, s: str) -> str:
+        country = ['', '+*-', '+**-', '+***-']
+        at = s.find('@')
+        if at >= 0:
+            return (s[0] + "*" * 5 + s[at - 1:]).lower()
+        s = ''.join(x for x in s if x.isdigit())
+        return country[len(s) - 10] + '***-***-' + s[-4:]
+          
