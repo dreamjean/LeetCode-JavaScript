@@ -1,24 +1,16 @@
-/**
- * @param {number[]} spells
- * @param {number[]} potions
- * @param {number} success
- * @return {number[]}
- */
-var successfulPairs = function(spells, potions, success) {
-  potions.sort((a, b) => a - b);
-  
-  return spells.map((spell) => search(spell, potions, success));
-};
-
-const search = (spell, potions, target) => {
-  const n = potions.length;
-  let [lo, hi] = [0, n - 1];
-  
-  while (lo <= hi) {
-    const mid = (lo + hi) >>> 1;
-    if (spell * potions[mid] < target) lo = mid + 1;
-    else hi = mid - 1;
-  }
-  
-  return n - lo;
-}
+class Solution:
+    def successfulPairs(self, spells: List[int], potions: List[int], success: int) -> List[int]:
+        def search(spell, potions, success):
+            n = len(potions)
+            lo, hi = 0, n - 1
+            while lo <= hi:
+                mid = lo + (hi - lo) // 2
+                if spell * potions[mid] < success:
+                    lo = mid + 1
+                else:
+                    hi = mid - 1
+            return n - lo
+          
+          
+        potions = sorted(potions)
+        return [search(spell, potions, success) for spell in spells]
