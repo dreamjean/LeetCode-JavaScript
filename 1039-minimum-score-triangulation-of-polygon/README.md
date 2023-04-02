@@ -16,8 +16,8 @@
 <img alt="" src="https://assets.leetcode.com/uploads/2021/02/25/shape2.jpg" style="width: 446px; height: 163px;">
 <pre><strong>Input:</strong> values = [3,7,4,5]
 <strong>Output:</strong> 144
-<strong>Explanation:</strong> There are two triangulations, with possible scores: 3*7*5 + 4*5*7 = 245, or 3*4*5 + 3*4*7 = 144.
-The minimum score is 144.
+<strong>Explanation:</strong> There are two triangulations, with possible scores: 3*7*5 + 4*5*7 = 245, or 3*4*5 + 3*4*7 = 144.<font></font>
+The minimum score is 144.<font></font>
 </pre>
 
 <p><strong class="example">Example 3:</strong></p>
