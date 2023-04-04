@@ -3,15 +3,14 @@
  * @return {number}
  */
 var trap = function(height) {
-  let [left, right, leftMax, rightMax, ans] = [0, height.length - 1, 0, 0, 0];
+  let [left, right, maxLeft, maxRight, ans] = [0, height.length - 1, 0, 0, 0];
   
   while (left <= right) {
-    leftMax = Math.max(leftMax, height[left]);
-    rightMax = Math.max(rightMax, height[right]);
-    
-    ans += leftMax >= rightMax
-      ? rightMax - height[right--]
-      : leftMax - height[left++];
+    maxLeft = Math.max(maxLeft, height[left]);
+    maxRight = Math.max(maxRight, height[right]);
+    ans += maxLeft < maxRight
+      ? maxLeft - height[left++]
+      : maxRight - height[right--];
   }
   
   return ans;
