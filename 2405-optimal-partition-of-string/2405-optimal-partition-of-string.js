@@ -3,7 +3,6 @@
  * @return {number}
  */
 var partitionString = function(s) {
-  const n = s.length;
   let set = new Set();
   let count = 1;
   
