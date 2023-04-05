@@ -1,14 +1,3 @@
-/**
- * @param {number[]} nums
- * @return {number}
- */
-var minimizeArrayValue = function(nums) {
-  let [preSum, ans] = [0, 0];
-  
-  nums.forEach((num, i) => {
-    preSum += num;
-    ans = Math.max(ans, Math.ceil(preSum / (i + 1)));
-  })
-  
-  return ans;
-};
+class Solution:
+    def minimizeArrayValue(self, nums: List[int]) -> int:
+        return max((num + i) // (i + 1) for i, num in enumerate(accumulate(nums)))
