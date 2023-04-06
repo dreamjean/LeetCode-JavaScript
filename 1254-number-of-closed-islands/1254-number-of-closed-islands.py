@@ -1,31 +1,21 @@
-/**
- * @param {number[][]} grid
- * @return {number}
- */
-var closedIsland = function(grid) {
-  const [m, n] = [grid.length, grid[0].length];
-  const dirs = [[1, 0], [0, 1], [-1, 0], [0, -1]];
-  let count = 0;
-  
-  const dfs = (r, c) => {
-    if (grid[r][c]) return true;
-    if (!r || !c || r >= m - 1 || c >= n - 1) return false;
-    
-    grid[r][c] = 1;
-    let res = true;
-    
-    for (let [dx, dy] of dirs) {
-      if (!dfs(dx + r, dy + c)) res = false;
-    }
-    
-    return res;
-  }
-  
-  for (let i = 1; i < m - 1; i++) {
-    for (let j = 1; j < n- 1; j++) {
-      if (!grid[i][j] && dfs(i, j)) count++;
-    } 
-  }
-  
-  return count;
-};
+class Solution:
+    def closedIsland(self, grid: List[List[int]]) -> int:
+        def dfs(r, c):
+            if r < 0 or c < 0 or r >= m or c >= n:
+                return False
+            if grid[r][c] == 1:
+                return True
+            grid[r][c] = 1
+            res = True
+            for (x, y) in [(r, c + 1), (r, c - 1), (r + 1, c), (r - 1, c)]:
+                if not dfs(x, y):
+                    res = False
+            return res
+          
+        
+        m, n, count = len(grid), len(grid[0]), 0
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 0:
+                    count += dfs(i, j)
+        return count
