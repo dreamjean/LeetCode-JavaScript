@@ -8,7 +8,7 @@ class Solution:
                 fill(x, y)
                 
                 
-        m, n, count = len(grid), len(grid[0]), 0
+        m, n = len(grid), len(grid[0])
         for i in range(m):
             fill(i, 0)
             fill(i, n - 1)
