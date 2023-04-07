@@ -8,13 +8,10 @@ var numEnclaves = function(grid) {
   let count = 0;
   
   const fill = (r, c) => {
-    if (r < 0 || r >= m || c < 0 || c >= n || !grid[r][c]) return 0;
+    if (r < 0 || r >= m || c < 0 || c >= n || !grid[r][c]) return;
     
-    let res = 1;
     grid[r][c] = 0;
-    dirs.forEach(([dx, dy]) => res += fill(dx + r, dy + c));
-    
-    return res;
+    dirs.forEach(([dx, dy]) => fill(dx + r, dy + c));
   }
   
   for (let i = 0; i < m; i++) {
@@ -29,7 +26,7 @@ var numEnclaves = function(grid) {
   
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
-      if (grid[i][j]) count += fill(i, j);
+      count += grid[i][j];
     }
   }
   
