@@ -12,7 +12,7 @@ var boxDelivering = function(boxes, portsCount, maxBoxes, maxWeight) {
   dp[0] = 0;
   
   for (let i = 0; i < n; i++) {
-    while (j < n && maxBoxes > 0 && maxWeight >= boxes[j][1]) {
+    while (j < n && maxBoxes && maxWeight >= boxes[j][1]) {
       maxBoxes--;
       maxWeight -= boxes[j][1];
       
