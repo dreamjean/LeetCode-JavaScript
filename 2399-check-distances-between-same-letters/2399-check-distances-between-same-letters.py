@@ -1,18 +1,10 @@
-/**
- * @param {string} s
- * @param {number[]} distance
- * @return {boolean}
- */
-var checkDistances = function(s, distance) {
-  const n = s.length;
-  
-  for (let i = 0; i < n; i++) {
-    const index = s.charCodeAt(i) - 'a'.charCodeAt();
-    const nextPos = i + distance[index] + 1;
-    if (nextPos >= n || s[i] !== s[nextPos]) return false;
-    
-    distance[index] = -1;
-  }
-  
-  return true;
-};
+class Solution:
+    def checkDistances(self, s: str, distance: List[int]) -> bool:
+        for i, ch in enumerate(s):
+            index = ord(s[i]) - ord('a')
+            next_pos = i + distance[index] + 1
+            if next_pos >= len(s) or s[i] != s[next_pos]:
+                return False
+            distance[index] = -1
+        return True
+        
