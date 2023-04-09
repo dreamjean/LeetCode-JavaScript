@@ -9,7 +9,7 @@ var maximumScore = function(nums, k) {
   
   while (l > 0 || r < n - 1) {
     if (!l) r++;
-    else if (r == n - 1) l--;
+    else if (r === n - 1) l--;
     else nums[l - 1] < nums[r + 1] ? r++ : l--;
     
     min = Math.min(min, nums[l], nums[r]);
