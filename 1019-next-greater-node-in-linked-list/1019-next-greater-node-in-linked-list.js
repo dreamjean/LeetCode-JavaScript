@@ -9,22 +9,20 @@
  * @param {ListNode} head
  * @return {number[]}
  */
-var nextLargerNodes = function (head) {
+var nextLargerNodes = function(head) {
   const stack = [];
   const ans = [];
-
+  
   while (head) {
-    ans.push(head.val);
+    while (stack.length && stack.at(-1)[0] < head.val) {
+      const index = stack.pop()[1];
+      ans[index] = head.val;
+    }
+    
+    stack.push([head.val, ans.length]);
+    ans.push(0);
     head = head.next;
   }
-
-  for (let i = ans.length - 1; i >= 0; i--) {
-    const num = ans[i];
-    while (stack.length && stack.at(-1) <= num) stack.pop();
-
-    ans[i] = !stack.length ? 0 : stack.at(-1);
-    stack.push(num);
-  }
-
+  
   return ans;
 };
