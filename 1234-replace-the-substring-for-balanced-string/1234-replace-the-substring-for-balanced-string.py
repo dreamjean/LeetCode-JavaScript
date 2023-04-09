@@ -1,12 +1,11 @@
 class Solution:
     def balancedString(self, s: str) -> int:
-        count, n, k = Counter(s), len(s), len(s) // 4
-        l, ans = 0, n
+        count, n = Counter(s), len(s)
+        ans, k, j = n, n // 4, 0
         for i, ch in enumerate(s):
             count[ch] -= 1
-            while l < n and count['Q'] <= k and count['W'] <= k and count['E'] <= k and count['R'] <= k:
-                ans = min(ans, i - l + 1)
-                count[s[l]] += 1
-                l += 1
+            while j < n and count['E'] <= k and count['Q'] <= k and count['W'] <= k and count['R'] <= k:
+                ans = min(ans, i - j + 1)
+                count[s[j]] += 1
+                j += 1
         return ans
-                
