@@ -3,15 +3,15 @@
  * @return {number}
  */
 var totalFruit = function(fruits) {
-  let [fruitA, fruitB, currB, currMax, max] = [-1, -1, 0, 0, 0];
+  let [fruitA, fruitB, countB, currMax, ans] = [-1, -1, 0, 0, 0];
   
   for (let fruit of fruits) {
-    currMax = fruit === fruitA || fruit === fruitB ? currMax + 1 : currB + 1;
-    currB = fruit === fruitB ? currB + 1 : 1;
+    currMax = (fruit === fruitA || fruit === fruitB) ? currMax + 1 : countB + 1;   
+    fruit === fruitB ? ++countB : countB = 1;    
     if (fruit !== fruitB) [fruitA, fruitB] = [fruitB, fruit];
     
-    max = Math.max(max, currMax);
+    ans = Math.max(ans, currMax);
   }
   
-  return max;
+  return ans;
 };
