@@ -1,18 +1,12 @@
-/**
- * @param {number[]} nums
- * @param {number} k
- * @return {number}
- */
-var constrainedSubsetSum = function(nums, k) {
-  const queue = [];
-  
-  for (let i = 0; i < nums.length; i++) {
-    nums[i] += queue.length ? nums[queue[0]] : 0;
-    while (queue.length && nums[queue.at(-1)] <= nums[i]) queue.pop();
-    
-    if (nums[i] > 0) queue.push(i);
-    if (queue.length && i - queue[0] >= k) queue.shift();
-  }
-  
-  return Math.max(...nums);
-};
+class Solution:
+    def constrainedSubsetSum(self, nums: List[int], k: int) -> int:
+        dq = deque()
+        for i in range(len(nums)):
+            nums[i] += dq[0] if dq else 0
+            while dq and dq[-1] < nums[i]:
+                dq.pop()
+            if nums[i] > 0:
+                dq.append(nums[i])
+            if i >= k and dq and dq[0] == nums[i - k]:
+                dq.popleft()
+        return max(nums)
