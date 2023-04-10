@@ -15,10 +15,7 @@ var constrainedSubsetSum = function(nums, k) {
       tail--;
     }
     
-    if (nums[i] > 0) {
-      stack.push(i);
-      tail++;
-    }
+    if (nums[i] > 0) stack[++tail] = i;
     if (head <= tail && i - stack[head] >= k) head++;
   }
   
