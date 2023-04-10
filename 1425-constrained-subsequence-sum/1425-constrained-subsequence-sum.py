@@ -7,6 +7,6 @@ class Solution:
                 dq.pop()
             if nums[i] > 0:
                 dq.append(nums[i])
-            if i >= k and dq and nums[i - k] == dq[0]:
+            if i >= k and dq and dq[0] == nums[i - k]:
                 dq.popleft()
         return max(nums)
