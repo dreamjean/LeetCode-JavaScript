@@ -1,12 +1,27 @@
-class Solution:
-    def constrainedSubsetSum(self, nums: List[int], k: int) -> int:
-        dq = deque()
-        for i in range(len(nums)):
-            nums[i] += dq[0] if dq else 0
-            while dq and dq[-1] < nums[i]:
-                dq.pop()
-            if nums[i] > 0:
-                dq.append(nums[i])
-            if i >= k and dq and dq[0] == nums[i - k]:
-                dq.popleft()
-        return max(nums)
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var constrainedSubsetSum = function(nums, k) {
+  const stack = [];
+  let [head, tail, ans] = [0, -1, nums[0]];
+  
+  for (let i = 0; i < nums.length; i++) {
+    nums[i] += head <= tail ? nums[stack[head]] : 0;
+    ans = Math.max(ans, nums[i]);
+    while (head <= tail && nums[stack[tail]] < nums[i]) {
+      stack.pop();
+      tail--;
+    }
+    
+    if (nums[i] > 0) {
+      stack.push(i);
+      tail++;
+    }
+    if (head <= tail && i - stack[head] >= k) head++;
+  }
+  
+  return ans;
+};
+
