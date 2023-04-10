@@ -4,24 +4,20 @@
  * @return {number}
  */
 var shortestSubarray = function(nums, k) {
-  const n = nums.length;
   const stack = [];
-  let [head, tail, ans] = [0, 0, n + 1];
+  const n = nums.length;
+  let [l, r, ans] = [0, -1, n + 1];
   
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i < nums.length; i++) {
     if (i) nums[i] += nums[i - 1];
     if (nums[i] >= k) ans = Math.min(ans, i + 1);
     
-    while (head < tail && nums[i] - nums[stack[head]] >= k)
-      ans = Math.min(ans, i - stack[head++]);
+    while (l <= r && nums[i] - nums[stack[l]] >= k) 
+      ans = Math.min(ans, i - stack[l++]);
     
-    while (tail && nums[i] <= nums[stack[tail - 1]]) {
-      stack.pop();
-      tail--;
-    }
+    while (l <= r && nums[i] <= nums[stack[r]]) r--;
     
-    stack.push(i);
-    tail++;
+    stack[++r] = i;
   }
   
   return ans <= n ? ans : -1;
