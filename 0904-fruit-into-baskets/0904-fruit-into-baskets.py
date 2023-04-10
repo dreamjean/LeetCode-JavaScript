@@ -1,15 +1,13 @@
 class Solution:
     def totalFruit(self, fruits: List[int]) -> int:
-        fruitA = fruitB = cntB = curr_max = ans = 0
-        for fruit in fruits:
-            if fruit == fruitA or fruit == fruitB:
-                curr_max += 1
-            else:
-                curr_max = cntB + 1
-            if fruit == fruitB:
-                cntB += 1
-            else:
-                fruitA, fruitB, cntB = fruitB, fruit, 1
-            ans = max(ans, curr_max)
+        count, k = Counter(), 2
+        j = ans = 0
+        for i, fruit in enumerate(fruits):
+            k -= count[fruit] == 0
+            count[fruit] += 1
+            while k < 0:
+                count[fruits[j]] -= 1
+                k += count[fruits[j]] == 0
+                j += 1
+            ans = max(ans, i - j + 1)
         return ans
-            
