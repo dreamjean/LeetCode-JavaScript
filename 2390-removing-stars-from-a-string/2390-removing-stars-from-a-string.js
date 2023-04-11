@@ -3,12 +3,13 @@
  * @return {string}
  */
 var removeStars = function(s) {
-  let ans = '';
+  const ans = [];
+  let j = 0;
   
   for (let ch of s) {
-    if (ch === '*') ans = ans.slice(0, -1);
-    else ans += ch;
+    if (ch === '*') j--;
+    else ans[j++] = ch;
   }
   
-  return ans;
+  return ans.slice(0, j).join('');
 };
