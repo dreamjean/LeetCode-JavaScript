@@ -3,7 +3,12 @@
  * @return {string}
  */
 var removeStars = function(s) {
-  return [...s]
-    .reduce((acc, curr) => (curr === '*' ? acc.pop() : acc.push(curr), acc), [])
-    .join('');
+  let ans = '';
+  
+  for (let ch of s) {
+    if (ch === '*') ans = ans.slice(0, -1);
+    else ans += ch;
+  }
+  
+  return ans;
 };
