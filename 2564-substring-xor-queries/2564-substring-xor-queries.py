@@ -1,24 +1,13 @@
-/**
- * @param {string} s
- * @param {number[][]} queries
- * @return {number[][]}
- */
-var substringXorQueries = function(s, queries) {
-  const seen = new Array(30);
-  const n = s.length;
-  
-  for (let i = 0; i < n; i++) {
-    if (s[i] === '0') {
-      if (!seen[0]) seen[0] = [i, i];
-      continue;
-    }
-    
-    let num = 0;
-    for (let j = i; j < Math.min(i + 30, n); j++) {
-      num = (num << 1) | +s[j];
-      if (!seen[num]) seen[num] = [i, j];
-    }
-  }
-  
-  return queries.map(([a, b]) => seen[a ^ b] ?? [-1, -1]);
-};
+class Solution:
+    def substringXorQueries(self, s: str, queries: List[List[int]]) -> List[List[int]]:
+        seen = {}
+        n = len(s)
+        for i in range(n):
+            if s[i] == '0':
+                seen.setdefault(0, [i, i]);
+                continue
+            num = 0
+            for j in range(i, min(i + 30, n)):
+                num = (num << 1) | int(s[j])
+                seen.setdefault(num, [i, j])
+        return [seen.get(a ^ b, [-1, -1]) for a, b in queries]
