@@ -5,16 +5,16 @@
 <p>An array <code>b</code> is called to be a <span class="tex-font-style-it">subarray</span> of <code>a</code> if it forms a contiguous subsequence of <code>a</code>, that is, if it is equal to <code>a[l],a[l+1],...,a[r]</code> for some <code>(l,r)</code>.</p>
 
 <p>&nbsp;</p>
-<p><strong>Example 1:</strong></p>
+<p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input:</strong> nums = [4,2,4,5,6]
+<pre class="notranslate"><strong>Input:</strong> nums = [4,2,4,5,6]
 <strong>Output:</strong> 17
 <strong>Explanation:</strong> The optimal subarray here is [2,4,5,6].
 </pre>
 
-<p><strong>Example 2:</strong></p>
+<p><strong class="example">Example 2:</strong></p>
 
-<pre><strong>Input:</strong> nums = [5,2,1,2,5,2,1,2,5]
+<pre class="notranslate"><strong>Input:</strong> nums = [5,2,1,2,5,2,1,2,5]
 <strong>Output:</strong> 8
 <strong>Explanation:</strong> The optimal subarray here is [5,2,1] or [1,2,5].
 </pre>
