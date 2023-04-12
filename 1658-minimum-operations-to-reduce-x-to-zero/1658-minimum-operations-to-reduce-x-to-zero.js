@@ -4,18 +4,19 @@
  * @return {number}
  */
 var minOperations = function(nums, x) {
-  const sum = nums.reduce((a, b) => a + b) - x;
   const n = nums.length;
-  let [start, end, currSum, diff] = [0, 0, 0, 0];
+  let sum = nums.reduce((a, b) => a + b) - x;
+  let [j, window] = [0, -1];
   
+  if (sum < 0) return -1;
   if (!sum) return n;
   
-  while (end < n) {
-    currSum += nums[end++];
-    while (start < end && currSum > sum) currSum -= nums[start++];
+  for (let i = 0; i < n; i++) {
+    sum -= nums[i];
+    while (sum < 0 && j < i) sum += nums[j++];
     
-    if (currSum === sum) diff = Math.max(diff, end - start);
+    if (!sum) window = Math.max(window, i - j + 1);
   }
   
-  return diff > 0 ? n - diff : -1;
+  return window < 0 ? window : n - window;
 };
