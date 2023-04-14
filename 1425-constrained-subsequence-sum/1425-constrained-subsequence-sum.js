@@ -4,18 +4,17 @@
  * @return {number}
  */
 var constrainedSubsetSum = function(nums, k) {
-  const stack = [];
-  let [head, tail, ans] = [0, -1, nums[0]];
+  const queue = [];
+  let [l, r, ans] = [0, -1, nums[0]];
   
   for (let i = 0; i < nums.length; i++) {
-    nums[i] += head <= tail ? nums[stack[head]] : 0;
+    nums[i] += (l <= r ? nums[queue[l]] : 0);
     ans = Math.max(ans, nums[i]);
-    while (head <= tail && nums[stack[tail]] < nums[i]) tail--;
+    while (l <= r && nums[queue[r]] < nums[i]) r--;
     
-    if (nums[i] > 0) stack[++tail] = i;
-    if (head <= tail && i - stack[head] >= k) head++;
+    if (nums[i] > 0) queue[++r] = i;
+    if (l <= r && i - queue[l] >= k) l++;
   }
   
   return ans;
 };
-
