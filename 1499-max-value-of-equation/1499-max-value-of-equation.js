@@ -4,17 +4,15 @@
  * @return {number}
  */
 var findMaxValueOfEquation = function(points, k) {
-  const queue = [];
-  let [l, r, ans] = [0, -1, -Infinity];
+  const pq = new MaxPriorityQueue({ priority: x => x[0] });
+  let ans = -Infinity;
   
   for (let [x, y] of points) {
-    while (l <= r && queue[l][1] < x - k) l++;
+    while (!pq.isEmpty() && pq.front().element[1] < x - k) pq.dequeue();
     
-    if (l <= r) ans = Math.max(ans, queue[l][0] + x + y);
+    if (!pq.isEmpty()) ans = Math.max(ans, pq.front().element[0] + x + y);
     
-    while (l <= r && queue[r][0] <= y - x) r--;
-    
-    queue[++r] = [y - x, x];
+    pq.enqueue([y - x, x]);
   }
   
   return ans;
