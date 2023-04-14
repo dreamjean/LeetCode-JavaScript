@@ -7,7 +7,7 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre class="notranslate"><strong>Input:</strong> points = [[1,3],[2,0],[5,10],[6,-10]], k = 1
+<pre><strong>Input:</strong> points = [[1,3],[2,0],[5,10],[6,-10]], k = 1
 <strong>Output:</strong> 4
 <strong>Explanation:</strong> The first two points satisfy the condition |x<sub>i</sub> - x<sub>j</sub>| &lt;= 1 and if we calculate the equation we get 3 + 0 + |1 - 2| = 4. Third and fourth points also satisfy the condition and give a value of 10 + -10 + |5 - 6| = 1.
 No other pairs satisfy the condition, so we return the max of 4 and 1.
@@ -15,7 +15,7 @@ No other pairs satisfy the condition, so we return the max of 4 and 1.
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre class="notranslate"><strong>Input:</strong> points = [[0,0],[3,0],[9,2]], k = 3
+<pre><strong>Input:</strong> points = [[0,0],[3,0],[9,2]], k = 3
 <strong>Output:</strong> 3
 <strong>Explanation: </strong>Only the first two points have an absolute difference of 3 or less in the x-values, and give the value of 0 + 0 + |0 - 3| = 3.
 </pre>
