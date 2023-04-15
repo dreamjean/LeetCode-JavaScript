@@ -1,7 +1,7 @@
 class Solution:
     def maxFrequency(self, nums: List[int], k: int) -> int:
         nums.sort()
-        s, j, ans = 0, 0, 0
+        j = s = ans = 0
         for i, num in enumerate(nums):
             s += num
             while s + k < num * (i - j + 1):
