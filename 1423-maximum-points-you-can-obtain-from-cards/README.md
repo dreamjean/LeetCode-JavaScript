@@ -7,23 +7,23 @@
 <p>Given the integer array <code>cardPoints</code> and the integer <code>k</code>, return the <em>maximum score</em> you can obtain.</p>
 
 <p>&nbsp;</p>
-<p><strong>Example 1:</strong></p>
+<p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input:</strong> cardPoints = [1,2,3,4,5,6,1], k = 3
+<pre class="notranslate"><strong>Input:</strong> cardPoints = [1,2,3,4,5,6,1], k = 3
 <strong>Output:</strong> 12
 <strong>Explanation:</strong> After the first step, your score will always be 1. However, choosing the rightmost card first will maximize your total score. The optimal strategy is to take the three cards on the right, giving a final score of 1 + 6 + 5 = 12.
 </pre>
 
-<p><strong>Example 2:</strong></p>
+<p><strong class="example">Example 2:</strong></p>
 
-<pre><strong>Input:</strong> cardPoints = [2,2,2], k = 2
+<pre class="notranslate"><strong>Input:</strong> cardPoints = [2,2,2], k = 2
 <strong>Output:</strong> 4
 <strong>Explanation:</strong> Regardless of which two cards you take, your score will always be 4.
 </pre>
 
-<p><strong>Example 3:</strong></p>
+<p><strong class="example">Example 3:</strong></p>
 
-<pre><strong>Input:</strong> cardPoints = [9,7,7,9,7,7,9], k = 7
+<pre class="notranslate"><strong>Input:</strong> cardPoints = [9,7,7,9,7,7,9], k = 7
 <strong>Output:</strong> 55
 <strong>Explanation:</strong> You have to take all the cards. Your score is the sum of points of all cards.
 </pre>
