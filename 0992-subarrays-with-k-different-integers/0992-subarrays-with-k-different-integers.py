@@ -8,11 +8,11 @@ class Solution:
                 count[num] += 1
                 while k < 0:
                     count[nums[j]] -= 1
-                    k += count[nums[j]] == 0                    
+                    k += count[nums[j]] == 0
                     j += 1
                 ans += i - j + 1
             return ans
           
           
         return atMost(nums, k) - atMost(nums, k - 1)
-                    
+                
