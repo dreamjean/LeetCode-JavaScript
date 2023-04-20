@@ -1,31 +1,20 @@
-/**
- * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
- * }
- */
-/**
- * @param {TreeNode} root
- * @return {number}
- */
-var widthOfBinaryTree = function(root) {
-  const queue = [[root, 1]];
-  let max = 1;
-  
-  while (queue.length) {
-    const size = queue.length;
-    const start = queue[0][1];
-    max = Math.max(max, queue[size - 1][1] - start + 1);
-    
-    for (let i = 0; i < size; i++) {
-      let [node, index] = queue.shift();
-      index -= start;
-      if (node.left) queue.push([node.left, index * 2]);
-      if (node.right) queue.push([node.right, index * 2 + 1]);
-    }
-  }
-  
-  return max;
-};
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        q, ans = [[root, 1]], 1
+        while q:
+            tmp = []
+            ans = max(ans, q[-1][1] - q[0][1] + 1)
+            for node, i in q:
+                if node.left:
+                    tmp.append([node.left, i * 2])
+                if node.right:
+                    tmp.append([node.right, i * 2 + 1])
+            q = tmp
+        return ans
+      
