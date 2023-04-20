@@ -15,13 +15,14 @@ var numSubmatrixSumTarget = function(matrix, target) {
   
   for (let k = 0; k < n; k++) {
     for (let j = k; j < n; j++) {
-      const map = { 0: 1 };
+      const map = new Map();
+      map.set(0, 1);
       let sum = 0;
       
       for (let i = 0; i < m; i++) {
         sum += matrix[i][j] - (!k ? 0 : matrix[i][k - 1]);
-        ans += map[sum - target] ?? 0;
-        map[sum] ? map[sum]++ : map[sum] = 1;
+        if (map.has(sum - target)) ans += map.get(sum - target);
+        map.set(sum, (map.get(sum) || 0) + 1);
       }
     }
   }
