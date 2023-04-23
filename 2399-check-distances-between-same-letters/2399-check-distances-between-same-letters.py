@@ -1,10 +1,9 @@
 class Solution:
     def checkDistances(self, s: str, distance: List[int]) -> bool:
+        prev_pos = [0] * 26
         for i, ch in enumerate(s):
-            index = ord(s[i]) - ord('a')
-            next_pos = i + distance[index] + 1
-            if next_pos >= len(s) or s[i] != s[next_pos]:
+            idx = ord(ch) - ord('a')
+            if prev_pos[idx] and i - prev_pos[idx] != distance[idx]:
                 return False
-            distance[index] = -1
+            prev_pos[idx] = i + 1
         return True
-        
