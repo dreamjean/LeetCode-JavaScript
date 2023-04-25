@@ -1,17 +1,18 @@
 
 var SmallestInfiniteSet = function() {
-  this.nums = Array.from({ length: 1000 }, (_, i) => i + 1);
-  this.l = 0;
-  this.r = 1000;
+  this.nums = Array.from({ length: 1001 }, (_, i) => i);
+  this.start = 1;
 };
 
 /**
  * @return {number}
  */
 SmallestInfiniteSet.prototype.popSmallest = function() {
-  if (this.l === this.r) return null;
-
-  return this.nums[this.l++];
+  while (!this.nums[this.start]) this.start++;
+  
+  this.nums[this.start] = 0;
+  
+  return this.start++;
 };
 
 /** 
@@ -19,25 +20,9 @@ SmallestInfiniteSet.prototype.popSmallest = function() {
  * @return {void}
  */
 SmallestInfiniteSet.prototype.addBack = function(num) {
-  const index = search(this.nums.slice(this.l), num);
-  if (index === -1) return;
-  
-  this.nums.splice(this.l + index, 0, num);
-  this.r++;
+  this.nums[num] = num;
+  this.start = Math.min(this.start, num);
 };
-  
-const search = (nums, target) => {
-  let [l, r] = [0, nums.length];
-  
-  while (l < r) {
-    const mid = (l + r) >>> 1;
-    if (nums[mid] === target) return -1;
-    
-    nums[mid] < target ? (l = mid + 1) : (r = mid);
-  }
-  
-  return l;
-}
 
 /** 
  * Your SmallestInfiniteSet object will be instantiated and called as such:
