@@ -4,9 +4,8 @@ class Solution:
         dp = [True] + [False] * n
         
         for j in range(2, n + 1):
-            if p[j - 1] == '*':
-                dp[j] = dp[j - 2]
-        
+            dp[j] = p[j - 1] == '*' and dp[j - 2]
+            
         for i in range(1, m + 1):
             tmp = [False] * (n + 1)
             for j in range(1, n + 1):
@@ -18,5 +17,4 @@ class Solution:
                     else:
                         tmp[j] = tmp[j - 2] | dp[j]
             dp = tmp
-        
         return dp[-1]
