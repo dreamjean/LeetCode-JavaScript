@@ -2,6 +2,7 @@ class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
         ans = []
         
+        @cache
         def dfs(l, r, path = ''):
             if l == 0 and r == 0:
                 ans.append(path)
