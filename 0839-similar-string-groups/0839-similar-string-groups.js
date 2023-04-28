@@ -6,7 +6,7 @@ var numSimilarGroups = function(strs) {
   const n = strs.length;
   const uf = new UnionFind(n);
   
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i < n - 1; i++) {
     for (let j = i + 1; j < n; j++) {
       if (isSimilar(strs[i], strs[j])) uf.union(i, j);
     }
@@ -16,10 +16,10 @@ var numSimilarGroups = function(strs) {
 };
 
 const isSimilar = (str1, str2) => {
-  let cnt = 0;
+  let count = 0;
   
   for (let i = 0; i < str1.length; i++) {
-    if (str1[i] !== str2[i] && ++cnt > 2) return false;
+    if (str1[i] !== str2[i] && ++count > 2) return false;
   }
   
   return true;
@@ -32,16 +32,21 @@ class UnionFind {
   }
   
   find(x) {
-    if (x !== this.parent[x]) this.parent[x] = this.find(this.parent[x]);
-    return this.parent[x];
+    let parent = this.parent;
+    while (x !== parent[x]) {
+      parent[x] = parent[parent[x]];
+      x = parent[x];
+    }
+    
+    return x;
   }
   
   union(x, y) {
     let rootX = this.find(x);
     let rootY = this.find(y);
-    if (rootX !== rootY) {
-      this.parent[rootX] = rootY;
-      this.count--;
-    }
+    if (rootX === rootY) return;
+    
+    this.parent[rootX] = rootY;
+    this.count--;
   }
 }
