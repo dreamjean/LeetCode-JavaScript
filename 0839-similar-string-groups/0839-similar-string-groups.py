@@ -1,52 +1,34 @@
-/**
- * @param {string[]} strs
- * @return {number}
- */
-var numSimilarGroups = function(strs) {
-  const n = strs.length;
-  const uf = new UnionFind(n);
-  
-  for (let i = 0; i < n - 1; i++) {
-    for (let j = i + 1; j < n; j++) {
-      if (isSimilar(strs[i], strs[j])) uf.union(i, j);
-    }
-  }
-  
-  return uf.count;
-};
-
-const isSimilar = (str1, str2) => {
-  let count = 0;
-  
-  for (let i = 0; i < str1.length; i++) {
-    if (str1[i] !== str2[i] && ++count > 2) return false;
-  }
-  
-  return true;
-}
-
-class UnionFind {
-  constructor(n) {
-    this.parent = Array.from({ length: n }, (_, i) => i);
-    this.count = n;
-  }
-  
-  find(x) {
-    let parent = this.parent;
-    while (x !== parent[x]) {
-      parent[x] = parent[parent[x]];
-      x = parent[x];
-    }
+class UnionFind:
+    def __init__(self, n):
+        self.parent = list(range(n))
+        self.count = n
     
-    return x;
-  }
-  
-  union(x, y) {
-    let rootX = this.find(x);
-    let rootY = this.find(y);
-    if (rootX === rootY) return;
-    
-    this.parent[rootX] = rootY;
-    this.count--;
-  }
-}
+    def find(self, x):
+        if x != self.parent[x]:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
+      
+    def union(self, x, y):
+        root_x = self.find(x)
+        root_y = self.find(y)
+        if root_x == root_y:
+            return
+        self.parent[root_x] = root_y
+        self.count -= 1
+        
+
+class Solution:
+    def numSimilarGroups(self, strs: List[str]) -> int:
+        def isSimilar(s1, s2):
+            count = sum(x != y for x, y in zip(s1, s2))
+            return count == 0 or count == 2
+      
+        n = len(strs)
+        uf = UnionFind(n)
+        
+        for i in range(n - 1):
+            for j in range(i + 1, n):
+                if isSimilar(strs[i], strs[j]):
+                    uf.union(i, j)
+        
+        return uf.count
