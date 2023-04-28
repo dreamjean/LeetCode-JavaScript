@@ -7,13 +7,13 @@ var equalFrequency = function(word) {
   
   for (let ch of word) count[ch.charCodeAt() - 'a'.charCodeAt()]++;
   
-  count = filter(count);
-  
   for (let i = 0; i < count.length; i++) {
+    if (!count[i]) continue;
+    
     count[i]--;
     
-    const set = new Set(filter(count));
-    if (set.size === 1) return true;
+    const set = new Set(count);
+    if (set.size === 1 || (set.size === 2 && set.has(0))) return true;
     
     count[i]++;
   }
@@ -21,4 +21,3 @@ var equalFrequency = function(word) {
   return false;
 };
 
-const filter = (nums) => nums.filter(x => x);
