@@ -9,16 +9,16 @@
 <p>Return <em>the number of minutes</em> needed to inform all the employees about the urgent news.</p>
 
 <p>&nbsp;</p>
-<p><strong>Example 1:</strong></p>
+<p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input:</strong> n = 1, headID = 0, manager = [-1], informTime = [0]
+<pre class="notranslate"><strong>Input:</strong> n = 1, headID = 0, manager = [-1], informTime = [0]
 <strong>Output:</strong> 0
 <strong>Explanation:</strong> The head of the company is the only employee in the company.
 </pre>
 
-<p><strong>Example 2:</strong></p>
+<p><strong class="example">Example 2:</strong></p>
 <img alt="" src="https://assets.leetcode.com/uploads/2020/02/27/graph.png" style="width: 404px; height: 174px;">
-<pre><strong>Input:</strong> n = 6, headID = 2, manager = [2,2,-1,2,2,2], informTime = [0,0,1,0,0,0]
+<pre class="notranslate"><strong>Input:</strong> n = 6, headID = 2, manager = [2,2,-1,2,2,2], informTime = [0,0,1,0,0,0]
 <strong>Output:</strong> 1
 <strong>Explanation:</strong> The head of the company with id = 2 is the direct manager of all the employees in the company and needs 1 minute to inform them all.
 The tree structure of the employees in the company is shown.
