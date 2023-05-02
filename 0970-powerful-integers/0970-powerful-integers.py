@@ -1,20 +1,15 @@
-/**
- * @param {number} x
- * @param {number} y
- * @param {number} bound
- * @return {number[]}
- */
-var powerfulIntegers = function(x, y, bound) {
-  const set = new Set();
-  
-  for (let i = 1; i < bound; i *= x) {
-    for (let j = 1; i + j <= bound; j *= y) {
-      set.add(i + j);
-      if (y === 1) break;
-    }
-    
-    if (x === 1) break;
-  }
-  
-  return [...set];
-};
+class Solution:
+    def powerfulIntegers(self, x: int, y: int, bound: int) -> List[int]:
+        ans = set()
+        a = 1
+        while a < bound:
+            b = 1
+            while a + b <= bound:
+                ans.add(a + b)
+                b *= y
+                if y == 1:
+                    break
+            a *= x
+            if x == 1:
+                break
+        return list(ans)
