@@ -10,6 +10,6 @@ var countOperationsToEmptyArray = function(nums) {
   for (let i = 1; i < n; i++) {
     if (pos[i] < pos[i - 1]) ans += n - i;
   }
-    
+  
   return ans;
 };
