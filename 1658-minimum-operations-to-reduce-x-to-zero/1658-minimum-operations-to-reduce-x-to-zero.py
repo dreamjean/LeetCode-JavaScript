@@ -1,8 +1,8 @@
 class Solution:
     def minOperations(self, nums: List[int], x: int) -> int:
-        n = len(nums)
         s = sum(nums) - x
-        j, window = 0, -1
+        n = len(nums)
+        j = window = 0
         
         if s < 0:
             return -1
@@ -11,10 +11,9 @@ class Solution:
         
         for i, num in enumerate(nums):
             s -= num
-            while s < 0 and j < n:
+            while s < 0:
                 s += nums[j]
                 j += 1
             if s == 0:
                 window = max(window, i - j + 1)
-        return window if window < 0 else n - window
-                
+        return -1 if window == 0 else n - window
