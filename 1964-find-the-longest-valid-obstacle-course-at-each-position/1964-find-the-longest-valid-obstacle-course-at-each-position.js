@@ -6,7 +6,7 @@ var longestObstacleCourseAtEachPosition = function(obstacles) {
   const subArr = [];
   const ans = [];
   
-  obstacles.forEach((num) => {
+  obstacles.forEach((num) => {    
     if (!subArr.length || subArr.at(-1) <= num) {
       subArr.push(num);
       ans.push(subArr.length);
